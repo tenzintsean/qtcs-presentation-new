@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS: Service Excellence</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Sky blue theme variables are imported from theme-skyblue.css */
+        
+        :root {
+            /* Typography Scale */
+            --title-xl: clamp(36px, 4.5vw, 64px);
+            --title-lg: clamp(28px, 3.5vw, 56px);
+            --title-md: clamp(24px, 3vw, 36px);
+            --text-lg: clamp(14px, 1.8vw, 22px);
+            --text-md: clamp(13px, 1.6vw, 20px);
+            --text-sm: clamp(12px, 1.6vh, 18px);
+        }
+        
+        /* Body styles handled by theme-skyblue.css */
+        
+        /* Desktop-only slide layout */
+        body {
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(80px, 8vh, 100px) clamp(20px, 3vw, 60px) clamp(100px, 10vh, 120px);
+        }
+        
+                    body {
+                overflow: hidden;
+            }
+            
+            .slide {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                height: 100vh;
+                max-width: 1920px;
+                max-height: 1080px;
+                overflow: hidden;
+                padding: clamp(85px, 8.5vh, 100px) clamp(20px, 2.5vw, 50px) clamp(100px, 10vh, 120px);
+            }
+            
+            .content-wrapper {
+                height: 100%;
+                gap: clamp(15px, 2vh, 25px);
+            }
+            
+            /* VAS - All elements scale with viewport height */
+            h1 { 
+                font-size: clamp(24px, 4vh, 42px);
+                margin-bottom: clamp(6px, 1vh, 10px);
+            }
+            
+            .subtitle {
+                font-size: clamp(14px, 2vh, 20px);
+                margin-bottom: clamp(15px, 2vh, 25px);
+            }
+        }
+        
+        /* Enhanced Sky pattern background animations - STANDARDIZED VERSION */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 80%, rgba(135, 206, 235, 0.1) 4px, transparent 4px);
+            background-size: 120px 120px, 80px 80px, 150px 150px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+        
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 90% 20%, rgba(176, 224, 230, 0.08) 3px, transparent 3px);
+            background-size: 100px 100px, 140px 140px;
+            animation: cloudMove2 50s linear infinite reverse;
+            z-index: 0;
+        }
+        
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, 10px) rotate(90deg); }
+            50% { transform: translate(30px, 25px) rotate(180deg); }
+            75% { transform: translate(45px, 35px) rotate(270deg); }
+            100% { transform: translate(60px, 50px) rotate(360deg); }
+        }
+        
+        @keyframes cloudMove2 {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 15px) scale(1.1); }
+            66% { transform: translate(-40px, 30px) scale(0.9); }
+            100% { transform: translate(-60px, 45px) scale(1); }
+        }
+        
+        /* Content wrapper for desktop layout control */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(20px, 3vh, 30px);
+        }
+        
+        @media (min-width: 768px) {
+            .content-wrapper {
+                height: 100%;
+                gap: clamp(15px, 2vh, 25px);
+            }
+        }
+        
+        /* Slide number with light glassmorphism */
+        .slide-number {
+            position: absolute;
+            top: clamp(15px, 1.5vw, 30px);
+            left: clamp(15px, 1.5vw, 30px);
+            font-size: clamp(12px, 0.8vw, 16px);
+            color: var(--text-muted);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            z-index: 20;
+        }
+        
+        /* Title styling */
+        h1 {
+            color: var(--text-primary);
+            font-size: var(--title-lg);
+            font-weight: 700;
+            margin-bottom: clamp(8px, 1.5vh, 15px);
+            line-height: 1.2;
+            text-align: center;
+            background: linear-gradient(135deg, var(--title-blue) 0%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: var(--text-lg);
+            text-align: center;
+            margin-bottom: clamp(20px, 3vh, 30px);
+        }
+        
+        /* Network section - VAS implementation */
+        .network-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: clamp(12px, 1.5vw, 20px);
+            padding: clamp(20px, 3vh, 30px);
+            text-align: center;
+            margin-bottom: clamp(20px, 3vh, 30px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        @media (min-width: 768px) {
+            .network-section {
+                padding: clamp(15px, 2.5vh, 25px);
+                margin-bottom: clamp(15px, 2vh, 20px);
+            }
+        }
+        
+        .network-title {
+            color: var(--text-primary);
+            font-size: clamp(20px, 2.8vw, 32px);
+            font-weight: 600;
+            margin-bottom: clamp(20px, 3vh, 30px);
+        }
+        
+        @media (min-width: 768px) {
+            .network-title {
+                font-size: clamp(18px, 2.5vh, 28px);
+                margin-bottom: clamp(15px, 2vh, 20px);
+            }
+        }
+        
+        .network-nodes {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(20px, 4vw, 40px);
+            flex-wrap: wrap;
+            position: relative;
+        }
+        
+        .network-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .node-circle {
+            width: clamp(60px, 8vw, 80px);
+            height: clamp(60px, 8vw, 80px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(14px, 2vw, 18px);
+            font-weight: 700;
+            margin-bottom: clamp(8px, 1.2vh, 12px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid;
+            transition: transform 0.3s ease;
+            color: white;
+        }
+        
+        @media (min-width: 768px) {
+            .node-circle {
+                width: clamp(50px, 7vh, 70px);
+                height: clamp(50px, 7vh, 70px);
+                font-size: clamp(12px, 1.8vh, 16px);
+                margin-bottom: clamp(6px, 1vh, 10px);
+            }
+        }
+        
+        .node-circle:hover {
+            transform: scale(1.1);
+        }
+        
+        .node-circle.blue {
+            background: linear-gradient(135deg, var(--title-blue) 0%, var(--title-blue-light) 100%);
+            border-color: var(--title-blue);
+        }
+        
+        .node-circle.gold {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-light) 100%);
+            border-color: var(--accent-primary);
+        }
+        
+        .node-circle.green {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.9) 0%, rgba(46, 204, 64, 0.9) 100%);
+            border-color: var(--green-primary);
+        }
+        
+        .node-label {
+            color: var(--text-secondary);
+            font-size: clamp(12px, 1.4vw, 16px);
+            font-weight: 500;
+        }
+        
+        @media (min-width: 768px) {
+            .node-label {
+                font-size: clamp(11px, 1.6vh, 14px);
+            }
+        }
+        
+        /* Service grid - VAS implementation */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(6px, 1vw, 10px);
+            margin-bottom: clamp(6px, 1vh, 10px);
+        }
+        
+        @media (min-width: 768px) {
+            .service-grid {
+                gap: clamp(2px, 0.5vh, 4px);
+                margin-bottom: clamp(2px, 0.4vh, 4px);
+                flex: 1;
+                min-height: 0;
+                overflow: hidden;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .service-grid {
+                grid-template-columns: 1fr;
+                gap: clamp(15px, 2vw, 20px);
+            }
+        }
+        
+        /* Service cards - VAS implementation */
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: clamp(12px, 1.5vw, 20px);
+            padding: clamp(20px, 3vh, 30px);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            display: flex;
+            align-items: flex-start;
+            gap: clamp(15px, 2.5vw, 20px);
+        }
+        
+        @media (min-width: 768px) {
+            .service-card {
+                padding: clamp(6px, 1vh, 10px);
+                gap: clamp(4px, 0.8vh, 8px);
+            }
+        }
+        
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .service-icon {
+            width: clamp(50px, 6vw, 70px);
+            height: clamp(50px, 6vw, 70px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .service-icon {
+                width: clamp(25px, 3vh, 35px);
+                height: clamp(25px, 3vh, 35px);
+                font-size: clamp(14px, 1.8vh, 20px);
+            }
+        }
+        
+        .service-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .service-icon.blue {
+            background: linear-gradient(135deg, var(--title-blue) 0%, var(--title-blue-light) 100%);
+        }
+        
+        .service-icon.gold {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-light) 100%);
+        }
+        
+        .service-icon.green {
+            background: linear-gradient(135deg, var(--green-primary) 0%, var(--green-light) 100%);
+        }
+        
+        .service-content {
+            flex: 1;
+        }
+        
+        .service-title {
+            color: var(--text-primary);
+            font-size: clamp(16px, 2vw, 22px);
+            font-weight: 600;
+            margin-bottom: clamp(8px, 1.2vh, 12px);
+        }
+        
+        @media (min-width: 768px) {
+            .service-title {
+                font-size: clamp(13px, 1.9vh, 17px);
+                margin-bottom: clamp(3px, 0.6vh, 6px);
+            }
+        }
+        
+        .service-description {
+            color: var(--text-secondary);
+            font-size: clamp(14px, 1.6vw, 18px);
+            line-height: 1.5;
+        }
+        
+        @media (min-width: 768px) {
+            .service-description {
+                font-size: clamp(11px, 1.5vh, 14px);
+                line-height: 1.3;
+            }
+        }
+        
+        /* Metrics section - VAS implementation */
+        .metrics-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(15px, 2.5vw, 25px);
+        }
+        
+        @media (min-width: 768px) {
+            .metrics-section {
+                gap: clamp(8px, 1.2vh, 12px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .metrics-section {
+                grid-template-columns: 1fr;
+                gap: clamp(10px, 1.5vw, 15px);
+            }
+        }
+        
+        .metric-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: clamp(12px, 1.5vw, 20px);
+            padding: clamp(20px, 3vh, 30px);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+        }
+        
+        @media (min-width: 768px) {
+            .metric-card {
+                padding: clamp(8px, 1.2vh, 15px);
+            }
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .metric-value {
+            font-size: clamp(32px, 4.5vw, 48px);
+            font-weight: 700;
+            margin-bottom: clamp(8px, 1.2vh, 12px);
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @media (min-width: 768px) {
+            .metric-value {
+                font-size: clamp(18px, 2.5vh, 28px);
+                margin-bottom: clamp(3px, 0.6vh, 6px);
+            }
+        }
+        
+        .metric-value.green {
+            background: linear-gradient(135deg, var(--green-primary) 0%, var(--green-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .metric-value.blue {
+            background: linear-gradient(135deg, var(--title-blue) 0%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: clamp(14px, 1.6vw, 18px);
+            font-weight: 500;
+        }
+        
+        @media (min-width: 768px) {
+            .metric-label {
+                font-size: clamp(10px, 1.4vh, 13px);
+            }
+        }
+        
+        /* Logo corner handled by centralized theme-skyblue.css */
+        
+        /* VAS Progressive Height Breakpoints */
+        
+        /* Stage 1: Moderate constraints (850px and below) */
+        @media (max-height: 850px) and (min-width: 768px) {
+            .slide {
+                padding: clamp(70px, 7vh, 85px) clamp(15px, 2vw, 40px) clamp(90px, 9vh, 110px);
+            }
+            
+            .content-wrapper {
+                gap: clamp(12px, 1.5vh, 20px);
+            }
+            
+            h1 {
+                font-size: clamp(22px, 3.5vh, 36px);
+                margin-bottom: clamp(4px, 0.6vh, 8px);
+            }
+            
+            .subtitle {
+                font-size: clamp(12px, 1.8vh, 18px);
+                margin-bottom: clamp(10px, 1.5vh, 18px);
+            }
+            
+            .network-section {
+                padding: clamp(12px, 2vh, 20px);
+                margin-bottom: clamp(12px, 1.5vh, 18px);
+            }
+            
+            .network-title {
+                font-size: clamp(16px, 2.2vh, 24px);
+                margin-bottom: clamp(12px, 1.8vh, 18px);
+            }
+            
+            .network-nodes {
+                gap: clamp(15px, 2.5vh, 25px);
+            }
+            
+            .node-circle {
+                width: clamp(45px, 6vh, 60px);
+                height: clamp(45px, 6vh, 60px);
+                font-size: clamp(11px, 1.6vh, 14px);
+                margin-bottom: clamp(5px, 0.8vh, 8px);
+            }
+            
+            .node-label {
+                font-size: clamp(10px, 1.4vh, 12px);
+            }
+            
+            .service-grid {
+                gap: clamp(10px, 1.5vh, 15px);
+                margin-bottom: clamp(10px, 1.5vh, 15px);
+            }
+            
+            .service-card {
+                padding: clamp(12px, 1.8vh, 20px);
+                gap: clamp(10px, 1.5vh, 15px);
+            }
+            
+            .service-icon {
+                width: clamp(35px, 5vh, 50px);
+                height: clamp(35px, 5vh, 50px);
+                font-size: clamp(18px, 2.5vh, 24px);
+            }
+            
+            .service-title {
+                font-size: clamp(13px, 2vh, 18px);
+                margin-bottom: clamp(5px, 0.8vh, 8px);
+            }
+            
+            .service-description {
+                font-size: clamp(11px, 1.6vh, 14px);
+                line-height: 1.3;
+            }
+            
+            .metrics-section {
+                gap: clamp(10px, 1.5vh, 15px);
+            }
+            
+            .metric-card {
+                padding: clamp(12px, 1.8vh, 20px);
+            }
+            
+            .metric-value {
+                font-size: clamp(20px, 3vh, 32px);
+                margin-bottom: clamp(4px, 0.6vh, 8px);
+            }
+            
+            .metric-label {
+                font-size: clamp(11px, 1.6vh, 14px);
+            }
+        }
+        
+        /* Stage 2: Severe constraints (750px and below) */
+        @media (max-height: 750px) and (min-width: 768px) {
+            .slide {
+                padding: 60px 15px 80px;
+            }
+            
+            .content-wrapper {
+                gap: 8px;
+            }
+            
+            h1 {
+                font-size: clamp(20px, 3vh, 32px);
+                margin-bottom: 3px;
+            }
+            
+            .subtitle {
+                font-size: clamp(11px, 1.5vh, 16px);
+                margin-bottom: 8px;
+            }
+            
+            .network-section {
+                padding: 10px;
+                margin-bottom: 8px;
+            }
+            
+            .network-title {
+                font-size: clamp(14px, 2vh, 20px);
+                margin-bottom: 8px;
+            }
+            
+            .network-nodes {
+                gap: 10px;
+            }
+            
+            .node-circle {
+                width: clamp(40px, 5vh, 50px);
+                height: clamp(40px, 5vh, 50px);
+                font-size: clamp(10px, 1.4vh, 12px);
+                margin-bottom: 3px;
+            }
+            
+            .node-label {
+                font-size: clamp(9px, 1.2vh, 11px);
+            }
+            
+            .service-grid {
+                gap: 8px;
+                margin-bottom: 8px;
+            }
+            
+            .service-card {
+                padding: 10px;
+                gap: 8px;
+            }
+            
+            .service-icon {
+                width: clamp(30px, 4vh, 40px);
+                height: clamp(30px, 4vh, 40px);
+                font-size: clamp(16px, 2.2vh, 20px);
+            }
+            
+            .service-title {
+                font-size: clamp(12px, 1.8vh, 16px);
+                margin-bottom: 3px;
+            }
+            
+            .service-description {
+                font-size: clamp(10px, 1.4vh, 12px);
+                line-height: 1.2;
+            }
+            
+            .metrics-section {
+                gap: 8px;
+            }
+            
+            .metric-card {
+                padding: 10px;
+            }
+            
+            .metric-value {
+                font-size: clamp(18px, 2.5vh, 28px);
+                margin-bottom: 2px;
+            }
+            
+            .metric-label {
+                font-size: clamp(10px, 1.4vh, 12px);
+            }
+        }
+        
+        /* Stage 3: Ultra-compact mode (650px and below) */
+        @media (max-height: 650px) and (min-width: 768px) {
+            .slide {
+                padding: 40px 10px 60px;
+            }
+            
+            .content-wrapper {
+                gap: 5px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                margin-bottom: 2px;
+            }
+            
+            .subtitle {
+                font-size: 10px;
+                margin-bottom: 5px;
+            }
+            
+            .network-section {
+                padding: 6px;
+                margin-bottom: 5px;
+            }
+            
+            .network-title {
+                font-size: 12px;
+                margin-bottom: 5px;
+            }
+            
+            .network-nodes {
+                gap: 6px;
+            }
+            
+            .node-circle {
+                width: 35px;
+                height: 35px;
+                font-size: 9px;
+                margin-bottom: 2px;
+            }
+            
+            .node-label {
+                font-size: 8px;
+            }
+            
+            .service-grid {
+                gap: 5px;
+                margin-bottom: 5px;
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .service-card {
+                padding: 6px;
+                gap: 5px;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .service-icon {
+                width: 25px;
+                height: 25px;
+                font-size: 14px;
+                margin: 0 auto;
+            }
+            
+            .service-title {
+                font-size: 10px;
+                margin-bottom: 2px;
+            }
+            
+            .service-description {
+                font-size: 9px;
+                line-height: 1.1;
+            }
+            
+            .metrics-section {
+                gap: 5px;
+            }
+            
+            .metric-card {
+                padding: 6px;
+            }
+            
+            .metric-value {
+                font-size: 16px;
+                margin-bottom: 1px;
+            }
+            
+            .metric-label {
+                font-size: 9px;
+            }
+            
+            /* Hide logo corner on ultra-compact */
+            .logo-corner {
+                display: none;
+            }
+        }
+        
+        /* Navigation and logo styles handled by centralized theme-skyblue.css */
+        
+        /* Enhanced Solar-themed decorative elements - STANDARDIZED VERSION */
+        .solar-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            opacity: 0.06;
+            animation: solarPulse 8s ease-in-out infinite;
+        }
+        
+        .solar-rays::before,
+        .solar-rays::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--accent-primary) 3deg,
+                transparent 6deg,
+                transparent 90deg,
+                var(--sky-primary) 93deg,
+                transparent 96deg,
+                transparent 180deg,
+                var(--accent-primary) 183deg,
+                transparent 186deg,
+                transparent 270deg,
+                var(--sky-primary) 273deg,
+                transparent 276deg,
+                transparent 354deg,
+                var(--accent-primary) 357deg,
+                transparent 360deg
+            );
+            animation: rotateSlow 45s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+        
+        .solar-rays::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-duration: 65s;
+            animation-direction: reverse;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--sky-light) 2deg,
+                transparent 4deg,
+                transparent 178deg,
+                var(--sky-light) 180deg,
+                transparent 182deg,
+                transparent 358deg,
+                var(--sky-light) 360deg
+            );
+        }
+        
+        @keyframes rotateSlow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes solarPulse {
+            0%, 100% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        /* Slide-specific progress bar width override */
+        .progress-fill {
+            width: calc(24 / 28 * 100%);
+        }
+    </style>
+</head>
+<body class="sky-theme">
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="slide-counter">24 / 28</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <select class="slide-select" onchange="jumpToSlide(this.value)">
+            <option value="index.html">1. Welcome</option>
+            <option value="slide2.html">2. About</option>
+            <option value="slide3.html">3. Purpose & Direction</option>
+            <option value="slide4.html">4. Heritage</option>
+            <option value="slide5.html">5. Excellence</option>
+            <option value="slide6.html">6. L3 Open Body</option>
+            <option value="slide6b.html">7. L3 Closed Body</option>
+            <option value="slide7.html">8. L5 Tipper</option>
+            <option value="slide8.html">9. L3 Garbage Body</option>
+            <option value="slide8b.html">10. L3 Fogging</option>
+            <option value="slide9.html">11. Product Range</option>
+            <option value="slide9b.html">12. L5 Premium</option>
+            <option value="slide9c.html">13. L5 Deluxe</option>
+            <option value="slide10.html">14. Technical Excellence</option>
+            <option value="slide11.html">15. Future E-Bus</option>
+            <option value="slide12.html">16. Last-Mile Logistics</option>
+            <option value="slide13.html">17. SMB Empowerment</option>
+            <option value="slide14.html">18. Public Sector</option>
+            <option value="slide15.html">19. Aftermarket Excellence</option>
+            <option value="slide16.html">20. Chennai Case Study</option>
+            <option value="slide17.html">21. Panchayat Case Study</option>
+            <option value="slide18.html">22. Client Testimonials</option>
+            <option value="slide19.html">23. Manufacturing</option>
+            <option value="slide20.html" selected>24. Service Network</option>
+            <option value="slide21.html">25. Awards & Recognition</option>
+            <option value="slide22.html">26. Strategic Partnerships</option>
+            <option value="slide23.html">27. Growth Vision</option>
+            <option value="slide24.html">28. Thank You</option>
+        </select>
+    </div>
+    
+    <!-- Navigation Buttons at Bottom -->
+    <div class="nav-buttons">
+        <button class="nav-btn prev" onclick="prevSlide()">‹</button>
+        <button class="nav-btn next" onclick="nextSlide()">›</button>
+    </div>
+
+    <div class="slide sky-pattern">
+        <div class="solar-rays"></div>
+        <div class="slide-number">24</div>
+        
+        <div class="content-wrapper">
+            <h1>End-to-End Service Excellence</h1>
+            <div class="subtitle">24/7 support ensures maximum vehicle uptime</div>
+            
+            <div class="network-section">
+                <h2 class="network-title">Our Service Network Across South India</h2>
+                <div class="network-nodes">
+                    <div class="network-node">
+                        <div class="node-circle blue">TN</div>
+                        <div class="node-label">35+ locations</div>
+                    </div>
+                    <div class="network-node">
+                        <div class="node-circle gold">KA</div>
+                        <div class="node-label">8+ locations</div>
+                    </div>
+                    <div class="network-node">
+                        <div class="node-circle green">AP</div>
+                        <div class="node-label">5+ locations</div>
+                    </div>
+                    <div class="network-node">
+                        <div class="node-circle blue">KL</div>
+                        <div class="node-label">2+ locations</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon blue">🏪</div>
+                    <div class="service-content">
+                        <h3 class="service-title">50+ Authorized Dealers</h3>
+                        <p class="service-description">Comprehensive network across South India with trained technicians and genuine parts inventory</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon gold">🚐</div>
+                    <div class="service-content">
+                        <h3 class="service-title">Mobile Service Units</h3>
+                        <p class="service-description">On-site maintenance and repairs to minimize downtime for fleet operators</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon green">📞</div>
+                    <div class="service-content">
+                        <h3 class="service-title">24/7 Helpline</h3>
+                        <p class="service-description">Round-the-clock technical support in Tamil, Hindi, and English for immediate assistance</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon blue">🔧</div>
+                    <div class="service-content">
+                        <h3 class="service-title">Parts Guarantee</h3>
+                        <p class="service-description">Comprehensive inventory ensures quick replacement and minimal wait times</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="metrics-section">
+                <div class="metric-card">
+                    <div class="metric-value">2 Hours</div>
+                    <div class="metric-label">Response Time</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value green">95%</div>
+                    <div class="metric-label">First-Time Fix Rate</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value blue">365 Days</div>
+                    <div class="metric-label">Support Availability</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="logo-corner">QTCS</div>
+    </div>
+    
+    <script>
+        const slides = [
+            'index.html',
+            'slide2.html',
+            'slide3.html',
+            'slide4.html',
+            'slide5.html',
+            'slide6.html',
+            'slide6b.html',
+            'slide7.html',
+            'slide8.html',
+            'slide8b.html',
+            'slide9.html',
+            'slide9b.html',
+            'slide9c.html',
+            'slide10.html',
+            'slide11.html',
+            'slide12.html',
+            'slide13.html',
+            'slide14.html',
+            'slide15.html',
+            'slide16.html',
+            'slide17.html',
+            'slide18.html',
+            'slide19.html',
+            'slide20.html',
+            'slide21.html',
+            'slide22.html',
+            'slide23.html',
+            'slide24.html'
+        ];
+        
+        const currentSlide = 'slide20.html';
+        const currentIndex = slides.indexOf(currentSlide);
+        
+        function jumpToSlide(slideFile) {
+            if (slideFile && slideFile !== currentSlide) {
+                window.location.href = slideFile;
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                window.location.href = slides[currentIndex - 1];
+            }
+        }
+        
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                window.location.href = slides[currentIndex + 1];
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+        
+        // Set the correct option in dropdown
+        document.querySelector('.slide-select').value = currentSlide;
+    </script>
+</body>
+</html>

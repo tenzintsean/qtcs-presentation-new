@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS: Vision & Mission</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        /* CSS variables imported from theme-skyblue.css */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+        
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: transparent;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(60px, 7vh, 80px) clamp(20px, 3vw, 60px) clamp(90px, 10vh, 120px);
+        }
+        
+        /* Enhanced Sky pattern background animations - STANDARDIZED VERSION */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 80%, rgba(135, 206, 235, 0.1) 4px, transparent 4px);
+            background-size: 120px 120px, 80px 80px, 150px 150px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+        
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 90% 20%, rgba(176, 224, 230, 0.08) 3px, transparent 3px);
+            background-size: 100px 100px, 140px 140px;
+            animation: cloudMove2 50s linear infinite reverse;
+            z-index: 0;
+        }
+        
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, 10px) rotate(90deg); }
+            50% { transform: translate(30px, 25px) rotate(180deg); }
+            75% { transform: translate(45px, 35px) rotate(270deg); }
+            100% { transform: translate(60px, 50px) rotate(360deg); }
+        }
+        
+        @keyframes cloudMove2 {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 15px) scale(1.1); }
+            66% { transform: translate(-40px, 30px) scale(0.9); }
+            100% { transform: translate(-60px, 45px) scale(1); }
+        }
+        
+        /* Main content container */
+        .content-wrapper {
+            width: 100%;
+            max-width: 1400px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(20px, 2.5vh, 35px);
+            z-index: 1;
+            position: relative;
+        }
+        
+        /* Header section */
+        .header-section {
+            text-align: center;
+            margin-bottom: clamp(5px, 1vh, 12px);
+        }
+        
+        .main-title {
+            font-size: clamp(36px, 4.5vw, 64px);
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 50%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: clamp(10px, 1.5vh, 20px);
+            animation: titleShine 4s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+        }
+        
+        @keyframes titleShine {
+            0%, 100% { filter: brightness(1) drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3)); }
+            50% { filter: brightness(1.2) drop-shadow(0 4px 8px rgba(255, 255, 255, 0.5)); }
+        }
+        
+        /* Mission/Vision Cards */
+        .vision-mission-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(20px, 2.5vw, 40px);
+            margin-bottom: clamp(25px, 3vh, 40px);
+        }
+        
+        .vision-card, .mission-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: clamp(20px, 2.5vh, 30px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        }
+        
+        .mission-card {
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.15) 0%, var(--glass-bg) 100%);
+            border-color: rgba(255, 140, 0, 0.3);
+        }
+        
+        .vision-card {
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.15) 0%, var(--glass-bg) 100%);
+            border-color: rgba(0, 71, 171, 0.3);
+        }
+        
+        .vision-card:hover, .mission-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 140, 0, 0.4);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 140, 0, 0.1);
+        }
+        
+        .card-title {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 600;
+            margin-bottom: clamp(15px, 2vh, 25px);
+        }
+        
+        .mission-card .card-title {
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+        }
+        
+        .vision-card .card-title {
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+        }
+        
+        .card-text {
+            font-size: clamp(14px, 1.8vw, 22px);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Values Section */
+        .values-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: clamp(20px, 2.5vh, 30px);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        }
+        
+        .values-title {
+            font-size: clamp(28px, 3.5vw, 42px);
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: clamp(25px, 3vh, 40px);
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 50%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: clamp(15px, 2vw, 30px);
+            flex: 1;
+        }
+        
+        .value-item {
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .value-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            width: clamp(60px, 7vh, 90px);
+            height: clamp(60px, 7vh, 90px);
+            margin: 0 auto clamp(12px, 1.5vh, 20px);
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.1) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(28px, 3.5vh, 42px);
+            transition: all var(--transition-normal);
+        }
+        
+        .value-item:nth-child(2) .value-icon,
+        .value-item:nth-child(4) .value-icon {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.2) 0%, rgba(34, 139, 34, 0.1) 100%);
+            border-color: rgba(34, 139, 34, 0.3);
+        }
+        
+        .value-item:nth-child(3) .value-icon {
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.2) 0%, rgba(0, 71, 171, 0.1) 100%);
+            border-color: rgba(0, 71, 171, 0.3);
+        }
+        
+        .value-item:hover .value-icon {
+            transform: rotateY(360deg);
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.3);
+        }
+        
+        .value-name {
+            font-size: clamp(14px, 1.8vh, 22px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: clamp(6px, 0.8vh, 10px);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        .value-desc {
+            font-size: clamp(11px, 1.4vh, 16px);
+            color: var(--text-secondary);
+            line-height: 1.4;
+            font-weight: 400;
+        }
+        
+        /* Navigation Styles with Progress Bar */
+        .nav-container {
+            position: fixed;
+            top: clamp(10px, 1.5vh, 25px);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 1vw, 20px);
+            background: var(--glass-bg-light);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: clamp(8px, 1vh, 12px) clamp(15px, 1.5vw, 25px);
+            border-radius: 100px;
+            border: 1px solid var(--glass-border-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .slide-counter {
+            font-size: clamp(11px, 1.4vh, 16px);
+            font-weight: 600;
+            color: var(--text-primary);
+            min-width: clamp(60px, 5vw, 80px);
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: clamp(80px, 10vw, 150px);
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: calc(3 / 28 * 100%);
+            background: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            border-radius: 2px;
+            transition: width var(--transition-normal);
+            box-shadow: 0 0 8px rgba(255, 140, 0, 0.4);
+        }
+
+        .slide-select {
+            padding: clamp(6px, 0.8vh, 10px) clamp(10px, 0.8vw, 15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            font-size: clamp(11px, 1.4vh, 15px);
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            cursor: pointer;
+            outline: none;
+            transition: all var(--transition-normal);
+        }
+
+        .slide-select:focus,
+        .slide-select:hover {
+            border-color: var(--accent-primary);
+            background: var(--glass-bg-light);
+        }
+
+        .slide-select option {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+        }
+
+        /* Navigation Buttons - Bottom */
+        .nav-buttons {
+            position: fixed;
+            bottom: clamp(20px, 3vh, 40px);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            gap: clamp(15px, 2vw, 30px);
+        }
+
+        .nav-btn {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur-heavy));
+            -webkit-backdrop-filter: blur(var(--glass-blur-heavy));
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            width: clamp(40px, 5vh, 55px);
+            height: clamp(40px, 5vh, 55px);
+            border-radius: 50%;
+            font-size: clamp(16px, 2vh, 22px);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: var(--accent-light);
+            border-color: var(--accent-primary);
+            transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Enhanced Solar-themed decorative elements - STANDARDIZED VERSION */
+        .solar-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            opacity: 0.06;
+            animation: solarPulse 8s ease-in-out infinite;
+        }
+        
+        .solar-rays::before,
+        .solar-rays::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--accent-primary) 3deg,
+                transparent 6deg,
+                transparent 90deg,
+                var(--sky-primary) 93deg,
+                transparent 96deg,
+                transparent 180deg,
+                var(--accent-primary) 183deg,
+                transparent 186deg,
+                transparent 270deg,
+                var(--sky-primary) 273deg,
+                transparent 276deg,
+                transparent 354deg,
+                var(--accent-primary) 357deg,
+                transparent 360deg
+            );
+            animation: rotateSlow 45s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+        
+        .solar-rays::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-duration: 65s;
+            animation-direction: reverse;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--sky-light) 2deg,
+                transparent 4deg,
+                transparent 178deg,
+                var(--sky-light) 180deg,
+                transparent 182deg,
+                transparent 358deg,
+                var(--sky-light) 360deg
+            );
+        }
+        
+        @keyframes rotateSlow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes solarPulse {
+            0%, 100% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        /* Slide number */
+        .slide-number {
+            position: absolute;
+            top: clamp(15px, 2vh, 30px);
+            left: clamp(15px, 2vw, 30px);
+            font-size: clamp(12px, 1.5vh, 16px);
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            font-weight: 500;
+            z-index: 10;
+        }
+
+        /* Logo corner handled by centralized theme-skyblue.css */
+        
+        /* Desktop: logo positioned absolutely to slide */
+        .content-wrapper .logo-corner {
+            display: none;
+        }
+
+
+
+
+        /* Animation on load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .content-wrapper > * {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .content-wrapper > *:nth-child(1) { animation-delay: 0.1s; }
+        .content-wrapper > *:nth-child(2) { animation-delay: 0.2s; }
+        .content-wrapper > *:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body class="sky-theme">
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="slide-counter">3 / 28</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <select class="slide-select" onchange="jumpToSlide(this.value)">
+            <option value="index.html">1. Welcome</option>
+            <option value="slide2.html">2. About</option>
+            <option value="slide3.html" selected>3. Purpose & Direction</option>
+            <option value="slide4.html">4. Heritage</option>
+            <option value="slide5.html">5. Excellence</option>
+            <option value="slide6.html">6. L3 Open Body</option>
+            <option value="slide6b.html">7. L3 Closed Body</option>
+            <option value="slide7.html">8. L5 Tipper</option>
+            <option value="slide8.html">9. L3 Garbage Body</option>
+            <option value="slide8b.html">10. L3 Fogging</option>
+            <option value="slide9.html">11. Product Range</option>
+            <option value="slide9b.html">12. L5 Premium</option>
+            <option value="slide9c.html">13. L5 Deluxe</option>
+            <option value="slide10.html">14. Technical Excellence</option>
+            <option value="slide11.html">15. Future E-Bus</option>
+            <option value="slide12.html">16. Last-Mile Logistics</option>
+            <option value="slide13.html">17. SMB Empowerment</option>
+            <option value="slide14.html">18. Public Sector</option>
+            <option value="slide15.html">19. Aftermarket Excellence</option>
+            <option value="slide16.html">20. Chennai Case Study</option>
+            <option value="slide17.html">21. Panchayat Case Study</option>
+            <option value="slide18.html">22. Solar Smart Technology</option>
+            <option value="slide19.html">23. Manufacturing</option>
+            <option value="slide20.html">24. Customer Testimonials</option>
+            <option value="slide21.html">25. Awards & Recognition</option>
+            <option value="slide22.html">26. Strategic Partnerships</option>
+            <option value="slide23.html">27. Growth Vision</option>
+            <option value="slide24.html">28. Thank You</option>
+        </select>
+    </div>
+    
+    <!-- Navigation Buttons at Bottom -->
+    <div class="nav-buttons">
+        <button class="nav-btn prev" onclick="prevSlide()">‹</button>
+        <button class="nav-btn next" onclick="nextSlide()">›</button>
+    </div>
+
+    <!-- Slide 3: Vision & Mission with Aspirational Imagery -->
+    <div class="slide">
+        <div class="slide-number">3</div>
+        <div class="solar-rays"></div>
+        
+        <div class="logo-corner">QTCS</div>
+        
+        <div class="content-wrapper">
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1 class="main-title">Our Purpose & Direction</h1>
+            </div>
+            
+            <!-- Mission and Vision Cards -->
+            <div class="vision-mission-container">
+                <div class="mission-card">
+                    <h3 class="card-title">Our Mission</h3>
+                    <p class="card-text">To empower individuals and businesses through innovative technologies and exceptional services, driving positive change and fostering sustainable growth.</p>
+                </div>
+                
+                <div class="vision-card">
+                    <h3 class="card-title">Our Vision</h3>
+                    <p class="card-text">To be one of the leading companies in the Global EV industry, recognized for our commitment to excellence, customer satisfaction, and making a meaningful impact on the world.</p>
+                </div>
+            </div>
+            
+            <!-- Core Values Section -->
+            <div class="values-section">
+                <h3 class="values-title">Our Core Values</h3>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <div class="value-icon">💡</div>
+                        <h4 class="value-name">Innovation</h4>
+                        <p class="value-desc">Continuously evolving design and cutting-edge technology</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🛡️</div>
+                        <h4 class="value-name">Reliability</h4>
+                        <p class="value-desc">Engineered for demanding Indian conditions</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🤝</div>
+                        <h4 class="value-name">Partnership</h4>
+                        <p class="value-desc">Building long-term relationships with our clients</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🌍</div>
+                        <h4 class="value-name">Sustainability</h4>
+                        <p class="value-desc">Environmental leadership and responsibility</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🎯</div>
+                        <h4 class="value-name">Customer Centered</h4>
+                        <p class="value-desc">Putting customer needs at the heart of everything we do</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Logo moved inside content wrapper for mobile -->
+            <div class="logo-corner">QTCS</div>
+        </div>
+    </div>
+
+    <script>
+        const slides = [
+            'index.html',
+            'slide2.html', 'slide3.html', 'slide4.html', 'slide5.html', 'slide6.html',
+            'slide6b.html', 'slide7.html', 'slide8.html', 'slide8b.html', 'slide9.html',
+            'slide9b.html', 'slide9c.html', 'slide10.html', 'slide11.html', 'slide12.html',
+            'slide13.html', 'slide14.html', 'slide15.html', 'slide16.html', 'slide17.html',
+            'slide18.html', 'slide19.html', 'slide20.html', 'slide21.html', 'slide22.html',
+            'slide23.html', 'slide24.html'
+        ];
+        
+        const currentSlide = 'slide3.html';
+        const currentIndex = slides.indexOf(currentSlide);
+        
+        function jumpToSlide(slideFile) {
+            if (slideFile && slideFile !== currentSlide) {
+                window.location.href = slideFile;
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                window.location.href = slides[currentIndex - 1];
+            }
+        }
+        
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                window.location.href = slides[currentIndex + 1];
+            }
+        }
+        
+        // Keyboard navigation - including spacebar
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+        });
+        
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+    </script>
+</body>
+</html>

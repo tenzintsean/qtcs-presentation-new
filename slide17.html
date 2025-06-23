@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS: Panchayat Case Study</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Sky blue theme variables are imported from theme-skyblue.css */
+        
+        /* Body styles handled by theme-skyblue.css */
+        
+        /* Desktop-only slide layout */
+        body {
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(80px, 8vh, 100px) clamp(20px, 3vw, 60px) clamp(100px, 10vh, 120px);
+        }
+        
+                    body {
+                overflow: hidden;
+            }
+            
+            .slide {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                height: 100vh;
+                max-width: 1920px;
+                max-height: 1080px;
+                overflow: hidden;
+                padding: clamp(85px, 8.5vh, 100px) clamp(20px, 2.5vw, 50px) clamp(100px, 10vh, 120px);
+            }
+        }
+        
+        /* Enhanced Sky pattern background animations - STANDARDIZED VERSION */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 80%, rgba(135, 206, 235, 0.1) 4px, transparent 4px);
+            background-size: 120px 120px, 80px 80px, 150px 150px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+        
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 90% 20%, rgba(176, 224, 230, 0.08) 3px, transparent 3px);
+            background-size: 100px 100px, 140px 140px;
+            animation: cloudMove2 50s linear infinite reverse;
+            z-index: 0;
+        }
+        
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, 10px) rotate(90deg); }
+            50% { transform: translate(30px, 25px) rotate(180deg); }
+            75% { transform: translate(45px, 35px) rotate(270deg); }
+            100% { transform: translate(60px, 50px) rotate(360deg); }
+        }
+        
+        @keyframes cloudMove2 {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 15px) scale(1.1); }
+            66% { transform: translate(-40px, 30px) scale(0.9); }
+            100% { transform: translate(-60px, 45px) scale(1); }
+        }
+        
+        /* Content container - Scrollable approach */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(20px, 3vh, 30px);
+        }
+        
+        /* Main content area - Auto-sizing approach */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(10px, 2vh, 20px);
+            min-height: 0; /* Critical for flex sizing */
+        }
+        
+        @media (min-width: 768px) {
+            .content-wrapper {
+                height: 100%;
+            }
+            
+            /* Auto-adjust spacing based on available height */
+            @media (max-height: 950px) {
+                .main-content {
+                    gap: clamp(8px, 1.5vh, 15px);
+                }
+            }
+            
+            @media (max-height: 850px) {
+                .main-content {
+                    gap: clamp(5px, 1vh, 10px);
+                }
+            }
+        }
+        
+        /* Header section */
+        .header-section {
+            text-align: center;
+            margin-bottom: clamp(15px, 2vh, 20px);
+        }
+        
+        /* Main title with trust blue gradient */
+        h1 {
+            font-size: clamp(28px, 3.5vw, 56px);
+            font-weight: 700;
+            margin-bottom: clamp(6px, 1vh, 10px);
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 50%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+            animation: titleShine 4s ease-in-out infinite;
+        }
+        
+        @keyframes titleShine {
+            0%, 100% { filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3)); }
+            50% { filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.5)); }
+        }
+        
+        /* Subtitle - Light glassmorphic */
+        .subtitle {
+            font-size: clamp(14px, 1.8vw, 20px);
+            color: var(--text-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.15) 0%, var(--glass-bg) 100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: clamp(8px, 1.2vh, 12px) clamp(20px, 3vw, 30px);
+            border-radius: 25px;
+            border: 1px solid rgba(0, 71, 171, 0.3);
+            display: inline-block;
+            margin: 0 auto;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Grid layout - Flexible sizing */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: clamp(20px, 3vh, 30px);
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+                gap: clamp(10px, 1.5vw, 20px);
+            }
+            
+            @media (max-height: 850px) {
+                .grid-2 {
+                    gap: clamp(8px, 1vw, 15px);
+                }
+            }
+        }
+        
+        /* District cards - Light glassmorphic - Responsive sizing */
+        .district-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .district-card:hover {
+            transform: translateY(-5px);
+            background: var(--glass-bg-light);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        /* District headers - Glassmorphic with color overlay */
+        .district-header {
+            padding: clamp(12px, 1.5vh, 18px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .district-header.gold {
+            background: linear-gradient(135deg, rgba(253, 184, 19, 0.15) 0%, rgba(253, 184, 19, 0.1) 100%);
+            border-bottom: 1px solid rgba(253, 184, 19, 0.3);
+        }
+        
+        .district-header.blue {
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.15) 0%, rgba(0, 71, 171, 0.1) 100%);
+            border-bottom: 1px solid rgba(0, 71, 171, 0.3);
+        }
+        
+        .district-header h3 {
+            font-size: clamp(18px, 2.5vw, 28px);
+            font-weight: 700;
+            margin-bottom: clamp(3px, 0.5vh, 6px);
+            color: var(--text-primary);
+            line-height: 1.1;
+        }
+        
+        @media (min-width: 768px) and (max-height: 850px) {
+            .district-header h3 {
+                font-size: clamp(16px, 2.2vw, 24px);
+            }
+        }
+        
+        @media (min-width: 768px) and (max-height: 750px) {
+            .district-header h3 {
+                font-size: clamp(14px, 2vw, 20px);
+            }
+        }
+        
+        .district-header.gold h3 {
+            filter: drop-shadow(0 2px 8px rgba(253, 184, 19, 0.5));
+        }
+        
+        .district-header.blue h3 {
+            filter: drop-shadow(0 2px 8px rgba(0, 71, 171, 0.5));
+        }
+        
+        .district-header p {
+            font-size: clamp(12px, 1.6vw, 16px);
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        @media (min-width: 768px) and (max-height: 850px) {
+            .district-header p {
+                font-size: clamp(12px, 1.6vw, 16px);
+            }
+        }
+        
+        @media (min-width: 768px) and (max-height: 750px) {
+            .district-header p {
+                font-size: clamp(11px, 1.4vw, 14px);
+            }
+        }
+        
+        /* District content - Responsive */
+        .district-content {
+            padding: clamp(15px, 2vh, 25px);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: visible; /* Allow content to be fully visible */
+            min-height: 0; /* Critical for flex expansion */
+        }
+        
+        @media (min-width: 768px) and (max-height: 850px) {
+            .district-content {
+                padding: clamp(12px, 1.5vh, 20px);
+            }
+        }
+        
+        @media (min-width: 768px) and (max-height: 750px) {
+            .district-content {
+                padding: clamp(10px, 1.2vh, 15px);
+            }
+        }
+        
+        .district-content h4 {
+            font-size: clamp(16px, 2vw, 22px);
+            margin-bottom: clamp(10px, 1.5vh, 18px);
+            font-weight: 600;
+        }
+        
+        @media (min-width: 768px) and (max-height: 850px) {
+            .district-content h4 {
+                font-size: clamp(14px, 1.8vw, 20px);
+                margin-bottom: clamp(8px, 1vh, 12px);
+            }
+        }
+        
+        @media (min-width: 768px) and (max-height: 750px) {
+            .district-content h4 {
+                font-size: clamp(13px, 1.6vw, 18px);
+                margin-bottom: 6px;
+            }
+        }
+        
+        .district-content.gold h4 {
+            color: var(--accent-primary);
+            filter: drop-shadow(0 2px 8px rgba(255, 140, 0, 0.5));
+        }
+        
+        .district-content.blue h4 {
+            color: var(--title-blue-light);
+            filter: drop-shadow(0 2px 8px rgba(0, 71, 171, 0.5));
+        }
+        
+        /* District items - Responsive font sizing */
+        .district-items {
+            font-size: clamp(8px, 1vw, 11px);
+            color: var(--text-primary);
+            line-height: 1.1;
+            flex: 1;
+            overflow: visible;
+            min-height: 0;
+        }
+        
+        .district-items p {
+            margin-bottom: clamp(1px, 0.2vh, 3px);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        @media (min-width: 768px) and (max-height: 850px) {
+            .district-items {
+                font-size: clamp(11px, 1.3vw, 13px);
+                line-height: 1.2;
+            }
+            
+            .district-items p {
+                margin-bottom: 3px;
+                gap: 4px;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-height: 750px) {
+            .district-items {
+                font-size: clamp(10px, 1.2vw, 12px);
+                line-height: 1.15;
+            }
+            
+            .district-items p {
+                margin-bottom: 2px;
+            }
+        }
+        
+        .district-items .emoji {
+            font-size: 1.1em;
+            filter: saturate(2);
+        }
+        
+        @media (min-width: 768px) and (max-height: 750px) {
+            .district-items .emoji {
+                font-size: 1em;
+            }
+        }
+        
+        /* Banner - Light glassmorphic */
+        .impact-banner {
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.15) 0%, var(--glass-bg) 100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: clamp(4px, 0.6vh, 8px);
+            border-radius: 6px;
+            margin-top: clamp(3px, 0.6vh, 6px);
+            text-align: center;
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            box-shadow: 0 8px 24px rgba(255, 140, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+        
+        @media (min-width: 768px) and (max-height: 750px) {
+            .impact-banner {
+                padding: clamp(3px, 0.5vh, 6px);
+                margin-top: 3px;
+            }
+        }
+        
+        .impact-banner.blue {
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.15) 0%, rgba(0, 71, 171, 0.1) 100%);
+            border-color: rgba(0, 71, 171, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 71, 171, 0.2);
+        }
+        
+        .impact-banner p {
+            font-size: clamp(7px, 0.8vw, 10px);
+            font-weight: 700;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+            color: var(--text-primary);
+        }
+        
+        @media (min-width: 768px) and (max-height: 750px) {
+            .impact-banner p {
+                font-size: clamp(6px, 0.8vw, 8px);
+            }
+        }
+        
+        /* Transformation section - Light glassmorphic green - Flexible sizing */
+        .transformation-section {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.15) 0%, var(--glass-bg) 100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: clamp(20px, 2.5vh, 30px);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(34, 139, 34, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(34, 139, 34, 0.3);
+            flex: 0 0 auto;
+        }
+        
+        @media (min-width: 768px) and (max-height: 850px) {
+            .transformation-section {
+                padding: clamp(15px, 2vh, 25px);
+            }
+        }
+        
+        .transformation-section h3 {
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: clamp(20px, 2.5vh, 25px);
+            font-size: clamp(22px, 2.8vw, 32px);
+            filter: drop-shadow(0 2px 8px rgba(34, 139, 34, 0.5));
+        }
+        
+        /* Impact items - Responsive layout */
+        .impact-items {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: clamp(10px, 1.5vw, 15px);
+        }
+        
+        @media (min-width: 768px) and (max-height: 850px) {
+            .impact-items {
+                gap: clamp(8px, 1vw, 12px);
+            }
+        }
+        
+        .impact-item {
+            flex: 1;
+            min-width: 100px;
+            background: var(--glass-bg);
+            padding: clamp(10px, 1.5vh, 15px);
+            border-radius: 15px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-normal);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .impact-item:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: var(--glass-bg-light);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .impact-item .icon {
+            font-size: clamp(28px, 3.5vw, 40px);
+            margin-bottom: 8px;
+            filter: saturate(2);
+        }
+        
+        .impact-item p {
+            font-size: clamp(13px, 1.6vw, 16px);
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        /* Slide number - Light glassmorphism */
+        .slide-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: clamp(12px, 0.8vw, 16px);
+            color: var(--text-primary);
+            font-weight: 600;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 6px 12px;
+            z-index: 20;
+        }
+        
+        /* Enhanced Solar-themed decorative elements - STANDARDIZED VERSION */
+        .solar-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            opacity: 0.06;
+            animation: solarPulse 8s ease-in-out infinite;
+        }
+        
+        .solar-rays::before,
+        .solar-rays::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--accent-primary) 3deg,
+                transparent 6deg,
+                transparent 90deg,
+                var(--sky-primary) 93deg,
+                transparent 96deg,
+                transparent 180deg,
+                var(--accent-primary) 183deg,
+                transparent 186deg,
+                transparent 270deg,
+                var(--sky-primary) 273deg,
+                transparent 276deg,
+                transparent 354deg,
+                var(--accent-primary) 357deg,
+                transparent 360deg
+            );
+            animation: rotateSlow 45s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+        
+        .solar-rays::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-duration: 65s;
+            animation-direction: reverse;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--sky-light) 2deg,
+                transparent 4deg,
+                transparent 178deg,
+                var(--sky-light) 180deg,
+                transparent 182deg,
+                transparent 358deg,
+                var(--sky-light) 360deg
+            );
+        }
+        
+        @keyframes rotateSlow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes solarPulse {
+            0%, 100% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        /* Logo corner handled by centralized theme-skyblue.css */
+        
+        /* Navigation handled by centralized theme-skyblue.css */
+        
+        /* Slide-specific progress bar width override */
+        .progress-fill {
+            width: calc(21 / 28 * 100%); /* Slide 21 progress */
+        }
+        
+        /* Desktop optimization - Simple approach like slide16 */
+        @media (min-width: 768px) {
+            .content-wrapper {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        }
+        
+        /* Dynamic height-based sizing for desktop */
+        @media (min-width: 768px) {
+            /* Base responsive sizing using viewport height */
+            h1 {
+                font-size: clamp(24px, 4vh, 42px);
+                margin-bottom: clamp(6px, 1vh, 10px);
+            }
+            
+            .subtitle {
+                font-size: clamp(12px, 2vh, 20px);
+                padding: clamp(6px, 1vh, 12px) clamp(15px, 2vw, 30px);
+            }
+            
+            .district-header h3 {
+                font-size: clamp(18px, 3.5vh, 32px);
+            }
+            
+            .district-header p {
+                font-size: clamp(12px, 2vh, 18px);
+            }
+            
+            .district-content h4 {
+                font-size: clamp(16px, 2.5vh, 24px);
+                margin-bottom: clamp(8px, 1.5vh, 18px);
+            }
+            
+            .district-items {
+                font-size: clamp(11px, 1.8vh, 15px);
+            }
+            
+            .district-items p {
+                margin-bottom: clamp(3px, 0.6vh, 8px);
+            }
+            
+            .impact-banner p {
+                font-size: clamp(14px, 2.5vh, 20px);
+            }
+            
+            .transformation-section h3 {
+                font-size: clamp(18px, 3vh, 32px);
+                margin-bottom: clamp(12px, 2vh, 25px);
+            }
+            
+            .impact-item .icon {
+                font-size: clamp(22px, 4vh, 40px);
+            }
+            
+            .impact-item p {
+                font-size: clamp(11px, 1.8vh, 16px);
+            }
+        }
+        
+        /* Extra compression for very constrained heights */
+        @media (max-height: 750px) and (min-width: 768px) {
+            .slide {
+                padding: 60px 20px 80px;
+            }
+            
+            .main-content {
+                gap: 8px;
+            }
+            
+            .grid-2 {
+                gap: 8px;
+            }
+            
+            .district-header {
+                padding: clamp(12px, 1.5vh, 18px);
+            }
+            
+            .district-header h3 {
+                margin-bottom: 3px;
+            }
+            
+            .district-content {
+                padding: 12px;
+            }
+            
+            .impact-banner {
+                padding: 8px;
+                margin-top: 8px;
+            }
+            
+            .transformation-section {
+                padding: 12px;
+            }
+            
+            .impact-items {
+                gap: 8px;
+            }
+            
+            .impact-item {
+                padding: 8px;
+            }
+        }
+        
+        /* Removed aggressive desktop overrides - now using simple approach */
+        
+        /* Mobile specific */
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .impact-items {
+                gap: 10px;
+            }
+            
+            .impact-item {
+                min-width: 80px;
+            }
+        }
+        
+        /* Animation on load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .content-wrapper > * {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .content-wrapper > *:nth-child(1) { animation-delay: 0.2s; }
+        .content-wrapper > *:nth-child(2) { animation-delay: 0.3s; }
+        .content-wrapper > *:nth-child(3) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="sky-theme">
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="slide-counter">21 / 28</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <select class="slide-select" onchange="jumpToSlide(this.value)">
+            <option value="index.html">1. Welcome</option>
+            <option value="slide2.html">2. About</option>
+            <option value="slide3.html">3. Purpose & Direction</option>
+            <option value="slide4.html">4. Heritage</option>
+            <option value="slide5.html">5. Excellence</option>
+            <option value="slide6.html">6. L3 Open Body</option>
+            <option value="slide6b.html">7. L3 Closed Body</option>
+            <option value="slide7.html">8. L5 Tipper</option>
+            <option value="slide8.html">9. L3 Garbage Body</option>
+            <option value="slide8b.html">10. L3 Fogging</option>
+            <option value="slide9.html">11. Product Range</option>
+            <option value="slide9b.html">12. L5 Premium</option>
+            <option value="slide9c.html">13. L5 Deluxe</option>
+            <option value="slide10.html">14. Technical Excellence</option>
+            <option value="slide11.html">15. Future E-Bus</option>
+            <option value="slide12.html">16. Last-Mile Logistics</option>
+            <option value="slide13.html">17. SMB Empowerment</option>
+            <option value="slide14.html">18. Public Sector</option>
+            <option value="slide15.html">19. Aftermarket Excellence</option>
+            <option value="slide16.html">20. Chennai Case Study</option>
+            <option value="slide17.html" selected>21. Panchayat Case Study</option>
+            <option value="slide18.html">22. Solar Smart Technology</option>
+            <option value="slide19.html">23. Manufacturing</option>
+            <option value="slide20.html">24. Customer Testimonials</option>
+            <option value="slide21.html">25. Awards & Recognition</option>
+            <option value="slide22.html">26. Strategic Partnerships</option>
+            <option value="slide23.html">27. Growth Vision</option>
+            <option value="slide24.html">28. Thank You</option>
+        </select>
+    </div>
+    
+    <!-- Navigation Buttons at Bottom -->
+    <div class="nav-buttons">
+        <button class="nav-btn prev" onclick="prevSlide()">‹</button>
+        <button class="nav-btn next" onclick="nextSlide()">›</button>
+    </div>
+
+    <div class="slide sky-pattern">
+        <div class="slide-number">21</div>
+        <div class="solar-rays"></div>
+        
+        <div class="content-wrapper">
+            <div class="header-section">
+                <h1>Case Study: Tamil Nadu Panchayats</h1>
+                <div class="subtitle">TRANSFORMING RURAL INDIA • 671 VILLAGES EMPOWERED</div>
+            </div>
+            
+            <div class="main-content">
+                <div class="grid-2">
+                <div class="district-card">
+                    <div class="district-header gold">
+                        <h3>Coimbatore District</h3>
+                        <p>248 Vehicles Deployed</p>
+                    </div>
+                    <div class="district-content gold">
+                        <h4>Applications</h4>
+                        <div class="district-items">
+                            <p><span class="emoji">🗑️</span> Waste collection in 120 panchayats</p>
+                            <p><span class="emoji">💧</span> Water supply distribution</p>
+                            <p><span class="emoji">🏥</span> Healthcare service delivery</p>
+                            <p><span class="emoji">🌾</span> Agricultural produce transport</p>
+                        </div>
+                        <div class="impact-banner">
+                            <p>30% EFFICIENCY IMPROVEMENT</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="district-card">
+                    <div class="district-header blue">
+                        <h3>Tiruvallur District</h3>
+                        <p>423 Vehicles Deployed</p>
+                    </div>
+                    <div class="district-content blue">
+                        <h4>Impact Metrics</h4>
+                        <div class="district-items">
+                            <p><span class="emoji">🏘️</span> 200+ panchayats served</p>
+                            <p><span class="emoji">🏠</span> 50,000+ households benefited</p>
+                            <p><span class="emoji">👨‍💼</span> Direct employment for 400+ drivers</p>
+                            <p><span class="emoji">💰</span> ₹2 Cr annual fuel savings</p>
+                        </div>
+                        <div class="impact-banner blue">
+                            <p>SUSTAINABLE DEVELOPMENT MODEL</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="transformation-section">
+                <h3>Rural Transformation Impact</h3>
+                <div class="impact-items">
+                    <div class="impact-item">
+                        <div class="icon">🏘️</div>
+                        <p>Clean Villages</p>
+                    </div>
+                    <div class="impact-item">
+                        <div class="icon">🏥</div>
+                        <p>Better Healthcare Access</p>
+                    </div>
+                    <div class="impact-item">
+                        <div class="icon">🌾</div>
+                        <p>Improved Agri Logistics</p>
+                    </div>
+                    <div class="impact-item">
+                        <div class="icon">👥</div>
+                        <p>Youth Employment</p>
+                    </div>
+                    <div class="impact-item">
+                        <div class="icon">🌱</div>
+                        <p>Environmental Leadership</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="logo-corner">QTCS</div>
+    </div>
+    
+    <script>
+        const slides = [
+            'index.html',
+            'slide2.html',
+            'slide3.html',
+            'slide4.html',
+            'slide5.html',
+            'slide6.html',
+            'slide6b.html',
+            'slide7.html',
+            'slide8.html',
+            'slide8b.html',
+            'slide9.html',
+            'slide9b.html',
+            'slide9c.html',
+            'slide10.html',
+            'slide11.html',
+            'slide12.html',
+            'slide13.html',
+            'slide14.html',
+            'slide15.html',
+            'slide16.html',
+            'slide17.html',
+            'slide18.html',
+            'slide19.html',
+            'slide20.html',
+            'slide21.html',
+            'slide22.html',
+            'slide23.html',
+            'slide24.html'
+        ];
+        
+        const currentSlide = 'slide17.html';
+        const currentIndex = slides.indexOf(currentSlide);
+        
+        function jumpToSlide(slideFile) {
+            if (slideFile && slideFile !== currentSlide) {
+                window.location.href = slideFile;
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                window.location.href = slides[currentIndex - 1];
+            }
+        }
+        
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                window.location.href = slides[currentIndex + 1];
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+        });
+        
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+        
+        // Set the correct option in dropdown
+        document.querySelector('.slide-select').value = currentSlide;
+    </script>
+</body>
+</html>

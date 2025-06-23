@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS: Revolutionizing Last-Mile Logistics</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Sky blue theme variables are imported from theme-skyblue.css */
+        
+        /* Body styles handled by theme-skyblue.css */
+        
+        /* Desktop-only slide layout */
+        body {
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(80px, 8vh, 100px) clamp(20px, 3vw, 60px) clamp(100px, 10vh, 120px);
+        }
+        
+        /* Enhanced Sky pattern background animations - STANDARDIZED VERSION */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 80%, rgba(135, 206, 235, 0.1) 4px, transparent 4px);
+            background-size: 120px 120px, 80px 80px, 150px 150px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+        
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 90% 20%, rgba(176, 224, 230, 0.08) 3px, transparent 3px);
+            background-size: 100px 100px, 140px 140px;
+            animation: cloudMove2 50s linear infinite reverse;
+            z-index: 0;
+        }
+        
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, 10px) rotate(90deg); }
+            50% { transform: translate(30px, 25px) rotate(180deg); }
+            75% { transform: translate(45px, 35px) rotate(270deg); }
+            100% { transform: translate(60px, 50px) rotate(360deg); }
+        }
+        
+        @keyframes cloudMove2 {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 15px) scale(1.1); }
+            66% { transform: translate(-40px, 30px) scale(0.9); }
+            100% { transform: translate(-60px, 45px) scale(1); }
+        }
+        
+        /* Content container */
+        .content-wrapper {
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(10px, 1.5vh, 20px);
+            justify-content: space-between;
+        }
+        
+        /* Header section */
+        .header-section {
+            text-align: center;
+            margin-bottom: clamp(15px, 2vh, 25px);
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .header-section {
+                margin-bottom: clamp(8px, 1vh, 15px);
+            }
+        }
+        
+        /* Enhanced Solar-themed decorative elements - STANDARDIZED VERSION */
+        .solar-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            opacity: 0.06;
+            animation: solarPulse 8s ease-in-out infinite;
+        }
+        
+        .solar-rays::before,
+        .solar-rays::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--accent-primary) 3deg,
+                transparent 6deg,
+                transparent 90deg,
+                var(--sky-primary) 93deg,
+                transparent 96deg,
+                transparent 180deg,
+                var(--accent-primary) 183deg,
+                transparent 186deg,
+                transparent 270deg,
+                var(--sky-primary) 273deg,
+                transparent 276deg,
+                transparent 354deg,
+                var(--accent-primary) 357deg,
+                transparent 360deg
+            );
+            animation: rotateSlow 45s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+        
+        .solar-rays::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-duration: 65s;
+            animation-direction: reverse;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--sky-light) 2deg,
+                transparent 4deg,
+                transparent 178deg,
+                var(--sky-light) 180deg,
+                transparent 182deg,
+                transparent 358deg,
+                var(--sky-light) 360deg
+            );
+        }
+        
+        @keyframes rotateSlow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes solarPulse {
+            0%, 100% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        /* Slide number enhanced */
+        .slide-number {
+            position: absolute;
+            top: clamp(20px, 2vw, 40px);
+            left: clamp(20px, 2vw, 40px);
+            font-size: clamp(14px, 1vw, 18px);
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            font-weight: 500;
+        }
+        
+        .main-title {
+            font-size: clamp(28px, 3.5vw, 48px);
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 50%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: clamp(6px, 0.8vh, 10px);
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+            animation: titleShine 4s ease-in-out infinite;
+        }
+        
+        @keyframes titleShine {
+            0%, 100% { filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3)); }
+            50% { filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.5)); }
+        }
+        
+        .subtitle {
+            font-size: clamp(14px, 1.8vw, 20px);
+            color: var(--text-secondary);
+            margin-bottom: clamp(15px, 2vh, 25px);
+        }
+        
+        /* Main content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(10px, 1.5vh, 20px);
+            margin-bottom: 0;
+            flex: 1;
+            justify-content: space-between;
+        }
+        
+        /* Services grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(8px, 1vw, 15px);
+        }
+        
+        /* Service card - Light theme glassmorphism */
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: clamp(20px, 3vw, 30px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-normal);
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .service-card {
+                padding: clamp(15px, 2vh, 25px);
+            }
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: var(--glass-bg-light);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+            border-color: var(--glass-border-light);
+        }
+        
+        /* Service header */
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: clamp(15px, 2vw, 25px);
+            margin-bottom: clamp(12px, 1.5vh, 20px);
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .service-header {
+                gap: clamp(10px, 1.5vw, 20px);
+                margin-bottom: clamp(8px, 1vh, 15px);
+            }
+        }
+        
+        /* Icon box - Light theme glassmorphism with color accents */
+        .icon-box {
+            width: clamp(50px, 7vw, 70px);
+            height: clamp(50px, 7vw, 70px);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(24px, 3vw, 32px);
+            flex-shrink: 0;
+            transition: all var(--transition-normal);
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .icon-box {
+                width: clamp(40px, 5vw, 55px);
+                height: clamp(40px, 5vw, 55px);
+                font-size: clamp(20px, 2.5vw, 28px);
+            }
+        }
+        
+        .icon-box.blue {
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.12) 0%, rgba(0, 71, 171, 0.08) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 71, 171, 0.25);
+            box-shadow: 0 4px 16px rgba(0, 71, 171, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+        
+        .icon-box.green {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.12) 0%, rgba(34, 139, 34, 0.08) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(34, 139, 34, 0.25);
+            box-shadow: 0 4px 16px rgba(34, 139, 34, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+        
+        .icon-box.gold {
+            background: linear-gradient(135deg, rgba(253, 184, 19, 0.12) 0%, rgba(253, 184, 19, 0.08) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(253, 184, 19, 0.25);
+            box-shadow: 0 4px 16px rgba(253, 184, 19, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+        
+        .service-header h4 {
+            font-size: clamp(18px, 2.2vw, 26px);
+            color: var(--title-blue-light);
+            font-weight: 600;
+            margin: 0;
+            filter: drop-shadow(0 2px 8px rgba(0, 71, 171, 0.3));
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .service-header h4 {
+                font-size: clamp(16px, 2vw, 22px);
+            }
+        }
+        
+        .service-description {
+            font-size: clamp(14px, 1.8vw, 20px);
+            color: var(--text-primary);
+            line-height: 1.5;
+            margin-bottom: clamp(12px, 1.5vh, 15px);
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .service-description {
+                font-size: clamp(13px, 1.6vw, 18px);
+                margin-bottom: clamp(8px, 1vh, 12px);
+            }
+        }
+        
+        /* Service highlight - Light theme glassmorphism */
+        .service-highlight {
+            padding: clamp(10px, 1.5vh, 15px);
+            border-radius: 10px;
+            font-size: clamp(14px, 1.6vw, 18px);
+            font-weight: 600;
+            margin-top: clamp(10px, 1.5vh, 15px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all var(--transition-normal);
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .service-highlight {
+                padding: clamp(8px, 1vh, 12px);
+                font-size: clamp(12px, 1.5vw, 16px);
+                margin-top: clamp(8px, 1vh, 12px);
+            }
+        }
+        
+        .highlight-blue {
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.08) 0%, rgba(0, 71, 171, 0.05) 100%);
+            border: 1px solid rgba(0, 71, 171, 0.2);
+            color: var(--title-blue-light);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+        
+        .highlight-green {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.08) 0%, rgba(34, 139, 34, 0.05) 100%);
+            border: 1px solid rgba(34, 139, 34, 0.2);
+            color: var(--green-light);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+        
+        .highlight-gold {
+            background: linear-gradient(135deg, rgba(253, 184, 19, 0.08) 0%, rgba(253, 184, 19, 0.05) 100%);
+            border: 1px solid rgba(253, 184, 19, 0.2);
+            color: var(--accent-primary);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Bottom CTA section - Light theme gold glassmorphism with increased fogginess */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(253, 184, 19, 0.25) 0%, rgba(253, 184, 19, 0.18) 100%);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border: 1px solid rgba(253, 184, 19, 0.4);
+            color: var(--text-primary);
+            padding: clamp(12px, 1.8vh, 20px);
+            border-radius: 12px;
+            text-align: center;
+            margin-top: clamp(10px, 1.5vh, 18px);
+            box-shadow: 0 12px 32px rgba(253, 184, 19, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .cta-section {
+                padding: clamp(10px, 1.5vh, 16px);
+                margin-top: clamp(6px, 1vh, 12px);
+            }
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(253, 184, 19, 0.03) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        
+        .cta-section h3 {
+            color: var(--text-primary);
+            font-size: clamp(16px, 2vw, 22px);
+            margin-bottom: clamp(6px, 1vh, 10px);
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8), 0 2px 6px rgba(0, 0, 0, 0.3);
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .cta-section h3 {
+                font-size: clamp(14px, 1.8vw, 20px);
+                margin-bottom: clamp(4px, 0.6vh, 8px);
+            }
+        }
+        
+        .cta-section p {
+            font-size: clamp(12px, 1.5vw, 16px);
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .cta-section p {
+                font-size: clamp(10px, 1.2vw, 14px);
+            }
+        }
+        
+        /* Logo corner handled by centralized theme-skyblue.css */
+        
+        /* Navigation handled by centralized theme-skyblue.css */
+        
+        /* Slide-specific override for progress bar width */
+        .progress-fill {
+            width: calc(16 / 28 * 100%);
+        }
+        
+        /* Responsive adjustments for 780px height */
+        @media (max-height: 780px) and (min-width: 768px) {
+            .slide {
+                padding: clamp(70px, 7vh, 85px) clamp(15px, 2vw, 40px) clamp(90px, 9vh, 110px);
+            }
+            
+            .content-wrapper {
+                gap: 8px;
+            }
+            
+            .service-card {
+                padding: clamp(12px, 1.8vh, 20px);
+            }
+            
+            .cta-section {
+                padding: clamp(15px, 2vh, 25px);
+            }
+        }
+
+        
+        /* Animation on load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .content-wrapper > * {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .content-wrapper > *:nth-child(1) { animation-delay: 0.2s; }
+        .content-wrapper > *:nth-child(2) { animation-delay: 0.3s; }
+        .content-wrapper > *:nth-child(3) { animation-delay: 0.4s; }
+        
+    </style>
+</head>
+<body class="sky-theme">
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="slide-counter">16 / 28</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <select class="slide-select" onchange="jumpToSlide(this.value)">
+            <option value="index.html">1. Welcome</option>
+            <option value="slide2.html">2. About</option>
+            <option value="slide3.html">3. Purpose & Direction</option>
+            <option value="slide4.html">4. Heritage</option>
+            <option value="slide5.html">5. Excellence</option>
+            <option value="slide6.html">6. L3 Open Body</option>
+            <option value="slide6b.html">7. L3 Closed Body</option>
+            <option value="slide7.html">8. L3 Passenger</option>
+            <option value="slide8.html">9. L3 Garbage Body</option>
+            <option value="slide8b.html">10. L3 Fogging</option>
+            <option value="slide9.html">11. L5 Open Body Heavy Duty</option>
+            <option value="slide9b.html">12. L5 Closed Body Heavy Duty</option>
+            <option value="slide9c.html">13. L5 Passenger Premium</option>
+            <option value="slide10.html">14. Technical Excellence</option>
+            <option value="slide11.html">15. Future E-Bus</option>
+            <option value="slide12.html" selected>16. Last-Mile Logistics</option>
+            <option value="slide13.html">17. SMB Empowerment</option>
+            <option value="slide14.html">18. Public Sector</option>
+            <option value="slide15.html">19. Aftermarket Excellence</option>
+            <option value="slide16.html">20. Chennai Case Study</option>
+            <option value="slide17.html">21. Panchayat Case Study</option>
+            <option value="slide18.html">22. Solar Smart Technology</option>
+            <option value="slide19.html">23. Manufacturing</option>
+            <option value="slide20.html">24. Customer Testimonials</option>
+            <option value="slide21.html">25. Awards & Recognition</option>
+            <option value="slide22.html">26. Strategic Partnerships</option>
+            <option value="slide23.html">27. Growth Vision</option>
+            <option value="slide24.html">28. Thank You</option>
+        </select>
+    </div>
+    
+    <!-- Navigation Buttons at Bottom -->
+    <div class="nav-buttons">
+        <button class="nav-btn prev" onclick="prevSlide()">‹</button>
+        <button class="nav-btn next" onclick="nextSlide()">›</button>
+    </div>
+
+    <!-- Slide 16: Last-Mile Logistics -->
+    <div class="slide sky-pattern">
+        <div class="slide-number">16</div>
+        <div class="solar-rays"></div>
+        
+        <div class="content-wrapper">
+            <div class="header-section">
+                <h1 class="main-title">Revolutionizing Last-Mile Logistics</h1>
+                <div class="subtitle">Transforming how India's essential goods reach consumers</div>
+            </div>
+            
+            <div class="main-content">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="icon-box blue">
+                                <div>🏠</div>
+                            </div>
+                            <h4>LPG Cylinder Distribution</h4>
+                        </div>
+                        <p class="service-description">Safe, efficient delivery to millions of households. Reduced turnaround time by 40% with zero emissions.</p>
+                        <div class="service-highlight highlight-blue">
+                            <p>✓ 250K+ households served monthly</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="icon-box green">
+                                <div>💧</div>
+                            </div>
+                            <h4>Mineral Water Delivery</h4>
+                        </div>
+                        <p class="service-description">Hygienic transport with closed body design. Serving 500+ dealers across Tamil Nadu.</p>
+                        <div class="service-highlight highlight-green">
+                            <p>✓ 100% contamination-free delivery</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="icon-box gold">
+                                <div>📦</div>
+                            </div>
+                            <h4>E-Commerce Fulfillment</h4>
+                        </div>
+                        <p class="service-description">Optimized for urban delivery with 90km range. Supporting India's digital commerce revolution.</p>
+                        <div class="service-highlight highlight-gold">
+                            <p>✓ Scaling with India's e-commerce growth</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-header">
+                            <div class="icon-box blue">
+                                <div>🏪</div>
+                            </div>
+                            <h4>Retail & Supermarket</h4>
+                        </div>
+                        <p class="service-description">Temperature-controlled options available. Ensuring fresh goods reach customers daily.</p>
+                        <div class="service-highlight highlight-blue">
+                            <p>✓ 95% on-time delivery rate</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cta-section">
+                    <h3>Powering 10,000+ Small Businesses Across India</h3>
+                    <p>With operational savings of ₹3-5 per kilometer</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="logo-corner">QTCS</div>
+    </div>
+    <script>
+        const slides = [
+            'index.html',
+            'slide2.html',
+            'slide3.html',
+            'slide4.html',
+            'slide5.html',
+            'slide6.html',
+            'slide6b.html',
+            'slide7.html',
+            'slide8.html',
+            'slide8b.html',
+            'slide9.html',
+            'slide9b.html',
+            'slide9c.html',
+            'slide10.html',
+            'slide11.html',
+            'slide12.html',
+            'slide13.html',
+            'slide14.html',
+            'slide15.html',
+            'slide16.html',
+            'slide17.html',
+            'slide18.html',
+            'slide19.html',
+            'slide20.html',
+            'slide21.html',
+            'slide22.html',
+            'slide23.html',
+            'slide24.html'
+        ];
+        
+        const currentSlide = 'slide12.html';
+        const currentIndex = slides.indexOf(currentSlide);
+        
+        function jumpToSlide(slideFile) {
+            if (slideFile && slideFile !== currentSlide) {
+                window.location.href = slideFile;
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                window.location.href = slides[currentIndex - 1];
+            }
+        }
+        
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                window.location.href = slides[currentIndex + 1];
+            }
+        }
+        
+        // Keyboard navigation - including spacebar
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+        });
+        
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+        
+        // Set the correct option in dropdown
+        document.querySelector('.slide-select').value = currentSlide;
+    </script>
+</body>
+</html>

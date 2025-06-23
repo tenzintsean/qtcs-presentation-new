@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS: E-Bus Innovation</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Sky blue theme variables are imported from theme-skyblue.css */
+        
+        /* Body styles handled by theme-skyblue.css */
+        
+        /* Desktop-only slide layout */
+        body {
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(80px, 8vh, 100px) clamp(20px, 3vw, 60px) clamp(100px, 10vh, 120px);
+        }
+        
+        
+        /* Enhanced Sky pattern background animations - STANDARDIZED VERSION */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 80%, rgba(135, 206, 235, 0.1) 4px, transparent 4px);
+            background-size: 120px 120px, 80px 80px, 150px 150px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+        
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 90% 20%, rgba(176, 224, 230, 0.08) 3px, transparent 3px);
+            background-size: 100px 100px, 140px 140px;
+            animation: cloudMove2 50s linear infinite reverse;
+            z-index: 0;
+        }
+        
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, 10px) rotate(90deg); }
+            50% { transform: translate(30px, 25px) rotate(180deg); }
+            75% { transform: translate(45px, 35px) rotate(270deg); }
+            100% { transform: translate(60px, 50px) rotate(360deg); }
+        }
+        
+        @keyframes cloudMove2 {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 15px) scale(1.1); }
+            66% { transform: translate(-40px, 30px) scale(0.9); }
+            100% { transform: translate(-60px, 45px) scale(1); }
+        }
+        
+        /* Content container */
+        .content-wrapper {
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(10px, 1.5vh, 20px);
+            justify-content: space-between;
+        }
+        
+        /* Header section */
+        .header-section {
+            text-align: center;
+            margin-bottom: clamp(15px, 2vh, 25px);
+        }
+        
+        .header-section {
+            margin-bottom: clamp(8px, 1vh, 15px);
+        }
+        
+        /* Enhanced Solar-themed decorative elements - STANDARDIZED VERSION */
+        .solar-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            opacity: 0.06;
+            animation: solarPulse 8s ease-in-out infinite;
+        }
+        
+        .solar-rays::before,
+        .solar-rays::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--accent-primary) 3deg,
+                transparent 6deg,
+                transparent 90deg,
+                var(--sky-primary) 93deg,
+                transparent 96deg,
+                transparent 180deg,
+                var(--accent-primary) 183deg,
+                transparent 186deg,
+                transparent 270deg,
+                var(--sky-primary) 273deg,
+                transparent 276deg,
+                transparent 354deg,
+                var(--accent-primary) 357deg,
+                transparent 360deg
+            );
+            animation: rotateSlow 45s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+        
+        .solar-rays::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-duration: 65s;
+            animation-direction: reverse;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--sky-light) 2deg,
+                transparent 4deg,
+                transparent 178deg,
+                var(--sky-light) 180deg,
+                transparent 182deg,
+                transparent 358deg,
+                var(--sky-light) 360deg
+            );
+        }
+        
+        @keyframes rotateSlow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes solarPulse {
+            0%, 100% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        /* Slide number enhanced */
+        .slide-number {
+            position: absolute;
+            top: clamp(20px, 2vw, 40px);
+            left: clamp(20px, 2vw, 40px);
+            font-size: clamp(14px, 1vw, 18px);
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            font-weight: 500;
+        }
+        
+        .main-title {
+            font-size: clamp(28px, 3.5vw, 48px);
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 50%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: clamp(6px, 0.8vh, 10px);
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+            animation: titleShine 4s ease-in-out infinite;
+        }
+        
+        @keyframes titleShine {
+            0%, 100% { filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3)); }
+            50% { filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.5)); }
+        }
+        
+        .subtitle {
+            font-size: clamp(14px, 1.8vw, 20px);
+            color: var(--text-secondary);
+            margin-bottom: clamp(15px, 2vh, 25px);
+        }
+        
+        /* Main content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(8px, 1vh, 15px);
+            margin-bottom: 0;
+            flex: 1;
+            justify-content: space-between;
+        }
+        
+        /* E-Bus images section */
+        .ebus-images-section {
+            text-align: center;
+            margin-bottom: clamp(15px, 2vh, 20px);
+        }
+        
+        .ebus-images-section {
+            margin-bottom: clamp(8px, 1vh, 12px);
+        }
+        
+        .ebus-images {
+            display: flex;
+            gap: clamp(15px, 2.5vw, 25px);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+        
+        .ebus-images {
+            flex-wrap: nowrap;
+            gap: clamp(10px, 1.5vw, 20px);
+        }
+        
+        .ebus-images img {
+            width: 100%;
+            height: auto;
+            max-width: calc(50% - 10px);
+            border-radius: clamp(6px, 0.6vw, 12px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border: 3px solid rgba(34, 139, 34, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .ebus-images img {
+            max-width: none;
+            width: auto;
+            height: clamp(100px, 15vh, 180px);
+            object-fit: contain;
+            aspect-ratio: 16/10;
+        }
+        
+        .ebus-images img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+            border-color: rgba(34, 139, 34, 0.8);
+        }
+        
+        /* Coming soon section - Enhanced glassmorphism with visual hierarchy */
+        .coming-soon-section {
+            background: var(--glass-bg-light);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border-light);
+            color: var(--text-primary);
+            padding: clamp(15px, 2.5vw, 25px);
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: clamp(15px, 2vh, 20px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+        
+        .coming-soon-section:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(34, 139, 34, 0.4);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(34, 139, 34, 0.1);
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .coming-soon-section {
+                padding: clamp(12px, 2vh, 20px);
+                margin-bottom: clamp(8px, 1vh, 12px);
+            }
+        }
+        
+        .coming-soon-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        
+        .coming-soon-section h3 {
+            color: var(--green-light);
+            font-size: clamp(20px, 3vw, 30px);
+            margin-bottom: clamp(12px, 2vw, 20px);
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 2px 8px rgba(34, 139, 34, 0.5));
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .coming-soon-section h3 {
+                font-size: clamp(18px, 2.5vw, 26px);
+                margin-bottom: clamp(8px, 1vh, 12px);
+            }
+        }
+        
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: clamp(15px, 2vw, 20px);
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 480px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: clamp(10px, 1.5vw, 15px);
+            }
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .stats-grid {
+                gap: clamp(8px, 1vw, 12px);
+            }
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: clamp(28px, 4.8vw, 48px);
+            font-weight: 700;
+            color: var(--green-light);
+            margin-bottom: clamp(4px, 0.8vw, 8px);
+            filter: drop-shadow(0 2px 8px rgba(34, 139, 34, 0.5));
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .stat-value {
+                font-size: clamp(24px, 3.5vw, 36px);
+                margin-bottom: clamp(2px, 0.5vh, 5px);
+            }
+        }
+        
+        .stat-label {
+            font-size: clamp(14px, 1.8vw, 18px);
+            color: var(--text-secondary);
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .stat-label {
+                font-size: clamp(12px, 1.5vw, 16px);
+            }
+        }
+        
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: clamp(15px, 2vw, 20px);
+        }
+        
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: clamp(10px, 1.5vw, 20px);
+            }
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .features-grid {
+                gap: clamp(8px, 1vw, 15px);
+            }
+        }
+        
+        /* Feature card - Glassmorphic */
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: clamp(3px, 0.5vw, 5px) solid var(--title-blue);
+            padding: clamp(15px, 2.5vw, 25px);
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .feature-card {
+                padding: clamp(12px, 2vh, 20px);
+            }
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 71, 171, 0.1);
+            border-left-color: var(--title-blue-light);
+        }
+        
+        .feature-card.gold-accent {
+            border-left-color: var(--accent-primary);
+        }
+        
+        .feature-card.gold-accent:hover {
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 140, 0, 0.1);
+            border-left-color: var(--accent-light);
+        }
+        
+        .feature-card h4 {
+            color: var(--title-blue-light);
+            font-size: clamp(16px, 2.2vw, 22px);
+            margin-bottom: clamp(8px, 1.5vw, 15px);
+            font-weight: 600;
+            filter: drop-shadow(0 2px 8px rgba(0, 71, 171, 0.5));
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .feature-card h4 {
+                font-size: clamp(14px, 1.8vw, 18px);
+                margin-bottom: clamp(5px, 0.8vh, 10px);
+            }
+        }
+        
+        .feature-card.gold-accent h4 {
+            color: var(--accent-primary);
+            filter: drop-shadow(0 2px 8px rgba(255, 140, 0, 0.5));
+        }
+        
+        .feature-list {
+            font-size: clamp(14px, 1.7vw, 17px);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .feature-list {
+                font-size: clamp(12px, 1.5vw, 15px);
+                line-height: 1.4;
+            }
+        }
+        
+        .feature-list p {
+            margin: clamp(4px, 0.6vh, 8px) 0;
+        }
+        
+        @media (min-width: 768px) and (min-height: 600px) {
+            .feature-list p {
+                margin: clamp(2px, 0.4vh, 5px) 0;
+            }
+        }
+        
+        /* Logo corner handled by centralized theme-skyblue.css */
+        
+        /* Navigation handled by centralized theme-skyblue.css */
+        
+        /* Slide-specific override for progress bar width */
+        .progress-fill {
+            width: calc(15 / 28 * 100%);
+        }
+        
+        /* Responsive adjustments for 780px height */
+        @media (max-height: 780px) and (min-width: 768px) {
+            .slide {
+                padding: clamp(70px, 7vh, 85px) clamp(15px, 2vw, 40px) clamp(90px, 9vh, 110px);
+            }
+            
+            .content-wrapper {
+                gap: 8px;
+            }
+            
+            .ebus-images img {
+                height: clamp(80px, 12vh, 120px);
+            }
+            
+            .coming-soon-section {
+                padding: clamp(10px, 1.5vh, 15px);
+            }
+        }
+
+        
+        /* Animation on load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .content-wrapper > * {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .content-wrapper > *:nth-child(1) { animation-delay: 0.2s; }
+        .content-wrapper > *:nth-child(2) { animation-delay: 0.3s; }
+        .content-wrapper > *:nth-child(3) { animation-delay: 0.4s; }
+        .content-wrapper > *:nth-child(4) { animation-delay: 0.5s; }
+        
+    </style>
+</head>
+<body class="sky-theme">
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="slide-counter">15 / 28</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <select class="slide-select" onchange="jumpToSlide(this.value)">
+            <option value="index.html">1. Welcome</option>
+            <option value="slide2.html">2. About</option>
+            <option value="slide3.html">3. Purpose & Direction</option>
+            <option value="slide4.html">4. Heritage</option>
+            <option value="slide5.html">5. Excellence</option>
+            <option value="slide6.html">6. L3 Open Body</option>
+            <option value="slide6b.html">7. L3 Closed Body</option>
+            <option value="slide7.html">8. L3 Passenger</option>
+            <option value="slide8.html">9. L3 Garbage Body</option>
+            <option value="slide8b.html">10. L3 Fogging</option>
+            <option value="slide9.html">11. L5 Open Body Heavy Duty</option>
+            <option value="slide9b.html">12. L5 Closed Body Heavy Duty</option>
+            <option value="slide9c.html">13. L5 Passenger Premium</option>
+            <option value="slide10.html">14. Technical Excellence</option>
+            <option value="slide11.html" selected>15. Future E-Bus</option>
+            <option value="slide12.html">16. Last-Mile Logistics</option>
+            <option value="slide13.html">17. SMB Empowerment</option>
+            <option value="slide14.html">18. Public Sector</option>
+            <option value="slide15.html">19. Aftermarket Excellence</option>
+            <option value="slide16.html">20. Chennai Case Study</option>
+            <option value="slide17.html">21. Panchayat Case Study</option>
+            <option value="slide18.html">22. Solar Smart Technology</option>
+            <option value="slide19.html">23. Manufacturing</option>
+            <option value="slide20.html">24. Customer Testimonials</option>
+            <option value="slide21.html">25. Awards & Recognition</option>
+            <option value="slide22.html">26. Strategic Partnerships</option>
+            <option value="slide23.html">27. Growth Vision</option>
+            <option value="slide24.html">28. Thank You</option>
+        </select>
+    </div>
+    
+    <!-- Navigation Buttons at Bottom -->
+    <div class="nav-buttons">
+        <button class="nav-btn prev" onclick="prevSlide()">‹</button>
+        <button class="nav-btn next" onclick="nextSlide()">›</button>
+    </div>
+
+    <!-- Slide 15: Future E-Bus -->
+    <div class="slide sky-pattern">
+        <div class="slide-number">15</div>
+        <div class="solar-rays"></div>
+        
+        <div class="content-wrapper">
+            <div class="header-section">
+                <h1 class="main-title">The Future: QTCS E-Bus</h1>
+                <div class="subtitle">Expanding our vision to transform public transportation</div>
+            </div>
+            
+            <div class="main-content">
+                <div class="ebus-images-section">
+                    <div class="ebus-images">
+                        <img src="future-e-bus/Untitled.jpeg" alt="Future E-Bus 1">
+                        <img src="future-e-bus/Untitled 2.jpeg" alt="Future E-Bus 2">
+                        <img src="future-e-bus/Untitled 3.jpeg" alt="Future E-Bus 3">
+                        <img src="future-e-bus/Untitled 4.jpeg" alt="Future E-Bus 4">
+                    </div>
+                </div>
+                
+                <div class="coming-soon-section">
+                    <h3>Coming Soon: The QTCS E-Bus Series</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">32</div>
+                            <p class="stat-label">Passenger Capacity</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">200km</div>
+                            <p class="stat-label">Range per Charge</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">2025</div>
+                            <p class="stat-label">Launch Year</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>🔧 Smart Features</h4>
+                        <div class="feature-list">
+                            <p>🛰️ GPS tracking and route optimization</p>
+                            <p>📱 Digital ticketing integration</p>
+                            <p>📺 Real-time passenger information</p>
+                            <p>❄️ Air conditioning with air purification</p>
+                        </div>
+                    </div>
+                    <div class="feature-card gold-accent">
+                        <h4>🎯 Target Applications</h4>
+                        <div class="feature-list">
+                            <p>🏙️ City public transport</p>
+                            <p>🏢 Corporate employee transport</p>
+                            <p>🎓 School and college buses</p>
+                            <p>🏨 Tourism and hospitality</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="logo-corner">QTCS</div>
+    </div>
+    <script>
+        const slides = [
+            'index.html',
+            'slide2.html',
+            'slide3.html',
+            'slide4.html',
+            'slide5.html',
+            'slide6.html',
+            'slide6b.html',
+            'slide7.html',
+            'slide8.html',
+            'slide8b.html',
+            'slide9.html',
+            'slide9b.html',
+            'slide9c.html',
+            'slide10.html',
+            'slide11.html',
+            'slide12.html',
+            'slide13.html',
+            'slide14.html',
+            'slide15.html',
+            'slide16.html',
+            'slide17.html',
+            'slide18.html',
+            'slide19.html',
+            'slide20.html',
+            'slide21.html',
+            'slide22.html',
+            'slide23.html',
+            'slide24.html'
+        ];
+        
+        const currentSlide = 'slide11.html';
+        const currentIndex = slides.indexOf(currentSlide);
+        
+        function jumpToSlide(slideFile) {
+            if (slideFile && slideFile !== currentSlide) {
+                window.location.href = slideFile;
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                window.location.href = slides[currentIndex - 1];
+            }
+        }
+        
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                window.location.href = slides[currentIndex + 1];
+            }
+        }
+        
+        // Keyboard navigation - including spacebar
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+        });
+        
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+        
+        // Set the correct option in dropdown
+        document.querySelector('.slide-select').value = currentSlide;
+    </script>
+</body>
+</html>

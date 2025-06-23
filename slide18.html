@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS: Client Testimonials</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Sky blue theme variables are imported from theme-skyblue.css */
+        
+        /* Body styles handled by theme-skyblue.css */
+        
+        /* Desktop-only slide layout */
+        body {
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(80px, 8vh, 100px) clamp(20px, 3vw, 60px) clamp(100px, 10vh, 120px);
+        }
+        
+                    body {
+                overflow: hidden;
+            }
+            
+            .slide {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                height: 100vh;
+                max-width: 1920px;
+                max-height: 1080px;
+                overflow: hidden;
+                padding: clamp(85px, 8.5vh, 100px) clamp(20px, 2.5vw, 50px) clamp(100px, 10vh, 120px);
+            }
+            
+            .content-wrapper {
+                height: 100%;
+                gap: clamp(15px, 2vh, 25px);
+            }
+            
+            /* VAS - All elements scale with viewport height */
+            h1 { 
+                font-size: clamp(24px, 4vh, 42px);
+                margin-bottom: clamp(6px, 1vh, 10px);
+            }
+            
+            .subtitle {
+                font-size: clamp(14px, 2vh, 20px);
+                margin-bottom: clamp(15px, 2vh, 25px);
+            }
+            
+            /* Main content - flexible with no scrolling */
+            .grid-2 {
+                flex: 1;
+                min-height: 0;
+                gap: clamp(12px, 2vh, 20px);
+                max-height: calc(100% - 150px); /* Account for header and bottom banner */
+            }
+            
+            /* Bottom banner - flexible sizing */
+            .bottom-banner {
+                flex: 0 0 auto;
+                margin-top: clamp(15px, 2vh, 25px);
+            }
+        }
+        
+        /* Enhanced Sky pattern background animations - STANDARDIZED VERSION */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 80%, rgba(135, 206, 235, 0.1) 4px, transparent 4px);
+            background-size: 120px 120px, 80px 80px, 150px 150px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+        
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 90% 20%, rgba(176, 224, 230, 0.08) 3px, transparent 3px);
+            background-size: 100px 100px, 140px 140px;
+            animation: cloudMove2 50s linear infinite reverse;
+            z-index: 0;
+        }
+        
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, 10px) rotate(90deg); }
+            50% { transform: translate(30px, 25px) rotate(180deg); }
+            75% { transform: translate(45px, 35px) rotate(270deg); }
+            100% { transform: translate(60px, 50px) rotate(360deg); }
+        }
+        
+        @keyframes cloudMove2 {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 15px) scale(1.1); }
+            66% { transform: translate(-40px, 30px) scale(0.9); }
+            100% { transform: translate(-60px, 45px) scale(1); }
+        }
+        
+        /* Content wrapper for desktop layout control */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(20px, 3vh, 30px);
+        }
+        
+        /* Slide number - Light glassmorphism */
+        .slide-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: clamp(12px, 0.8vw, 16px);
+            color: var(--text-primary);
+            font-weight: 600;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 6px 12px;
+            z-index: 20;
+        }
+        
+        /* Title styling */
+        h1 {
+            font-size: clamp(28px, 3.5vw, 56px);
+            font-weight: 700;
+            margin-bottom: clamp(8px, 1.5vh, 15px);
+            line-height: 1.2;
+            text-align: center;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 50%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+        }
+        
+        .subtitle {
+            font-size: clamp(14px, 1.8vw, 20px);
+            color: var(--text-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.15) 0%, var(--glass-bg) 100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: clamp(8px, 1.2vh, 12px) clamp(20px, 3vw, 30px);
+            border-radius: 25px;
+            border: 1px solid rgba(0, 71, 171, 0.3);
+            display: inline-block;
+            margin: 0 auto clamp(20px, 3vh, 30px);
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Grid layout - VAS container */
+        .grid-2 { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: clamp(15px, 2.5vw, 25px); 
+            margin-bottom: clamp(15px, 2.5vw, 25px);
+            flex: 1;
+            min-height: 0; /* Critical for VAS */
+            align-content: start; /* Prevent vertical stretching */
+            grid-auto-rows: minmax(0, 1fr); /* Equal height distribution */
+        }
+        
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: clamp(10px, 1.5vw, 15px);
+            }
+        }
+        
+        /* Icon boxes with glassmorphism - Light theme */
+        .icon-box {
+            width: clamp(42px, 5vw, 60px);
+            height: clamp(42px, 5vw, 60px);
+            border-radius: clamp(6px, 0.7vw, 12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: clamp(6px, 1vw, 12px);
+            font-size: clamp(20px, 2.5vw, 28px);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-normal);
+            flex-shrink: 0;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+        }
+        
+        @media (min-width: 768px) {
+            .icon-box {
+                width: clamp(38px, 6vh, 55px);
+                height: clamp(38px, 6vh, 55px);
+                font-size: clamp(18px, 3vh, 26px);
+                margin-bottom: clamp(4px, 0.8vh, 8px);
+            }
+        }
+        
+        .icon-box:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        /* Testimonial cards with glassmorphism - Light theme */
+        .testimonial-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: clamp(8px, 1.0vw, 16px);
+            padding: clamp(15px, 2.5vw, 25px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-height: 100%; /* Ensure cards don't exceed grid */
+            overflow: hidden; /* Prevent content overflow */
+            transition: all var(--transition-normal);
+        }
+        
+        @media (min-width: 768px) {
+            .testimonial-card {
+                padding: clamp(10px, 1.5vh, 18px); /* Reduced padding for more content space */
+                max-height: clamp(240px, 36vh, 380px); /* Increased for 3 lines of text */
+            }
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            background: var(--glass-bg-light);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: clamp(6px, 1vw, 12px);
+            margin-bottom: clamp(4px, 0.8vw, 8px);
+        }
+        
+        @media (min-width: 768px) {
+            .testimonial-header {
+                gap: clamp(3px, 0.6vh, 8px);
+                margin-bottom: clamp(2px, 0.4vh, 4px);
+            }
+        }
+        
+        h4 {
+            color: var(--text-primary);
+            font-size: clamp(13px, 1.3vw, 18px);
+            font-weight: 600;
+            margin-bottom: clamp(2px, 0.4vw, 6px);
+        }
+        
+        @media (min-width: 768px) {
+            h4 {
+                font-size: clamp(11px, 1.6vh, 16px);
+                margin-bottom: clamp(2px, 0.4vh, 4px);
+            }
+        }
+        
+        .testimonial-text {
+            font-size: clamp(14px, 1.4vw, 18px);
+            color: var(--text-primary);
+            line-height: 1.5;
+            margin-bottom: clamp(10px, 1.5vw, 15px);
+            font-style: italic;
+            flex: 1;
+            min-height: 0; /* Allow text to shrink */
+            overflow: hidden; /* Prevent text overflow */
+        }
+        
+        @media (min-width: 768px) {
+            .testimonial-text {
+                font-size: clamp(12px, 1.8vh, 16px);
+                line-height: 1.4;
+                margin-bottom: clamp(8px, 1.2vh, 12px);
+            }
+        }
+        
+        .testimonial-footer {
+            background: var(--glass-bg-light);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            padding: clamp(6px, 1vw, 10px);
+            border-radius: clamp(5px, 0.5vw, 8px);
+            margin-top: auto;
+            flex-shrink: 0; /* Prevent footer from shrinking */
+        }
+        
+        @media (min-width: 768px) {
+            .testimonial-footer {
+                padding: clamp(4px, 0.8vh, 8px);
+            }
+        }
+        
+        .testimonial-author {
+            font-size: clamp(11px, 1.2vw, 15px);
+            font-weight: 700;
+            margin-bottom: clamp(1px, 0.2vw, 2px);
+        }
+        
+        @media (min-width: 768px) {
+            .testimonial-author {
+                font-size: clamp(10px, 1.4vh, 13px);
+                margin-bottom: 1px;
+            }
+        }
+        
+        .testimonial-role {
+            font-size: clamp(10px, 1vw, 13px);
+            color: var(--text-secondary);
+        }
+        
+        @media (min-width: 768px) {
+            .testimonial-role {
+                font-size: clamp(9px, 1.2vh, 11px);
+            }
+        }
+        
+        /* Metrics grid - VAS implementation */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(10px, 1.5vh, 15px);
+            margin-top: clamp(10px, 1.5vh, 15px);
+            margin-bottom: 0; /* No bottom margin to save space */
+        }
+        
+        @media (min-width: 768px) {
+            .metrics-grid {
+                gap: clamp(3px, 0.5vh, 6px); /* Even tighter gaps */
+                margin-top: clamp(3px, 0.5vh, 6px);
+            }
+        }
+        
+        .metric-box {
+            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            padding: clamp(8px, 1.2vh, 12px);
+            border-radius: clamp(6px, 0.8vw, 10px);
+            transition: all var(--transition-normal);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (min-width: 768px) {
+            .metric-box {
+                padding: clamp(3px, 0.5vh, 6px); /* Even tighter padding */
+            }
+        }
+        
+        .metric-value {
+            font-size: clamp(18px, 2.5vw, 28px);
+            font-weight: 700;
+        }
+        
+        @media (min-width: 768px) {
+            .metric-value {
+                font-size: clamp(12px, 1.8vh, 18px); /* Even more aggressive scaling */
+            }
+        }
+        
+        .metric-label {
+            font-size: clamp(10px, 1.2vw, 13px);
+            color: var(--text-secondary);
+        }
+        
+        @media (min-width: 768px) {
+            .metric-label {
+                font-size: clamp(7px, 1vh, 9px); /* Even more aggressive scaling */
+            }
+        }
+        
+        /* Bottom banner with glassmorphism - Light theme */
+        .bottom-banner {
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.15) 0%, var(--glass-bg) 100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 71, 171, 0.3);
+            color: var(--text-primary);
+            padding: clamp(15px, 2.5vw, 25px);
+            border-radius: clamp(8px, 1.0vw, 16px);
+            text-align: center;
+            margin-top: auto;
+            box-shadow: 0 8px 24px rgba(0, 71, 171, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+        
+        @media (min-width: 768px) {
+            .bottom-banner {
+                padding: clamp(12px, 2vh, 20px);
+            }
+        }
+        
+        .bottom-banner h3 {
+            color: var(--text-primary);
+            margin-bottom: clamp(6px, 1vw, 10px);
+            font-size: clamp(16px, 2vw, 26px);
+            font-weight: 700;
+        }
+        
+        @media (min-width: 768px) {
+            .bottom-banner h3 {
+                font-size: clamp(14px, 2.2vh, 24px);
+                margin-bottom: clamp(4px, 0.6vh, 8px);
+            }
+        }
+        
+        .bottom-banner p {
+            font-size: clamp(12px, 1.4vw, 18px);
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .bottom-banner p {
+                font-size: clamp(11px, 1.6vh, 16px);
+            }
+        }
+        
+        /* Logo corner handled by centralized theme-skyblue.css */
+        
+        /* VAS Progressive Height Breakpoints */
+        
+        /* Stage 1: Moderate constraints (850px and below) */
+        @media (max-height: 850px) and (min-width: 768px) {
+            .slide {
+                padding: clamp(70px, 7vh, 85px) clamp(15px, 2vw, 40px) clamp(90px, 9vh, 110px);
+            }
+            
+            .content-wrapper {
+                gap: clamp(10px, 1.5vh, 18px);
+            }
+            
+            h1 {
+                font-size: clamp(20px, 3.5vh, 36px);
+                margin-bottom: clamp(4px, 0.6vh, 8px);
+            }
+            
+            .subtitle {
+                font-size: clamp(12px, 1.8vh, 18px);
+                margin-bottom: clamp(10px, 1.5vh, 20px);
+            }
+            
+            .grid-2 {
+                gap: clamp(10px, 1.5vh, 15px);
+                grid-auto-rows: minmax(0, 1fr); /* Equal height rows */
+            }
+            
+            .icon-box {
+                width: clamp(40px, 6vh, 55px);
+                height: clamp(40px, 6vh, 55px);
+                font-size: clamp(20px, 3vh, 26px);
+                margin-bottom: clamp(5px, 0.8vh, 10px);
+            }
+            
+            h4 {
+                font-size: clamp(12px, 1.8vh, 18px); /* Smaller */
+                margin-bottom: clamp(3px, 0.5vh, 6px); /* Less margin */
+            }
+            
+            .testimonial-card {
+                padding: clamp(8px, 1.2vh, 12px); /* Less padding */
+                max-height: clamp(180px, 28vh, 300px); /* More height allowance */
+            }
+            
+            .testimonial-header {
+                gap: clamp(6px, 1vh, 10px); /* Tighter gap */
+                margin-bottom: clamp(4px, 0.6vh, 6px); /* Less margin */
+            }
+            
+            .testimonial-text {
+                font-size: clamp(11px, 1.6vh, 14px);
+                margin-bottom: clamp(4px, 0.7vh, 8px); /* Less margin */
+                line-height: 1.35; /* Tighter line height */
+            }
+            
+            .testimonial-footer {
+                padding: clamp(4px, 0.6vh, 6px); /* Even less padding */
+                margin-top: clamp(4px, 0.6vh, 8px); /* Less margin */
+            }
+            
+            .testimonial-author {
+                font-size: clamp(10px, 1.5vh, 13px);
+            }
+            
+            .testimonial-role {
+                font-size: clamp(9px, 1.3vh, 11px);
+            }
+            
+            .metrics-grid {
+                gap: clamp(3px, 0.5vh, 5px); /* Very tight */
+                margin-top: clamp(3px, 0.5vh, 5px);
+            }
+            
+            .metric-box {
+                padding: clamp(3px, 0.5vh, 5px); /* Less padding */
+            }
+            
+            .metric-value {
+                font-size: clamp(11px, 1.6vh, 16px); /* Much smaller at 850px */
+            }
+            
+            .metric-label {
+                font-size: clamp(6px, 0.8vh, 8px); /* Much smaller at 850px */
+            }
+            
+            .bottom-banner {
+                padding: clamp(10px, 1.5vh, 15px);
+                margin-top: clamp(10px, 1.5vh, 18px);
+            }
+            
+            .bottom-banner h3 {
+                font-size: clamp(13px, 2vh, 20px);
+                margin-bottom: clamp(3px, 0.5vh, 6px);
+            }
+            
+            .bottom-banner p {
+                font-size: clamp(10px, 1.5vh, 14px);
+            }
+        }
+        
+        /* Stage 2: Severe constraints (750px and below) */
+        @media (max-height: 750px) and (min-width: 768px) {
+            .slide {
+                padding: 60px 15px 80px;
+            }
+            
+            .content-wrapper {
+                gap: 8px;
+            }
+            
+            h1 {
+                font-size: clamp(18px, 3vh, 30px);
+                margin-bottom: 3px;
+            }
+            
+            .subtitle {
+                font-size: clamp(11px, 1.5vh, 16px);
+                margin-bottom: 8px;
+            }
+            
+            .grid-2 {
+                gap: 8px;
+                grid-auto-rows: minmax(0, 1fr); /* Equal height rows */
+            }
+            
+            .icon-box {
+                width: clamp(35px, 5vh, 45px);
+                height: clamp(35px, 5vh, 45px);
+                font-size: clamp(18px, 2.5vh, 22px);
+                margin-bottom: 4px;
+            }
+            
+            h4 {
+                font-size: clamp(12px, 1.8vh, 18px);
+                margin-bottom: 4px;
+            }
+            
+            .testimonial-card {
+                padding: 6px; /* Minimal padding */
+                max-height: clamp(160px, 24vh, 240px); /* More height allowance */
+            }
+            
+            .testimonial-header {
+                gap: 4px; /* Tighter */
+                margin-bottom: 2px; /* Less */
+            }
+            
+            .testimonial-text {
+                font-size: clamp(10px, 1.4vh, 12px);
+                line-height: 1.2; /* Even tighter */
+                margin-bottom: 3px; /* Minimal margin */
+            }
+            
+            .testimonial-footer {
+                padding: 3px 5px; /* Minimal padding */
+                margin-top: 3px; /* Minimal margin */
+            }
+            
+            .testimonial-author {
+                font-size: clamp(9px, 1.3vh, 11px);
+                margin-bottom: 1px;
+            }
+            
+            .testimonial-role {
+                font-size: clamp(8px, 1.2vh, 10px);
+            }
+            
+            .metrics-grid {
+                gap: 2px; /* Minimal gap */
+                margin-top: 2px;
+            }
+            
+            .metric-box {
+                padding: 2px; /* Minimal */
+            }
+            
+            .metric-value {
+                font-size: clamp(10px, 1.4vh, 14px); /* Very small at 750px */
+            }
+            
+            .metric-label {
+                font-size: clamp(5px, 0.7vh, 7px); /* Very small at 750px */
+            }
+            
+            .bottom-banner {
+                padding: 8px 10px;
+                margin-top: 8px;
+            }
+            
+            .bottom-banner h3 {
+                font-size: clamp(12px, 1.8vh, 18px);
+                margin-bottom: 2px;
+            }
+            
+            .bottom-banner p {
+                font-size: clamp(9px, 1.3vh, 12px);
+            }
+        }
+        
+        /* Special handling for metrics-only card */
+        .testimonial-card:has(.metrics-grid) {
+            justify-content: flex-start; /* Start from top */
+        }
+        
+        .testimonial-card:has(.metrics-grid) .testimonial-header {
+            flex-shrink: 0; /* Keep header size */
+            margin-bottom: clamp(8px, 1vh, 12px); /* Consistent margin */
+        }
+        
+        .testimonial-card:has(.metrics-grid) .metrics-grid {
+            flex: 1; /* Take remaining space */
+            align-content: start; /* Start from top to prevent clipping */
+            max-height: 100%; /* Ensure it doesn't overflow */
+        }
+        
+        @media (min-width: 768px) {
+            .testimonial-card:has(.metrics-grid) .testimonial-header {
+                margin-bottom: clamp(4px, 0.6vh, 8px); /* Smaller margin on desktop */
+            }
+        }
+        
+        /* Stage 3: Ultra-compact mode (650px and below) */
+        @media (max-height: 650px) and (min-width: 768px) {
+            .slide {
+                padding: 50px 10px 70px;
+            }
+            
+            .content-wrapper {
+                gap: 6px;
+            }
+            
+            h1 {
+                font-size: 16px;
+                margin-bottom: 2px;
+            }
+            
+            .subtitle {
+                font-size: 10px;
+                margin-bottom: 6px;
+            }
+            
+            .grid-2 {
+                gap: 6px;
+                grid-template-columns: repeat(4, 1fr); /* Switch to 4 columns for more compact layout */
+            }
+            
+            .testimonial-card {
+                padding: 6px;
+                max-height: 120px; /* Ultra-compact cards */
+            }
+            
+            .testimonial-header {
+                gap: 3px;
+                margin-bottom: 2px;
+            }
+            
+            .icon-box {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+                margin-bottom: 3px;
+            }
+            
+            h4 {
+                font-size: 11px;
+                margin-bottom: 3px;
+            }
+            
+            .testimonial-text {
+                font-size: 9px;
+                line-height: 1.15; /* Very compact */
+                margin-bottom: 4px;
+            }
+            
+            .testimonial-footer {
+                padding: 2px 4px; /* Ultra minimal */
+                margin-top: 2px; /* Ultra minimal */
+            }
+            
+            .testimonial-author {
+                font-size: 8px;
+                margin-bottom: 0;
+            }
+            
+            .testimonial-role {
+                font-size: 7px;
+            }
+            
+            .metrics-grid {
+                gap: 2px; /* Ultra minimal */
+                margin-top: 2px;
+            }
+            
+            .metric-box {
+                padding: 2px; /* Ultra minimal */
+            }
+            
+            .metric-value {
+                font-size: 11px;
+            }
+            
+            .metric-label {
+                font-size: 6px;
+            }
+            
+            .bottom-banner {
+                padding: 6px 8px;
+                margin-top: 6px;
+            }
+            
+            .bottom-banner h3 {
+                font-size: 11px;
+                margin-bottom: 1px;
+            }
+            
+            .bottom-banner p {
+                font-size: 8px;
+            }
+        }
+        
+        /* Navigation handled by centralized theme-skyblue.css */
+        
+        /* Enhanced Solar-themed decorative elements - STANDARDIZED VERSION */
+        .solar-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            opacity: 0.06;
+            animation: solarPulse 8s ease-in-out infinite;
+        }
+        
+        .solar-rays::before,
+        .solar-rays::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--accent-primary) 3deg,
+                transparent 6deg,
+                transparent 90deg,
+                var(--sky-primary) 93deg,
+                transparent 96deg,
+                transparent 180deg,
+                var(--accent-primary) 183deg,
+                transparent 186deg,
+                transparent 270deg,
+                var(--sky-primary) 273deg,
+                transparent 276deg,
+                transparent 354deg,
+                var(--accent-primary) 357deg,
+                transparent 360deg
+            );
+            animation: rotateSlow 45s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+        
+        .solar-rays::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-duration: 65s;
+            animation-direction: reverse;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--sky-light) 2deg,
+                transparent 4deg,
+                transparent 178deg,
+                var(--sky-light) 180deg,
+                transparent 182deg,
+                transparent 358deg,
+                var(--sky-light) 360deg
+            );
+        }
+        
+        @keyframes rotateSlow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes solarPulse {
+            0%, 100% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        /* Remove all margins from header elements (zero row) */
+        .content-wrapper h1,
+        .content-wrapper .subtitle {
+            margin: 0 !important;
+        }
+
+        /* Remove all margins from first row testimonial cards */
+        .grid-2 .testimonial-card:nth-child(1) *,
+        .grid-2 .testimonial-card:nth-child(2) * {
+            margin: 0 !important;
+        }
+
+        /* Slide-specific progress bar width override */
+        .progress-fill {
+            width: calc(22 / 28 * 100%); /* Slide 22 progress */
+        }
+    </style>
+</head>
+<body class="sky-theme">
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="slide-counter">22 / 28</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <select class="slide-select" onchange="jumpToSlide(this.value)">
+            <option value="index.html">1. Welcome</option>
+            <option value="slide2.html">2. About</option>
+            <option value="slide3.html">3. Purpose & Direction</option>
+            <option value="slide4.html">4. Heritage</option>
+            <option value="slide5.html">5. Excellence</option>
+            <option value="slide6.html">6. L3 Open Body</option>
+            <option value="slide6b.html">7. L3 Closed Body</option>
+            <option value="slide7.html">8. L5 Tipper</option>
+            <option value="slide8.html">9. L3 Garbage Body</option>
+            <option value="slide8b.html">10. L3 Fogging</option>
+            <option value="slide9.html">11. Product Range</option>
+            <option value="slide9b.html">12. L5 Premium</option>
+            <option value="slide9c.html">13. L5 Deluxe</option>
+            <option value="slide10.html">14. Technical Excellence</option>
+            <option value="slide11.html">15. Future E-Bus</option>
+            <option value="slide12.html">16. Last-Mile Logistics</option>
+            <option value="slide13.html">17. SMB Empowerment</option>
+            <option value="slide14.html">18. Public Sector</option>
+            <option value="slide15.html">19. Aftermarket Excellence</option>
+            <option value="slide16.html">20. Chennai Case Study</option>
+            <option value="slide17.html">21. Panchayat Case Study</option>
+            <option value="slide18.html" selected>22. Client Testimonials</option>
+            <option value="slide19.html">23. Manufacturing</option>
+            <option value="slide20.html">24. Customer Testimonials</option>
+            <option value="slide21.html">25. Awards & Recognition</option>
+            <option value="slide22.html">26. Strategic Partnerships</option>
+            <option value="slide23.html">27. Growth Vision</option>
+            <option value="slide24.html">28. Thank You</option>
+        </select>
+    </div>
+    
+    <!-- Navigation Buttons at Bottom -->
+    <div class="nav-buttons">
+        <button class="nav-btn prev" onclick="prevSlide()">‹</button>
+        <button class="nav-btn next" onclick="nextSlide()">›</button>
+    </div>
+
+    <div class="slide sky-pattern">
+        <div class="slide-number">22</div>
+        <div class="solar-rays"></div>
+        
+        <div class="content-wrapper">
+            <h1>Voices of Trust</h1>
+            <div class="subtitle">What our partners say about QTCS's excellence</div>
+            
+            <div class="grid-2">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="icon-box" style="background: #0047AB;">
+                            <div>🏛️</div>
+                        </div>
+                        <h4 style="margin: 0;">Government Partnership</h4>
+                    </div>
+                    <p class="testimonial-text">"QTCS has been instrumental in our city's transformation to sustainable waste management. Their vehicles have performed flawlessly for over two years, and their service support is unmatched."</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-author" style="color: #0047AB;">Dr. Gagandeep Singh Bedi, IAS</div>
+                        <div class="testimonial-role">Commissioner, Greater Chennai Corporation</div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="icon-box" style="background: #FDB813;">
+                            <div>🚚</div>
+                        </div>
+                        <h4 style="margin: 0;">Logistics Excellence</h4>
+                    </div>
+                    <p class="testimonial-text">"Switching to QTCS vehicles has reduced our operational costs by 45%. The reliability and range perfectly match our urban delivery needs with zero maintenance issues."</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-author" style="color: #FDB813;">Rajesh Kumar</div>
+                        <div class="testimonial-role">Operations Head, QuickDeliver Logistics</div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="icon-box" style="background: #228B22;">
+                            <div>🏥</div>
+                        </div>
+                        <h4 style="margin: 0;">Healthcare Innovation</h4>
+                    </div>
+                    <p class="testimonial-text">"The QTCS team understood our unique requirements for rural healthcare delivery. They customized vehicles with medical storage and provided comprehensive training."</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-author" style="color: #228B22;">Dr. Priya Ramachandran</div>
+                        <div class="testimonial-role">Director, Tamil Nadu Health Department</div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="icon-box" style="background: #0047AB;">
+                            <div>⭐</div>
+                        </div>
+                        <h4 style="margin: 0;">Client Satisfaction</h4>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <div class="metric-value" style="color: #0047AB;">95%</div>
+                            <div class="metric-label">Satisfaction</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" style="color: #228B22;">98%</div>
+                            <div class="metric-label">Recommend</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" style="color: #FDB813;">4.8/5</div>
+                            <div class="metric-label">Rating</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" style="color: #0047AB;">50+</div>
+                            <div class="metric-label">Repeat Clients</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bottom-banner">
+                <h3>Trusted by 500+ Organizations Across India</h3>
+                <p>From government agencies to private enterprises - delivering excellence every day</p>
+            </div>
+        </div>
+        
+        <div class="logo-corner">QTCS</div>
+    </div>
+    
+    <script>
+        const slides = [
+            'index.html',
+            'slide2.html',
+            'slide3.html',
+            'slide4.html',
+            'slide5.html',
+            'slide6.html',
+            'slide6b.html',
+            'slide7.html',
+            'slide8.html',
+            'slide8b.html',
+            'slide9.html',
+            'slide9b.html',
+            'slide9c.html',
+            'slide10.html',
+            'slide11.html',
+            'slide12.html',
+            'slide13.html',
+            'slide14.html',
+            'slide15.html',
+            'slide16.html',
+            'slide17.html',
+            'slide18.html',
+            'slide19.html',
+            'slide20.html',
+            'slide21.html',
+            'slide22.html',
+            'slide23.html',
+            'slide24.html'
+        ];
+        
+        const currentSlide = 'slide18.html';
+        const currentIndex = slides.indexOf(currentSlide);
+        
+        function jumpToSlide(slideFile) {
+            if (slideFile && slideFile !== currentSlide) {
+                window.location.href = slideFile;
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                window.location.href = slides[currentIndex - 1];
+            }
+        }
+        
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                window.location.href = slides[currentIndex + 1];
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+        
+        // Set the correct option in dropdown
+        document.querySelector('.slide-select').value = currentSlide;
+    </script>
+</body>
+</html>

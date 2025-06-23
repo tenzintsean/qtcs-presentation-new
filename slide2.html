@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS: India's EV Revolution</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Body styles handled by theme-skyblue.css */
+        
+        body {
+            overflow: hidden;
+        }
+        
+        /* Desktop-only layout */
+        .slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(80px, 8vh, 100px) clamp(20px, 3vw, 60px) clamp(120px, 12vh, 140px);
+        }
+        
+        /* Enhanced Sky pattern background animations - STANDARDIZED VERSION */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 80%, rgba(135, 206, 235, 0.1) 4px, transparent 4px);
+            background-size: 120px 120px, 80px 80px, 150px 150px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+        
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 90% 20%, rgba(176, 224, 230, 0.08) 3px, transparent 3px);
+            background-size: 100px 100px, 140px 140px;
+            animation: cloudMove2 50s linear infinite reverse;
+            z-index: 0;
+        }
+        
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, 10px) rotate(90deg); }
+            50% { transform: translate(30px, 25px) rotate(180deg); }
+            75% { transform: translate(45px, 35px) rotate(270deg); }
+            100% { transform: translate(60px, 50px) rotate(360deg); }
+        }
+        
+        @keyframes cloudMove2 {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 15px) scale(1.1); }
+            66% { transform: translate(-40px, 30px) scale(0.9); }
+            100% { transform: translate(-60px, 45px) scale(1); }
+        }
+        
+        /* Main content container */
+        .content-wrapper {
+            width: 100%;
+            max-width: 1400px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(10px, 1.5vh, 18px);
+            z-index: 10;
+            position: relative;
+        }
+        
+        /* Header section using theme glassmorphism */
+        .header-section {
+            text-align: center;
+            background: var(--glass-header);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: clamp(15px, 2vh, 25px) clamp(20px, 3vw, 35px);
+            box-shadow: var(--shadow-md), var(--shadow-inset);
+            position: relative;
+        }
+        
+        .main-title {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 50%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: clamp(8px, 1vh, 12px);
+            animation: titleShine 4s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+        }
+        
+        @keyframes titleShine {
+            0%, 100% { filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3)); }
+            50% { filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.5)); }
+        }
+        
+        .subtitle {
+            font-size: clamp(14px, 1.8vw, 18px);
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        .opportunity-amount {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-primary) 50%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(255, 140, 0, 0.4)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 140, 0, 0.6)); }
+        }
+        
+        /* Stats grid using theme glass cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(8px, 1vh, 12px);
+        }
+        
+        .stats-grid {
+            flex: 1;
+            max-height: 35vh;
+        }
+        
+        .stat-card {
+            background: var(--glass-card);
+            backdrop-filter: blur(var(--glass-blur-light));
+            -webkit-backdrop-filter: blur(var(--glass-blur-light));
+            border: 1px solid var(--glass-card-border);
+            border-radius: var(--radius-lg);
+            padding: clamp(8px, 1.2vh, 15px) clamp(6px, 1vh, 12px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-slow);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 140, 0, 0.1) 100%);
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255, 140, 0, 0.4);
+            box-shadow: 
+                0 16px 40px rgba(255, 140, 0, 0.2),
+                inset 0 0 0 1px rgba(255, 140, 0, 0.1);
+            background: var(--glass-card-hover);
+        }
+        
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+        
+        .icon-wrapper {
+            width: clamp(50px, 6vh, 70px);
+            height: clamp(50px, 6vh, 70px);
+            margin: 0 auto var(--space-sm);
+            background: rgba(255, 140, 0, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(24px, 3vh, 36px);
+            position: relative;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .stat-card:nth-child(2) .icon-wrapper {
+            background: rgba(34, 139, 34, 0.15);
+            border-color: rgba(34, 139, 34, 0.3);
+        }
+        
+        .stat-card:nth-child(3) .icon-wrapper {
+            background: rgba(0, 71, 171, 0.15);
+            border-color: rgba(0, 71, 171, 0.3);
+        }
+        
+        .stat-card:nth-child(4) .icon-wrapper {
+            background: rgba(34, 139, 34, 0.15);
+            border-color: rgba(34, 139, 34, 0.3);
+        }
+        
+        .stat-card:hover .icon-wrapper {
+            transform: rotateY(360deg);
+        }
+        
+        .stat-number {
+            font-size: clamp(24px, 3vh, 48px);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-xs);
+            filter: drop-shadow(0 2px 6px rgba(255, 140, 0, 0.3));
+        }
+        
+        .stat-label {
+            font-size: var(--text-xs);
+            color: var(--text-secondary);
+            font-weight: 500;
+            line-height: 1.3;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Mini chart visualization */
+        .mini-chart {
+            height: clamp(30px, 4vh, 50px);
+            margin-top: var(--space-sm);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+        }
+        
+        .chart-bar {
+            width: 6px;
+            background: linear-gradient(to top, var(--title-blue-dark), var(--title-blue-light));
+            border-radius: 3px 3px 0 0;
+            opacity: 0.9;
+            animation: growBar 1s ease-out forwards;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        @keyframes growBar {
+            from { height: 0; }
+        }
+        
+        .chart-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+        .chart-bar:nth-child(2) { height: 60%; animation-delay: 0.2s; }
+        .chart-bar:nth-child(3) { height: 80%; animation-delay: 0.3s; }
+        .chart-bar:nth-child(4) { height: 100%; animation-delay: 0.4s; }
+        
+        /* Market dynamics section using theme glassmorphism */
+        .market-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: clamp(12px, 1.8vh, 20px);
+            box-shadow: var(--shadow-md), var(--shadow-inset);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .market-title {
+            font-size: var(--title-sm);
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 50%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 6px rgba(0, 71, 171, 0.3));
+        }
+        
+        .flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-md);
+            flex: 1;
+        }
+        
+        .flow-item {
+            flex: 1;
+            text-align: center;
+            padding: var(--space-md);
+            position: relative;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-normal);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .flow-item:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-3px);
+            border-color: rgba(255, 140, 0, 0.4);
+            box-shadow: 0 8px 24px rgba(255, 140, 0, 0.15);
+        }
+        
+        .flow-icon {
+            font-size: clamp(32px, 4vh, 48px);
+            margin-bottom: var(--space-sm);
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 3px 10px rgba(255, 140, 0, 0.3));
+        }
+        
+        .flow-item:nth-child(1) .flow-icon { animation-delay: 0s; }
+        .flow-item:nth-child(3) .flow-icon { animation-delay: 0.5s; }
+        .flow-item:nth-child(5) .flow-icon { animation-delay: 1s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .flow-text {
+            font-size: var(--text-md);
+            color: var(--text-primary);
+            line-height: 1.5;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        .flow-text strong {
+            color: var(--accent-dark);
+            font-weight: 700;
+        }
+        
+        .flow-arrow {
+            font-size: clamp(24px, 3vh, 36px);
+            background: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 2px 6px rgba(255, 140, 0, 0.4));
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        /* Navigation handled by centralized theme-skyblue.css */
+        
+        /* Slide-specific override for progress bar width */
+        .progress-fill {
+            width: calc(2 / 28 * 100%);
+        }
+
+
+
+
+
+        /* Animation on load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .content-wrapper > * {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .content-wrapper > *:nth-child(1) { animation-delay: 0.1s; }
+        .content-wrapper > *:nth-child(2) { animation-delay: 0.2s; }
+        .content-wrapper > *:nth-child(3) { animation-delay: 0.3s; }
+        
+        /* Enhanced Solar-themed decorative elements - STANDARDIZED VERSION */
+        .solar-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            opacity: 0.06;
+            animation: solarPulse 8s ease-in-out infinite;
+        }
+        
+        .solar-rays::before,
+        .solar-rays::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--accent-primary) 3deg,
+                transparent 6deg,
+                transparent 90deg,
+                var(--sky-primary) 93deg,
+                transparent 96deg,
+                transparent 180deg,
+                var(--accent-primary) 183deg,
+                transparent 186deg,
+                transparent 270deg,
+                var(--sky-primary) 273deg,
+                transparent 276deg,
+                transparent 354deg,
+                var(--accent-primary) 357deg,
+                transparent 360deg
+            );
+            animation: rotateSlow 45s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+        
+        .solar-rays::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-duration: 65s;
+            animation-direction: reverse;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--sky-light) 2deg,
+                transparent 4deg,
+                transparent 178deg,
+                var(--sky-light) 180deg,
+                transparent 182deg,
+                transparent 358deg,
+                var(--sky-light) 360deg
+            );
+        }
+        
+        @keyframes rotateSlow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes solarPulse {
+            0%, 100% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+    </style>
+</head>
+<body class="sky-theme">
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="slide-counter">2 / 28</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <select class="slide-select" onchange="jumpToSlide(this.value)">
+            <option value="index.html">1. Welcome</option>
+            <option value="slide2.html" selected>2. About</option>
+            <option value="slide3.html">3. Purpose & Direction</option>
+            <option value="slide4.html">4. Heritage</option>
+            <option value="slide5.html">5. Excellence</option>
+            <option value="slide6.html">6. L3 Open Body</option>
+            <option value="slide6b.html">7. L3 Closed Body</option>
+            <option value="slide7.html">8. L5 Tipper</option>
+            <option value="slide8.html">9. L3 Garbage Body</option>
+            <option value="slide8b.html">10. L3 Fogging</option>
+            <option value="slide9.html">11. Product Range</option>
+            <option value="slide9b.html">12. L5 Premium</option>
+            <option value="slide9c.html">13. L5 Deluxe</option>
+            <option value="slide10.html">14. Technical Excellence</option>
+            <option value="slide11.html">15. Future E-Bus</option>
+            <option value="slide12.html">16. Last-Mile Logistics</option>
+            <option value="slide13.html">17. SMB Empowerment</option>
+            <option value="slide14.html">18. Public Sector</option>
+            <option value="slide15.html">19. Aftermarket Excellence</option>
+            <option value="slide16.html">20. Chennai Case Study</option>
+            <option value="slide17.html">21. Panchayat Case Study</option>
+            <option value="slide18.html">22. Client Testimonials</option>
+            <option value="slide19.html">23. Manufacturing</option>
+            <option value="slide20.html">24. Service Network</option>
+            <option value="slide21.html">25. Awards & Recognition</option>
+            <option value="slide22.html">26. Strategic Partnerships</option>
+            <option value="slide23.html">27. Growth Vision</option>
+            <option value="slide24.html">28. Thank You</option>
+        </select>
+    </div>
+    
+    <!-- Navigation Buttons at Bottom -->
+    <div class="nav-buttons">
+        <button class="nav-btn prev" onclick="prevSlide()">‹</button>
+        <button class="nav-btn next" onclick="nextSlide()">›</button>
+    </div>
+
+    <!-- Slide 2: Sky Blue Background -->
+    <div class="slide sky-pattern">
+        <div class="slide-number">2</div>
+        
+        <div class="content-wrapper">
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1 class="main-title">
+                    India's EV Revolution:<br>
+                    A <span class="opportunity-amount">₹50,000+ Crore</span> Opportunity
+                </h1>
+                <div class="subtitle">The perfect storm of economics, policy, and sustainability</div>
+            </div>
+            
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="icon-wrapper">⛽</div>
+                    <div class="stat-number">₹100+</div>
+                    <div class="stat-label">Per Liter Fuel Cost</div>
+                    <div class="mini-chart">
+                        <div class="chart-bar"></div>
+                        <div class="chart-bar"></div>
+                        <div class="chart-bar"></div>
+                        <div class="chart-bar"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon-wrapper">📊</div>
+                    <div class="stat-number">35%</div>
+                    <div class="stat-label">Annual EV Growth</div>
+                    <div class="mini-chart">
+                        <div class="chart-bar"></div>
+                        <div class="chart-bar"></div>
+                        <div class="chart-bar"></div>
+                        <div class="chart-bar"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon-wrapper">🏛️</div>
+                    <div class="stat-number">₹36.79B</div>
+                    <div class="stat-label">PM E-DRIVE Scheme</div>
+                    <div style="margin-top: 8px; font-size: clamp(12px, 1.6vh, 18px); color: var(--title-blue-dark); font-weight: 500;">
+                        Government Support
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon-wrapper">🌱</div>
+                    <div class="stat-number">30%</div>
+                    <div class="stat-label">Carbon Reduction Target</div>
+                    <div style="margin-top: 8px; font-size: clamp(12px, 1.6vh, 18px); color: var(--green-primary); font-weight: 500;">
+                        By 2030
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Market Dynamics Section -->
+            <div class="market-section">
+                <h2 class="market-title">Market Dynamics Driving Change</h2>
+                <div class="flow-diagram">
+                    <div class="flow-item">
+                        <div class="flow-icon">🚀</div>
+                        <p class="flow-text"><strong>Rising costs</strong> push businesses toward sustainable alternatives</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">
+                        <div class="flow-icon">📋</div>
+                        <p class="flow-text"><strong>Government mandates</strong> accelerate EV adoption nationwide</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">
+                        <div class="flow-icon">🌆</div>
+                        <p class="flow-text"><strong>Urban air quality</strong> demands immediate action</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="solar-rays"></div>
+        
+        <div class="logo-corner">QTCS</div>
+    </div>
+
+    <script>
+        const slides = [
+            'index.html',
+            'slide2.html',
+            'slide3.html',
+            'slide4.html',
+            'slide5.html',
+            'slide6.html',
+            'slide6b.html',
+            'slide7.html',
+            'slide8.html',
+            'slide8b.html',
+            'slide9.html',
+            'slide9b.html',
+            'slide9c.html',
+            'slide10.html',
+            'slide11.html',
+            'slide12.html',
+            'slide13.html',
+            'slide14.html',
+            'slide15.html',
+            'slide16.html',
+            'slide17.html',
+            'slide18.html',
+            'slide19.html',
+            'slide20.html',
+            'slide21.html',
+            'slide22.html',
+            'slide23.html',
+            'slide24.html'
+        ];
+        
+        const currentSlide = 'slide2.html';
+        const currentIndex = slides.indexOf(currentSlide);
+        
+        function jumpToSlide(slideFile) {
+            if (slideFile && slideFile !== currentSlide) {
+                window.location.href = slideFile;
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                window.location.href = slides[currentIndex - 1];
+            }
+        }
+        
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                window.location.href = slides[currentIndex + 1];
+            }
+        }
+        
+        // Keyboard navigation - including spacebar
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+        });
+        
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+    </script>
+</body>
+</html>

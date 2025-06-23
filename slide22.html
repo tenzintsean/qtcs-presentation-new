@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS: Strategic Partnerships</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Sky blue theme variables are imported from theme-skyblue.css */
+        
+        /* Body styles handled by theme-skyblue.css */
+        
+        /* Desktop-only slide layout */
+        body {
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(80px, 8vh, 100px) clamp(20px, 3vw, 60px) clamp(100px, 10vh, 120px);
+        }
+        
+                    body {
+                overflow: hidden;
+            }
+            
+            .slide {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                height: 100vh;
+                max-width: 1920px;
+                max-height: 1080px;
+                overflow: hidden;
+                padding: clamp(100px, 10vh, 120px) clamp(20px, 2.5vw, 50px) clamp(80px, 8vh, 100px);
+            }
+            
+            .content-wrapper {
+                height: calc(100vh - 200px);
+                max-width: 1200px;
+                display: flex;
+                flex-direction: column;
+                gap: clamp(6px, 1vh, 12px);
+            }
+            
+            /* Header section - fixed space */
+            h1, .subtitle {
+                flex: 0 0 auto;
+            }
+            
+            /* Advantages grid - flexible space */
+            .advantages-grid {
+                flex: 1 1 auto;
+                min-height: 0;
+                overflow: hidden;
+            }
+            
+            /* Bottom line - fixed space */
+            .bottom-line {
+                flex: 0 0 auto;
+                margin-top: clamp(10px, 1.5vh, 20px);
+            }
+            
+            /* Force compact sizes on desktop */
+            h1 { 
+                font-size: clamp(20px, 2.8vh, 28px);
+                margin-bottom: 0;
+            }
+            
+            .subtitle {
+                font-size: clamp(12px, 1.5vh, 16px);
+                margin-bottom: clamp(2px, 0.2vh, 4px);
+            }
+        }
+        
+        /* Enhanced Sky pattern background animations - STANDARDIZED VERSION */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 80%, rgba(135, 206, 235, 0.1) 4px, transparent 4px);
+            background-size: 120px 120px, 80px 80px, 150px 150px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+        
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 90% 20%, rgba(176, 224, 230, 0.08) 3px, transparent 3px);
+            background-size: 100px 100px, 140px 140px;
+            animation: cloudMove2 50s linear infinite reverse;
+            z-index: 0;
+        }
+        
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, 10px) rotate(90deg); }
+            50% { transform: translate(30px, 25px) rotate(180deg); }
+            75% { transform: translate(45px, 35px) rotate(270deg); }
+            100% { transform: translate(60px, 50px) rotate(360deg); }
+        }
+        
+        @keyframes cloudMove2 {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 15px) scale(1.1); }
+            66% { transform: translate(-40px, 30px) scale(0.9); }
+            100% { transform: translate(-60px, 45px) scale(1); }
+        }
+        
+        /* Content wrapper for desktop layout control */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(20px, 3vh, 30px);
+        }
+        
+        /* Slide number with light glassmorphism */
+        .slide-number {
+            position: absolute;
+            top: clamp(15px, 1.5vw, 30px);
+            left: clamp(15px, 1.5vw, 30px);
+            font-size: clamp(12px, 0.8vw, 16px);
+            color: var(--text-muted);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            z-index: 20;
+        }
+        
+        /* Title styling */
+        h1 {
+            color: var(--text-primary);
+            font-size: var(--title-lg);
+            font-weight: 700;
+            margin-bottom: clamp(2px, 0.3vh, 6px);
+            line-height: 1;
+            text-align: center;
+            background: linear-gradient(135deg, var(--title-blue) 0%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: var(--text-lg);
+            text-align: center;
+            margin-bottom: clamp(8px, 1vh, 15px);
+        }
+        
+        /* Advantages grid */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(4px, 0.6vh, 8px);
+            margin-bottom: clamp(2px, 0.3vh, 6px);
+        }
+        
+        @media (min-width: 768px) {
+            .advantages-grid {
+                gap: clamp(6px, 0.8vh, 10px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .advantages-grid {
+                grid-template-columns: 1fr;
+                gap: clamp(10px, 1.5vw, 15px);
+            }
+        }
+        
+        /* Advantage cards with glassmorphism */
+        .advantage-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: clamp(12px, 1.5vw, 20px);
+            padding: clamp(15px, 2.5vh, 25px);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            border-left: 4px solid;
+        }
+        
+        @media (min-width: 768px) {
+            .advantage-card {
+                padding: clamp(8px, 1.5vh, 15px);
+                border-radius: clamp(8px, 1vw, 12px);
+            }
+        }
+        
+        .advantage-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 140, 0, 0.4);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .advantage-card.partnership {
+            border-left-color: var(--accent-primary);
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.15) 0%, var(--glass-bg) 100%);
+        }
+        
+        .advantage-card.ecosystem {
+            border-left-color: var(--title-blue);
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.15) 0%, var(--glass-bg) 100%);
+        }
+        
+        .advantage-card.manufacturing {
+            border-left-color: var(--green-primary);
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.15) 0%, var(--glass-bg) 100%);
+        }
+        
+        .advantage-card.innovation {
+            border-left-color: var(--accent-primary);
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.15) 0%, var(--glass-bg) 100%);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: clamp(15px, 2vw, 20px);
+            margin-bottom: clamp(15px, 2.5vh, 20px);
+        }
+        
+        @media (min-width: 768px) {
+            .card-header {
+                gap: clamp(8px, 1.2vw, 12px);
+                margin-bottom: clamp(6px, 1vh, 10px);
+            }
+        }
+        
+        /* Icon boxes with glassmorphism */
+        .card-icon {
+            width: clamp(50px, 6vw, 70px);
+            height: clamp(50px, 6vw, 70px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: bold;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+            flex-shrink: 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        @media (min-width: 768px) {
+            .card-icon {
+                width: clamp(35px, 4vw, 45px);
+                height: clamp(35px, 4vw, 45px);
+                font-size: clamp(18px, 2.2vw, 24px);
+            }
+        }
+        
+        .card-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .icon-partnership {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-light) 100%);
+        }
+        
+        .icon-ecosystem {
+            background: linear-gradient(135deg, var(--title-blue) 0%, var(--title-blue-light) 100%);
+        }
+        
+        .icon-manufacturing {
+            background: linear-gradient(135deg, var(--green-primary) 0%, var(--green-light) 100%);
+        }
+        
+        .icon-innovation {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-light) 100%);
+        }
+        
+        .card-title {
+            color: var(--text-primary);
+            font-size: clamp(16px, 2vw, 22px);
+            font-weight: 600;
+            margin: 0;
+            flex: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .card-title {
+                font-size: clamp(12px, 1.5vw, 16px);
+            }
+        }
+        
+        .card-content {
+            font-size: clamp(12px, 1.6vw, 16px);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        @media (min-width: 768px) {
+            .card-content {
+                font-size: clamp(14px, 1.6vw, 16px);
+                line-height: 1.5;
+            }
+        }
+        
+        .card-content p {
+            margin-bottom: clamp(6px, 1vh, 8px);
+            display: flex;
+            align-items: center;
+            gap: clamp(8px, 1vw, 12px);
+        }
+        
+        @media (min-width: 768px) {
+            .card-content p {
+                margin-bottom: clamp(3px, 0.5vh, 5px);
+                gap: clamp(4px, 0.6vw, 6px);
+            }
+        }
+        
+        .card-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Bottom line section with glassmorphism */
+        .bottom-line {
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.15) 0%, var(--glass-bg) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 71, 171, 0.3);
+            color: var(--text-primary);
+            padding: clamp(15px, 2.5vh, 25px);
+            border-radius: clamp(12px, 1.5vw, 20px);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            margin-top: auto;
+        }
+        
+        @media (min-width: 768px) {
+            .bottom-line {
+                padding: clamp(8px, 1.5vh, 12px);
+                border-radius: clamp(8px, 1vw, 12px);
+            }
+        }
+        
+        .bottom-line-title {
+            color: var(--text-primary);
+            font-size: clamp(18px, 2.5vw, 28px);
+            font-weight: 700;
+            margin-bottom: clamp(6px, 1vh, 12px);
+        }
+        
+        @media (min-width: 768px) {
+            .bottom-line-title {
+                font-size: clamp(14px, 1.8vw, 20px);
+                margin-bottom: clamp(3px, 0.5vh, 6px);
+            }
+        }
+        
+        .bottom-line-text {
+            font-size: clamp(12px, 1.6vw, 18px);
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        
+        @media (min-width: 768px) {
+            .bottom-line-text {
+                font-size: clamp(10px, 1.2vw, 14px);
+                line-height: 1.4;
+            }
+        }
+        
+        .highlight {
+            color: var(--title-blue);
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 71, 171, 0.4), 0 1px 2px rgba(255, 255, 255, 0.8);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 71, 171, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin: 2px 0;
+        }
+        
+        @media (min-width: 768px) {
+            .highlight {
+                padding: 1px 4px;
+                border-radius: 3px;
+                margin: 1px 0;
+            }
+        }
+        
+        /* Logo corner handled by centralized theme-skyblue.css */
+        
+        /* Enhanced Solar-themed decorative elements - STANDARDIZED VERSION */
+        .solar-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            opacity: 0.06;
+            animation: solarPulse 8s ease-in-out infinite;
+        }
+        
+        .solar-rays::before,
+        .solar-rays::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--accent-primary) 3deg,
+                transparent 6deg,
+                transparent 90deg,
+                var(--sky-primary) 93deg,
+                transparent 96deg,
+                transparent 180deg,
+                var(--accent-primary) 183deg,
+                transparent 186deg,
+                transparent 270deg,
+                var(--sky-primary) 273deg,
+                transparent 276deg,
+                transparent 354deg,
+                var(--accent-primary) 357deg,
+                transparent 360deg
+            );
+            animation: rotateSlow 45s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+        
+        .solar-rays::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-duration: 65s;
+            animation-direction: reverse;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--sky-light) 2deg,
+                transparent 4deg,
+                transparent 178deg,
+                var(--sky-light) 180deg,
+                transparent 182deg,
+                transparent 358deg,
+                var(--sky-light) 360deg
+            );
+        }
+        
+        @keyframes rotateSlow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes solarPulse {
+            0%, 100% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        /* VAS Progressive Height Breakpoints */
+        @media (max-height: 950px) and (min-width: 768px) {
+            .slide { 
+                padding: clamp(90px, 9vh, 110px) clamp(15px, 2vw, 40px) clamp(70px, 7vh, 90px);
+            }
+            h1 { 
+                font-size: clamp(22px, 3.5vh, 36px);
+            }
+            .subtitle { 
+                font-size: clamp(12px, 1.8vh, 18px);
+            }
+        }
+        
+        @media (max-height: 850px) and (min-width: 768px) {
+            .slide { 
+                padding: clamp(80px, 8vh, 100px) clamp(15px, 2vw, 35px) clamp(65px, 6.5vh, 80px);
+            }
+            .content-wrapper { 
+                gap: clamp(8px, 1.2vh, 15px);
+            }
+            h1 { 
+                font-size: clamp(20px, 3vh, 32px);
+                margin-bottom: clamp(4px, 0.7vh, 8px);
+            }
+            .subtitle { 
+                font-size: clamp(11px, 1.6vh, 16px);
+                margin-bottom: clamp(8px, 1.2vh, 15px);
+            }
+            .advantage-card { 
+                padding: clamp(12px, 2vh, 20px);
+            }
+            .card-icon {
+                width: clamp(45px, 5.5vw, 60px);
+                height: clamp(45px, 5.5vw, 60px);
+                font-size: clamp(22px, 2.8vw, 28px);
+            }
+            .card-title {
+                font-size: clamp(14px, 1.8vw, 20px);
+            }
+            .card-content {
+                font-size: clamp(11px, 1.4vw, 14px);
+            }
+            .bottom-line { 
+                padding: clamp(12px, 2vh, 20px);
+            }
+        }
+        
+        @media (max-height: 750px) and (min-width: 768px) {
+            .slide { 
+                padding: 70px 15px 60px;
+            }
+            .content-wrapper { 
+                gap: clamp(6px, 0.8vh, 10px);
+            }
+            h1 { 
+                font-size: clamp(18px, 2.5vh, 28px);
+                margin-bottom: clamp(3px, 0.5vh, 6px);
+            }
+            .subtitle { 
+                font-size: clamp(10px, 1.4vh, 14px);
+                margin-bottom: clamp(6px, 0.8vh, 10px);
+            }
+            .advantages-grid {
+                gap: clamp(8px, 1vh, 12px);
+            }
+            .advantage-card { 
+                padding: clamp(10px, 1.5vh, 15px);
+            }
+            .card-header {
+                gap: clamp(8px, 1.2vw, 12px);
+                margin-bottom: clamp(6px, 0.8vh, 10px);
+            }
+            .card-icon {
+                width: clamp(40px, 5vw, 50px);
+                height: clamp(40px, 5vw, 50px);
+                font-size: clamp(20px, 2.5vw, 24px);
+            }
+            .card-title { 
+                font-size: clamp(13px, 1.6vw, 18px);
+            }
+            .card-content {
+                font-size: clamp(10px, 1.3vw, 12px);
+                line-height: 1.3;
+            }
+            .card-content p {
+                margin-bottom: clamp(3px, 0.5vh, 5px);
+            }
+            .bottom-line { 
+                padding: clamp(10px, 1.5vh, 15px);
+            }
+            .bottom-line-title {
+                font-size: clamp(16px, 2vw, 22px);
+            }
+            .bottom-line-text {
+                font-size: clamp(10px, 1.3vw, 14px);
+            }
+        }
+        
+        @media (max-height: 650px) and (min-width: 768px) {
+            .slide { 
+                padding: 60px 10px 50px;
+            }
+            .content-wrapper { 
+                gap: 5px;
+            }
+            h1 { 
+                font-size: 16px;
+                margin-bottom: 2px;
+            }
+            .subtitle { 
+                font-size: 9px;
+                margin-bottom: 4px;
+            }
+            .advantages-grid {
+                gap: 6px;
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .advantage-card { 
+                padding: 8px;
+            }
+            .card-header {
+                gap: 6px;
+                margin-bottom: 4px;
+            }
+            .card-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+            .card-title { 
+                font-size: 11px;
+            }
+            .card-content {
+                font-size: 9px;
+                line-height: 1.2;
+            }
+            .card-content p {
+                margin-bottom: 2px;
+            }
+            .bottom-line { 
+                padding: 8px;
+                margin-top: 5px;
+            }
+            .bottom-line-title {
+                font-size: 14px;
+                margin-bottom: 2px;
+            }
+            .bottom-line-text {
+                font-size: 9px;
+            }
+        }
+        
+        /* Navigation and logo styles handled by centralized theme-skyblue.css */
+        
+        /* Slide-specific progress bar width override */
+        .progress-fill {
+            width: calc(26 / 28 * 100%);
+        }
+        
+        @media (max-width: 480px) {
+            .card-header {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body class="sky-theme">
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="slide-counter">26 / 28</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <select class="slide-select" onchange="jumpToSlide(this.value)">
+            <option value="index.html">1. Welcome</option>
+            <option value="slide2.html">2. About</option>
+            <option value="slide3.html">3. Purpose & Direction</option>
+            <option value="slide4.html">4. Heritage</option>
+            <option value="slide5.html">5. Excellence</option>
+            <option value="slide6.html">6. L3 Open Body</option>
+            <option value="slide6b.html">7. L3 Closed Body</option>
+            <option value="slide7.html">8. L5 Tipper</option>
+            <option value="slide8.html">9. L3 Garbage Body</option>
+            <option value="slide8b.html">10. L3 Fogging</option>
+            <option value="slide9.html">11. Product Range</option>
+            <option value="slide9b.html">12. L5 Premium</option>
+            <option value="slide9c.html">13. L5 Deluxe</option>
+            <option value="slide10.html">14. Technical Excellence</option>
+            <option value="slide11.html">15. Future E-Bus</option>
+            <option value="slide12.html">16. Last-Mile Logistics</option>
+            <option value="slide13.html">17. SMB Empowerment</option>
+            <option value="slide14.html">18. Public Sector</option>
+            <option value="slide15.html">19. Aftermarket Excellence</option>
+            <option value="slide16.html">20. Chennai Case Study</option>
+            <option value="slide17.html">21. Panchayat Case Study</option>
+            <option value="slide18.html">22. Client Testimonials</option>
+            <option value="slide19.html">23. Manufacturing</option>
+            <option value="slide20.html">24. Service Network</option>
+            <option value="slide21.html">25. Awards & Recognition</option>
+            <option value="slide22.html" selected>26. Strategic Partnerships</option>
+            <option value="slide23.html">27. Growth Vision</option>
+            <option value="slide24.html">28. Thank You</option>
+        </select>
+    </div>
+    
+    <!-- Navigation Buttons at Bottom -->
+    <div class="nav-buttons">
+        <button class="nav-btn prev" onclick="prevSlide()">‹</button>
+        <button class="nav-btn next" onclick="nextSlide()">›</button>
+    </div>
+
+    <div class="slide sky-pattern">
+        <div class="solar-rays"></div>
+        <div class="slide-number">26</div>
+        
+        <div class="content-wrapper">
+            <h1>The QTCS Advantage</h1>
+            <div class="subtitle">Why leading organizations choose QTCS</div>
+            
+            <div class="advantages-grid">
+                <div class="advantage-card partnership">
+                    <div class="card-header">
+                        <div class="card-icon icon-partnership">🤝</div>
+                        <h3 class="card-title">Proven Partnership</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>✓ 6,000+ vehicles successfully deployed</p>
+                        <p>✓ Major government contracts delivered</p>
+                        <p>✓ 95% customer satisfaction score</p>
+                        <p>✓ Long-term relationships, not just sales</p>
+                    </div>
+                </div>
+                
+                <div class="advantage-card ecosystem">
+                    <div class="card-header">
+                        <div class="card-icon icon-ecosystem">🔧</div>
+                        <h3 class="card-title">Complete Ecosystem</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>✓ Design to delivery ownership</p>
+                        <p>✓ 50+ service touchpoints</p>
+                        <p>✓ 24/7 customer support</p>
+                        <p>✓ Comprehensive warranty coverage</p>
+                    </div>
+                </div>
+                
+                <div class="advantage-card manufacturing">
+                    <div class="card-header">
+                        <div class="card-icon icon-manufacturing">🏭</div>
+                        <h3 class="card-title">Manufacturing Scale</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>✓ 200+ vehicles per day capacity</p>
+                        <p>✓ ISO certified production facility</p>
+                        <p>✓ Consistent quality at scale</p>
+                        <p>✓ Customization capabilities</p>
+                    </div>
+                </div>
+                
+                <div class="advantage-card innovation">
+                    <div class="card-header">
+                        <div class="card-icon icon-innovation">💡</div>
+                        <h3 class="card-title">Product Innovation</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>✓ Solar-Smart technology leadership</p>
+                        <p>✓ Comprehensive L3/L5 range</p>
+                        <p>✓ Application-specific solutions</p>
+                        <p>✓ Continuous R&D investment</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bottom-line">
+                <h2 class="bottom-line-title">The Bottom Line</h2>
+                <p class="bottom-line-text">
+                    When you choose QTCS, you're not just buying vehicles.<br>
+                    <span class="highlight">You're investing in a partnership that delivers results.</span>
+                </p>
+            </div>
+        </div>
+        
+        <div class="logo-corner">QTCS</div>
+    </div>
+    
+    <script>
+        const slides = [
+            'index.html',
+            'slide2.html',
+            'slide3.html',
+            'slide4.html',
+            'slide5.html',
+            'slide6.html',
+            'slide6b.html',
+            'slide7.html',
+            'slide8.html',
+            'slide8b.html',
+            'slide9.html',
+            'slide9b.html',
+            'slide9c.html',
+            'slide10.html',
+            'slide11.html',
+            'slide12.html',
+            'slide13.html',
+            'slide14.html',
+            'slide15.html',
+            'slide16.html',
+            'slide17.html',
+            'slide18.html',
+            'slide19.html',
+            'slide20.html',
+            'slide21.html',
+            'slide22.html',
+            'slide23.html',
+            'slide24.html'
+        ];
+        
+        const currentSlide = 'slide22.html';
+        const currentIndex = slides.indexOf(currentSlide);
+        
+        function jumpToSlide(slideFile) {
+            if (slideFile && slideFile !== currentSlide) {
+                window.location.href = slideFile;
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                window.location.href = slides[currentIndex - 1];
+            }
+        }
+        
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                window.location.href = slides[currentIndex + 1];
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+        
+        // Set the correct option in dropdown
+        document.querySelector('.slide-select').value = currentSlide;
+    </script>
+</body>
+</html>

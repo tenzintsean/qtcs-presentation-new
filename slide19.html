@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS: Manufacturing Excellence</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Sky blue theme variables are imported from theme-skyblue.css */
+        
+        :root {
+            /* Typography Scale - Mobile base (fixed px) */
+            --title-xl: 36px;
+            --title-lg: 28px;
+            --title-md: 24px;
+            --text-lg: 16px;
+            --text-md: 14px;
+            --text-sm: 12px;
+        }
+        
+        /* Desktop responsive typography */
+        @media (min-width: 768px) {
+            :root {
+                --title-xl: clamp(36px, 4.5vw, 64px);
+                --title-lg: clamp(28px, 3.5vw, 56px);
+                --title-md: clamp(24px, 3vw, 36px);
+                --text-lg: clamp(14px, 1.8vw, 22px);
+                --text-md: clamp(13px, 1.6vw, 20px);
+                --text-sm: clamp(12px, 1.6vh, 18px);
+            }
+        }
+        
+        /* Body styles handled by theme-skyblue.css */
+        
+        /* Desktop-only slide layout */
+        body {
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(80px, 8vh, 100px) clamp(20px, 3vw, 60px) clamp(100px, 10vh, 120px);
+        }
+        
+                    body {
+                overflow: hidden;
+            }
+            
+            .slide {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                height: 100vh;
+                max-width: 1920px;
+                max-height: 1080px;
+                overflow: hidden;
+                padding: clamp(85px, 8.5vh, 100px) clamp(20px, 2.5vw, 50px) clamp(100px, 10vh, 120px);
+            }
+            
+            .content-wrapper {
+                height: 100%;
+                gap: clamp(8px, 1vh, 15px);
+                display: flex;
+                flex-direction: column;
+            }
+            
+            /* VAS - All elements scale with viewport height */
+            h1 { 
+                font-size: clamp(24px, 4vh, 42px);
+                margin-bottom: clamp(3px, 0.5vh, 6px);
+                flex-shrink: 0;
+            }
+            
+            .subtitle {
+                font-size: clamp(14px, 2vh, 20px);
+                margin-bottom: clamp(8px, 1vh, 15px);
+                flex-shrink: 0;
+            }
+            
+            /* Capacity banner - fixed size */
+            .capacity-banner {
+                flex-shrink: 0;
+            }
+            
+            /* Features grid - flexible, takes available space */
+            .features-grid {
+                flex: 1 1 auto;
+                gap: clamp(5px, 0.7vh, 10px);
+                padding: clamp(3px, 0.5vh, 8px);
+            }
+            
+            .features-grid .feature-card {
+                padding: clamp(6px, 1vh, 12px);
+                gap: clamp(4px, 0.6vh, 8px);
+            }
+            
+            .features-grid .feature-title {
+                font-size: clamp(14px, 1.8vh, 20px);
+                margin-bottom: clamp(2px, 0.3vh, 5px);
+            }
+            
+            .features-grid .feature-list {
+                gap: clamp(2px, 0.3vh, 4px);
+            }
+            
+            .features-grid .feature-list li {
+                font-size: clamp(13px, 1.6vh, 18px);
+                padding: clamp(1px, 0.2vh, 3px) 0;
+                line-height: 1;
+            }
+            
+            .features-grid .feature-icon {
+                width: clamp(35px, 4.5vh, 50px);
+                height: clamp(35px, 4.5vh, 50px);
+                font-size: clamp(16px, 2.2vh, 24px);
+            }
+                min-height: 0;
+                overflow: hidden; /* No scrolling - everything must fit */
+            }
+            
+            /* ISO section - fixed but minimal */
+            .iso-section {
+                flex-shrink: 0;
+                margin-top: auto; /* Push to bottom */
+            }
+        }
+        
+        /* Enhanced Sky pattern background animations - STANDARDIZED VERSION */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 80%, rgba(135, 206, 235, 0.1) 4px, transparent 4px);
+            background-size: 120px 120px, 80px 80px, 150px 150px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+        
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 90% 20%, rgba(176, 224, 230, 0.08) 3px, transparent 3px);
+            background-size: 100px 100px, 140px 140px;
+            animation: cloudMove2 50s linear infinite reverse;
+            z-index: 0;
+        }
+        
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, 10px) rotate(90deg); }
+            50% { transform: translate(30px, 25px) rotate(180deg); }
+            75% { transform: translate(45px, 35px) rotate(270deg); }
+            100% { transform: translate(60px, 50px) rotate(360deg); }
+        }
+        
+        @keyframes cloudMove2 {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 15px) scale(1.1); }
+            66% { transform: translate(-40px, 30px) scale(0.9); }
+            100% { transform: translate(-60px, 45px) scale(1); }
+        }
+        
+        
+        /* Content wrapper - Mobile base */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        /* Desktop enhancement */
+        @media (min-width: 768px) {
+            .content-wrapper {
+                height: 100%;
+                max-width: 1400px;
+                gap: clamp(15px, 2vh, 25px);
+            }
+        }
+        
+        /* Slide number - Mobile base */
+        .slide-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            z-index: 20;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .slide-number {
+                top: clamp(15px, 1.5vw, 30px);
+                left: clamp(15px, 1.5vw, 30px);
+                font-size: clamp(12px, 0.8vw, 16px);
+            }
+        }
+        
+        /* Title styling - Mobile base */
+        h1 {
+            color: var(--text-primary);
+            font-size: var(--title-lg);
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-align: center;
+            background: linear-gradient(135deg, var(--title-blue) 0%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            h1 {
+                margin-bottom: clamp(8px, 1.5vh, 15px);
+            }
+        }
+        
+        /* Subtitle - Mobile base */
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: var(--text-lg);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .subtitle {
+                margin-bottom: clamp(20px, 3vh, 30px);
+            }
+        }
+        
+        /* Capacity banner - Mobile base */
+        .capacity-banner {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .capacity-banner {
+                padding: clamp(20px, 3vh, 30px);
+                border-radius: clamp(12px, 1.5vw, 20px);
+                margin-bottom: clamp(20px, 3vh, 30px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .capacity-banner {
+                padding: clamp(15px, 2.5vh, 25px);
+                margin-bottom: clamp(15px, 2vh, 20px);
+            }
+        }
+        
+        /* Capacity title - Mobile base */
+        .capacity-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .capacity-title {
+                font-size: clamp(24px, 3.5vw, 48px);
+                margin-bottom: clamp(8px, 1.5vh, 15px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .capacity-title {
+                font-size: clamp(20px, 3.5vh, 36px);
+                margin-bottom: clamp(5px, 0.8vh, 10px);
+            }
+        }
+        
+        /* Capacity subtitle - Mobile base */
+        .capacity-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .capacity-subtitle {
+                font-size: clamp(14px, 1.8vw, 20px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .capacity-subtitle {
+                font-size: clamp(12px, 1.8vh, 16px);
+            }
+        }
+        
+        /* Features grid - Mobile base (single column) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+        
+        /* Desktop multi-column */
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: clamp(20px, 3vw, 30px);
+                margin-bottom: clamp(20px, 3vh, 30px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .features-grid {
+                gap: clamp(12px, 1.8vh, 18px);
+                margin-bottom: clamp(10px, 1.5vh, 15px);
+                align-content: stretch; /* Allow cards to stretch to fill space */
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: clamp(15px, 2vw, 20px);
+            }
+        }
+        
+        /* Feature cards - Mobile base */
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 0;
+            height: 100%;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .feature-card {
+                border-radius: clamp(12px, 1.5vw, 20px);
+                padding: clamp(20px, 3vh, 30px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .feature-card {
+                padding: clamp(12px, 1.8vh, 20px);
+                overflow: hidden; /* Prevent any overflow */
+            }
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Feature icon - Mobile base */
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .feature-icon {
+                width: clamp(60px, 8vw, 80px);
+                height: clamp(60px, 8vw, 80px);
+                font-size: clamp(28px, 4vw, 36px);
+                margin-bottom: clamp(15px, 2.5vh, 20px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .feature-icon {
+                width: clamp(50px, 7vh, 70px);
+                height: clamp(50px, 7vh, 70px);
+                font-size: clamp(24px, 3.5vh, 32px);
+                margin-bottom: clamp(10px, 1.5vh, 15px);
+            }
+        }
+        
+        .feature-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .feature-icon.gold {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-light) 100%);
+            color: white;
+            box-shadow: 0 8px 24px rgba(255, 140, 0, 0.3);
+        }
+        
+        .feature-icon.green {
+            background: linear-gradient(135deg, var(--green-primary) 0%, var(--green-light) 100%);
+            color: white;
+            box-shadow: 0 8px 24px rgba(34, 139, 34, 0.3);
+        }
+        
+        .feature-icon.blue {
+            background: linear-gradient(135deg, var(--title-blue) 0%, var(--title-blue-light) 100%);
+            color: white;
+            box-shadow: 0 8px 24px rgba(0, 71, 171, 0.3);
+        }
+        
+        /* Feature title - Mobile base */
+        .feature-title {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .feature-title {
+                font-size: clamp(18px, 2.2vw, 24px);
+                margin-bottom: clamp(15px, 2.5vh, 20px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .feature-title {
+                font-size: clamp(16px, 2.5vh, 22px);
+                margin-bottom: clamp(10px, 1.5vh, 15px);
+            }
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1; /* Take available space */
+            min-height: 0; /* Allow shrinking */
+            overflow: hidden; /* Prevent overflow */
+        }
+        
+        /* Feature list items - Mobile base */
+        .feature-list li {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .feature-list li {
+                font-size: clamp(14px, 1.6vw, 18px);
+                margin-bottom: clamp(8px, 1.2vh, 12px);
+                gap: clamp(8px, 1vw, 12px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .feature-list li {
+                font-size: clamp(11px, 1.6vh, 14px);
+                margin-bottom: clamp(4px, 0.7vh, 8px);
+                gap: clamp(5px, 0.7vh, 8px);
+            }
+        }
+        
+        .feature-list li:last-child {
+            margin-bottom: 0; /* No margin on last item */
+        }
+        
+        /* Feature content wrapper */
+        /* Feature content - Mobile base */
+        .feature-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            width: 100%;
+            gap: 8px;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .feature-content {
+                gap: clamp(8px, 1.2vh, 12px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .feature-content {
+                gap: clamp(6px, 1vh, 10px);
+            }
+        }
+        
+        /* ISO section - Mobile base */
+        .iso-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .iso-section {
+                border-radius: clamp(12px, 1.5vw, 20px);
+                padding: clamp(20px, 3vh, 30px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .iso-section {
+                padding: clamp(10px, 1.5vh, 18px); /* Less padding */
+                min-height: 0; /* Allow shrinking */
+            }
+        }
+        
+        /* ISO title - Mobile base */
+        .iso-title {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .iso-title {
+                font-size: clamp(20px, 2.8vw, 32px);
+                margin-bottom: clamp(20px, 3vh, 30px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .iso-title {
+                font-size: clamp(14px, 2vh, 20px); /* Smaller title */
+                margin-bottom: clamp(8px, 1.2vh, 12px);
+            }
+        }
+        
+        /* ISO badges - Mobile base */
+        .iso-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .iso-badges {
+                gap: clamp(20px, 4vw, 40px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .iso-badges {
+                gap: clamp(8px, 1.5vh, 15px); /* Tighter spacing */
+            }
+        }
+        
+        .iso-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        /* ISO circle - Mobile base */
+        .iso-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid;
+            transition: transform 0.3s ease;
+            line-height: 1;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .iso-circle {
+                width: clamp(80px, 10vw, 120px);
+                height: clamp(80px, 10vw, 120px);
+                font-size: clamp(18px, 2.2vw, 28px);
+                margin-bottom: clamp(10px, 1.5vh, 15px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .iso-circle {
+                width: clamp(45px, 6vh, 70px); /* Smaller circles */
+                height: clamp(45px, 6vh, 70px);
+                font-size: clamp(12px, 1.8vh, 18px); /* Much smaller text to fit */
+                margin-bottom: clamp(5px, 0.8vh, 8px);
+            }
+        }
+        
+        .iso-circle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .iso-circle.gold {
+            background: linear-gradient(135deg, var(--glass-bg) 0%, var(--glass-bg-light) 100%);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            box-shadow: 0 8px 24px rgba(255, 140, 0, 0.3);
+        }
+        
+        .iso-circle.green {
+            background: linear-gradient(135deg, var(--glass-bg) 0%, var(--glass-bg-light) 100%);
+            border-color: var(--green-primary);
+            color: var(--green-primary);
+            box-shadow: 0 8px 24px rgba(34, 139, 34, 0.3);
+        }
+        
+        .iso-circle.blue {
+            background: linear-gradient(135deg, var(--glass-bg) 0%, var(--glass-bg-light) 100%);
+            border-color: var(--title-blue);
+            color: var(--title-blue);
+            box-shadow: 0 8px 24px rgba(0, 71, 171, 0.3);
+        }
+        
+        /* ISO label - Mobile base */
+        .iso-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Desktop responsive */
+        @media (min-width: 768px) {
+            .iso-label {
+                font-size: clamp(12px, 1.4vw, 16px);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .iso-label {
+                font-size: clamp(11px, 1.6vh, 14px);
+            }
+        }
+        
+        /* Logo corner handled by centralized theme-skyblue.css */
+        
+        /* Enhanced Solar-themed decorative elements - STANDARDIZED VERSION */
+        .solar-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            opacity: 0.06;
+            animation: solarPulse 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .solar-rays::before,
+        .solar-rays::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--accent-primary) 3deg,
+                transparent 6deg,
+                transparent 90deg,
+                var(--sky-primary) 93deg,
+                transparent 96deg,
+                transparent 180deg,
+                var(--accent-primary) 183deg,
+                transparent 186deg,
+                transparent 270deg,
+                var(--sky-primary) 273deg,
+                transparent 276deg,
+                transparent 354deg,
+                var(--accent-primary) 357deg,
+                transparent 360deg
+            );
+            animation: rotateSlow 45s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+
+        .solar-rays::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-duration: 65s;
+            animation-direction: reverse;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--sky-light) 2deg,
+                transparent 4deg,
+                transparent 178deg,
+                var(--sky-light) 180deg,
+                transparent 182deg,
+                transparent 358deg,
+                var(--sky-light) 360deg
+            );
+        }
+
+        @keyframes rotateSlow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes solarPulse {
+            0%, 100% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        /* VAS Progressive Height Breakpoints */
+        
+        /* Stage 1: Moderate constraints (850px and below) */
+        @media (max-height: 850px) and (min-width: 768px) {
+            .slide {
+                padding: clamp(70px, 7vh, 85px) clamp(15px, 2vw, 40px) clamp(80px, 8vh, 100px);
+            }
+            
+            .content-wrapper {
+                gap: clamp(12px, 1.5vh, 20px);
+            }
+            
+            h1 {
+                font-size: clamp(22px, 3.5vh, 36px);
+                margin-bottom: clamp(4px, 0.6vh, 8px);
+            }
+            
+            .subtitle {
+                font-size: clamp(12px, 1.8vh, 18px);
+                margin-bottom: clamp(10px, 1.5vh, 18px);
+            }
+            
+            .capacity-banner {
+                padding: clamp(12px, 2vh, 20px);
+                margin-bottom: clamp(12px, 1.5vh, 18px);
+            }
+            
+            .capacity-title {
+                font-size: clamp(18px, 3vh, 32px);
+                margin-bottom: clamp(4px, 0.6vh, 8px);
+            }
+            
+            .capacity-subtitle {
+                font-size: clamp(11px, 1.6vh, 14px);
+            }
+            
+            .features-grid {
+                gap: clamp(8px, 1.2vh, 12px);
+                margin-bottom: clamp(8px, 1.2vh, 12px);
+            }
+            
+            .feature-card {
+                padding: clamp(8px, 1.2vh, 14px); /* Even less padding */
+            }
+            
+            .feature-icon {
+                width: clamp(45px, 6vh, 60px);
+                height: clamp(45px, 6vh, 60px);
+                font-size: clamp(22px, 3vh, 28px);
+                margin-bottom: clamp(8px, 1.2vh, 12px);
+            }
+            
+            .feature-content {
+                gap: clamp(5px, 0.8vh, 8px);
+            }
+            
+            .feature-title {
+                font-size: clamp(14px, 2.2vh, 20px);
+                margin-bottom: clamp(6px, 1vh, 10px);
+            }
+            
+            .feature-list li {
+                font-size: clamp(9px, 1.2vh, 11px); /* Smaller text */
+                margin-bottom: clamp(2px, 0.3vh, 4px); /* Less margin */
+            }
+            
+            .iso-section {
+                padding: clamp(8px, 1.2vh, 12px); /* Less padding */
+            }
+            
+            .iso-title {
+                font-size: clamp(14px, 2vh, 20px);
+                margin-bottom: clamp(8px, 1.2vh, 12px);
+            }
+            
+            .iso-badges {
+                gap: clamp(12px, 2vh, 25px);
+            }
+            
+            .iso-circle {
+                width: clamp(40px, 5.5vh, 60px); /* Much smaller */
+                height: clamp(40px, 5.5vh, 60px);
+                font-size: clamp(14px, 2vh, 20px);
+                margin-bottom: clamp(4px, 0.6vh, 6px);
+            }
+            
+            .iso-label {
+                font-size: clamp(10px, 1.4vh, 12px);
+            }
+        }
+        
+        /* Stage 2: Severe constraints (750px and below) */
+        @media (max-height: 750px) and (min-width: 768px) {
+            .slide {
+                padding: 60px 15px 70px;
+            }
+            
+            .content-wrapper {
+                gap: 8px;
+            }
+            
+            h1 {
+                font-size: clamp(20px, 3vh, 32px);
+                margin-bottom: 3px;
+            }
+            
+            .subtitle {
+                font-size: clamp(11px, 1.5vh, 16px);
+                margin-bottom: 8px;
+            }
+            
+            .capacity-banner {
+                padding: 10px;
+                margin-bottom: 8px;
+            }
+            
+            .capacity-title {
+                font-size: clamp(16px, 2.5vh, 28px);
+                margin-bottom: 3px;
+            }
+            
+            .capacity-subtitle {
+                font-size: clamp(10px, 1.4vh, 12px);
+            }
+            
+            .features-grid {
+                gap: 6px;
+                margin-bottom: 6px;
+            }
+            
+            .feature-card {
+                padding: 6px; /* Minimal padding */
+            }
+            
+            .feature-icon {
+                width: clamp(40px, 5vh, 50px);
+                height: clamp(40px, 5vh, 50px);
+                font-size: clamp(20px, 2.5vh, 24px);
+                margin-bottom: 6px;
+            }
+            
+            .feature-content {
+                gap: 4px;
+            }
+            
+            .feature-title {
+                font-size: clamp(13px, 2vh, 18px);
+                margin-bottom: 4px;
+            }
+            
+            .feature-list li {
+                font-size: clamp(8px, 1vh, 10px); /* Even smaller */
+                margin-bottom: 1px; /* Minimal margin */
+            }
+            
+            .iso-section {
+                padding: 8px; /* Minimal padding */
+            }
+            
+            .iso-title {
+                font-size: clamp(12px, 1.8vh, 18px);
+                margin-bottom: 6px;
+            }
+            
+            .iso-badges {
+                gap: 10px;
+            }
+            
+            .iso-circle {
+                width: clamp(35px, 5vh, 50px); /* Very small */
+                height: clamp(35px, 5vh, 50px);
+                font-size: clamp(12px, 1.8vh, 18px);
+                margin-bottom: 3px;
+            }
+            
+            .iso-label {
+                font-size: clamp(9px, 1.2vh, 11px);
+            }
+        }
+        
+        /* Stage 3: Ultra-compact mode (650px and below) */
+        @media (max-height: 650px) and (min-width: 768px) {
+            .slide {
+                padding: 50px 10px 60px;
+            }
+            
+            .content-wrapper {
+                gap: 6px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                margin-bottom: 2px;
+            }
+            
+            .subtitle {
+                font-size: 10px;
+                margin-bottom: 6px;
+            }
+            
+            .capacity-banner {
+                padding: 8px;
+                margin-bottom: 6px;
+            }
+            
+            .capacity-title {
+                font-size: 14px;
+                margin-bottom: 2px;
+            }
+            
+            .capacity-subtitle {
+                font-size: 9px;
+            }
+            
+            .features-grid {
+                gap: 6px;
+                margin-bottom: 6px;
+                grid-template-columns: 1fr; /* Single column for ultra-compact */
+            }
+            
+            .feature-card {
+                padding: 8px;
+                flex-direction: row; /* Horizontal layout to save vertical space */
+                text-align: left;
+            }
+            
+            .feature-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+                margin-bottom: 0;
+                margin-right: 8px;
+            }
+            
+            .feature-content {
+                flex: 1;
+                gap: 3px;
+            }
+            
+            .feature-title {
+                font-size: 12px;
+                margin-bottom: 2px;
+            }
+            
+            .feature-list {
+                /* Show abbreviated content in ultra-compact mode */
+                max-height: 40px;
+                overflow: hidden;
+                position: relative;
+            }
+            
+            .feature-list li {
+                font-size: 9px;
+                margin-bottom: 1px;
+                line-height: 1.2;
+            }
+            
+            /* Show only first 2 items */
+            .feature-list li:nth-child(n+3) {
+                display: none;
+            }
+            
+            .iso-section {
+                padding: 8px;
+            }
+            
+            .iso-title {
+                font-size: 12px;
+                margin-bottom: 8px;
+            }
+            
+            .iso-badges {
+                gap: 8px;
+            }
+            
+            .iso-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+                margin-bottom: 3px;
+            }
+            
+            .iso-label {
+                font-size: 8px;
+            }
+        }
+        
+        /* Navigation handled by centralized theme-skyblue.css */
+        
+        /* Only slide-specific progress width override */
+        .progress-fill {
+            width: calc(23 / 28 * 100%);
+        }
+    </style>
+</head>
+<body class="sky-theme">
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="slide-counter">23 / 28</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <select class="slide-select" onchange="jumpToSlide(this.value)">
+            <option value="index.html">1. Welcome</option>
+            <option value="slide2.html">2. About</option>
+            <option value="slide3.html">3. Purpose & Direction</option>
+            <option value="slide4.html">4. Heritage</option>
+            <option value="slide5.html">5. Excellence</option>
+            <option value="slide6.html">6. L3 Open Body</option>
+            <option value="slide6b.html">7. L3 Closed Body</option>
+            <option value="slide7.html">8. L5 Tipper</option>
+            <option value="slide8.html">9. L3 Garbage Body</option>
+            <option value="slide8b.html">10. L3 Fogging</option>
+            <option value="slide9.html">11. Product Range</option>
+            <option value="slide9b.html">12. L5 Premium</option>
+            <option value="slide9c.html">13. L5 Deluxe</option>
+            <option value="slide10.html">14. Technical Excellence</option>
+            <option value="slide11.html">15. Future E-Bus</option>
+            <option value="slide12.html">16. Last-Mile Logistics</option>
+            <option value="slide13.html">17. SMB Empowerment</option>
+            <option value="slide14.html">18. Public Sector</option>
+            <option value="slide15.html">19. Aftermarket Excellence</option>
+            <option value="slide16.html">20. Chennai Case Study</option>
+            <option value="slide17.html">21. Panchayat Case Study</option>
+            <option value="slide18.html">22. Client Testimonials</option>
+            <option value="slide19.html" selected>23. Manufacturing</option>
+            <option value="slide20.html">24. Customer Testimonials</option>
+            <option value="slide21.html">25. Awards & Recognition</option>
+            <option value="slide22.html">26. Strategic Partnerships</option>
+            <option value="slide23.html">27. Growth Vision</option>
+            <option value="slide24.html">28. Thank You</option>
+        </select>
+    </div>
+    
+    <!-- Navigation Buttons at Bottom -->
+    <div class="nav-buttons">
+        <button class="nav-btn prev" onclick="prevSlide()">‹</button>
+        <button class="nav-btn next" onclick="nextSlide()">›</button>
+    </div>
+
+    <div class="slide sky-pattern">
+        <div class="slide-number">23</div>
+        
+        <div class="content-wrapper">
+            <h1>Unmatched Manufacturing Excellence</h1>
+            <div class="subtitle">Scale meets precision in every vehicle we build</div>
+            
+            <div class="capacity-banner">
+                <div class="capacity-title">200+ Vehicles Per Day Capacity</div>
+                <div class="capacity-subtitle">One of India's largest dedicated EV manufacturing facilities</div>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon gold">🏭</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">Advanced Production Lines</h3>
+                        <ul class="feature-list">
+                            <li>⚙️ Automated welding systems</li>
+                            <li>🔧 Precision assembly stations</li>
+                            <li>✅ In-line quality checkpoints</li>
+                            <li>☀️ Solar panel integration bay</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon green">📊</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">Quality Control Systems</h3>
+                        <ul class="feature-list">
+                            <li>🔍 47-point inspection process</li>
+                            <li>⚖️ Load testing facility</li>
+                            <li>🔋 Battery performance lab</li>
+                            <li>🏁 Real-world test track</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon blue">📈</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">Production Milestones</h3>
+                        <ul class="feature-list">
+                            <li>🚗 6,000+ vehicles delivered</li>
+                            <li>⏰ 99% on-time delivery</li>
+                            <li>🔒 Zero major recalls</li>
+                            <li>🔄 3x capacity expansion ready</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="iso-section">
+                <h2 class="iso-title">ISO Certified Excellence</h2>
+                <div class="iso-badges">
+                    <div class="iso-badge">
+                        <div class="iso-circle gold">9001</div>
+                        <div class="iso-label">Quality Management</div>
+                    </div>
+                    <div class="iso-badge">
+                        <div class="iso-circle green">14001</div>
+                        <div class="iso-label">Environmental Management</div>
+                    </div>
+                    <div class="iso-badge">
+                        <div class="iso-circle blue">18001</div>
+                        <div class="iso-label">Safety Management</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="solar-rays"></div>
+        <div class="logo-corner">QTCS</div>
+    </div>
+    
+    <script>
+        const slides = [
+            'index.html',
+            'slide2.html',
+            'slide3.html',
+            'slide4.html',
+            'slide5.html',
+            'slide6.html',
+            'slide6b.html',
+            'slide7.html',
+            'slide8.html',
+            'slide8b.html',
+            'slide9.html',
+            'slide9b.html',
+            'slide9c.html',
+            'slide10.html',
+            'slide11.html',
+            'slide12.html',
+            'slide13.html',
+            'slide14.html',
+            'slide15.html',
+            'slide16.html',
+            'slide17.html',
+            'slide18.html',
+            'slide19.html',
+            'slide20.html',
+            'slide21.html',
+            'slide22.html',
+            'slide23.html',
+            'slide24.html'
+        ];
+        
+        const currentSlide = 'slide19.html';
+        const currentIndex = slides.indexOf(currentSlide);
+        
+        function jumpToSlide(slideFile) {
+            if (slideFile && slideFile !== currentSlide) {
+                window.location.href = slideFile;
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                window.location.href = slides[currentIndex - 1];
+            }
+        }
+        
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                window.location.href = slides[currentIndex + 1];
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+        
+        // Set the correct option in dropdown
+        document.querySelector('.slide-select').value = currentSlide;
+    </script>
+</body>
+</html>
