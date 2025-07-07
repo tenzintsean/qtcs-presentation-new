@@ -608,12 +608,6 @@
         
         /* Navigation and logo styles handled by centralized theme-skyblue.css */
         
-        /* Hide navigation controls */
-        .nav-container,
-        .nav-buttons {
-            display: none !important;
-        }
-        
         /* Slide-specific progress bar width override */
         .progress-fill {
             width: calc(28 / 28 * 100%);
@@ -622,49 +616,6 @@
     </style>
 </head>
 <body class="sky-theme">
-    <!-- Navigation -->
-    <div class="nav-container">
-        <div class="slide-counter">28 / 28</div>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-        <select class="slide-select" onchange="jumpToSlide(this.value)">
-            <option value="index.html">1. Welcome</option>
-            <option value="slide2.html">2. About</option>
-            <option value="slide3.html">3. Purpose & Direction</option>
-            <option value="slide4.html">4. Heritage</option>
-            <option value="slide5.html">5. Excellence</option>
-            <option value="slide6.html">6. L3 Open Body</option>
-            <option value="slide6b.html">7. L3 Closed Body</option>
-            <option value="slide7.html">8. L5 Tipper</option>
-            <option value="slide8.html">9. L3 Garbage Body</option>
-            <option value="slide8b.html">10. L3 Fogging</option>
-            <option value="slide9.html">11. Product Range</option>
-            <option value="slide9b.html">12. L5 Premium</option>
-            <option value="slide9c.html">13. L5 Deluxe</option>
-            <option value="slide10.html">14. Technical Excellence</option>
-            <option value="slide11.html">15. Future E-Bus</option>
-            <option value="slide12.html">16. Last-Mile Logistics</option>
-            <option value="slide13.html">17. SMB Empowerment</option>
-            <option value="slide18.html">18. Public Sector</option>
-            <option value="slide15.html">19. Aftermarket Excellence</option>
-            <option value="slide16.html">20. Chennai Case Study</option>
-            <option value="slide17.html">21. Panchayat Case Study</option>
-            <option value="slide18.html">22. Client Testimonials</option>
-            <option value="slide19.html">23. Manufacturing</option>
-            <option value="slide20.html">24. Service Network</option>
-            <option value="slide21.html">25. Awards & Recognition</option>
-            <option value="slide22.html">26. Strategic Partnerships</option>
-            <option value="slide23.html">27. Growth Vision</option>
-            <option value="slide24.html" selected>28. Thank You</option>
-        </select>
-    </div>
-    
-    <!-- Navigation Buttons at Bottom -->
-    <div class="nav-buttons">
-        <button class="nav-btn prev" onclick="prevSlide()">‹</button>
-        <button class="nav-btn next" onclick="nextSlide()" disabled>›</button>
-    </div>
 
     <div class="slide sky-pattern">
         <div class="solar-rays"></div>
@@ -699,7 +650,7 @@
                     <div class="contact-item">
                         <div class="contact-icon website">🌐</div>
                         <p class="contact-label">Website</p>
-                        <p class="contact-value">privilsolutions.in</p>
+                        <p class="contact-value">QTCS.org</p>
                     </div>
                 </div>
                 
@@ -724,7 +675,9 @@
             </div>
         </div>
         
-        <div class="logo-corner">QTCS</div>
+        <div class="logo-corner">
+            <img src="qtcslogo.png" alt="QTCS - Quick Turn Consultancy Solutions" style="height: clamp(40px, 4vw, 60px); width: auto; object-fit: contain; background: white; padding: 8px; border-radius: 8px;">
+        </div>
     </div>
     
     <script>
@@ -759,8 +712,8 @@
             'slide24.html'
         ];
         
-        const currentSlide = 'slide24.html';
-        const currentIndex = slides.indexOf(currentSlide);
+        
+        const currentIndex = 27;
         
         function jumpToSlide(slideFile) {
             if (slideFile && slideFile !== currentSlide) {

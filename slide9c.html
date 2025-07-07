@@ -431,12 +431,15 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 140, 0, 0.3);
-            padding: clamp(15px, 2.5vh, 25px);
+            padding: clamp(25px, 4vh, 40px);
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 8px 25px rgba(255, 140, 0, 0.2);
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .feature-strip::before {
@@ -557,7 +560,7 @@
             }
             
             .feature-strip {
-                padding: clamp(8px, 1.2vh, 12px);
+                padding: clamp(15px, 2.5vh, 20px);
             }
             
             .feature-strip p {
@@ -566,12 +569,6 @@
         }
         
         /* Navigation handled by centralized theme-skyblue.css */
-        
-        /* Hide navigation controls */
-        .nav-container,
-        .nav-buttons {
-            display: none !important;
-        }
         
         /* Slide-specific override for progress bar width */
         .progress-fill {
@@ -620,49 +617,6 @@
     </style>
 </head>
 <body class="sky-theme">
-    <!-- Navigation -->
-    <div class="nav-container">
-        <div class="slide-counter">13 / 28</div>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-        <select class="slide-select" onchange="jumpToSlide(this.value)">
-            <option value="index.html">1. Welcome</option>
-            <option value="slide2.html">2. About</option>
-            <option value="slide3.html">3. Purpose & Direction</option>
-            <option value="slide4.html">4. Heritage</option>
-            <option value="slide5.html">5. Excellence</option>
-            <option value="slide6.html">6. L3 Open Body</option>
-            <option value="slide6b.html">7. L3 Closed Body</option>
-            <option value="slide7.html">8. L3 Passenger</option>
-            <option value="slide8.html">9. L3 Garbage Body</option>
-            <option value="slide8b.html">10. L3 Fogging</option>
-            <option value="slide9.html">11. L5 Open Body Heavy Duty</option>
-            <option value="slide9b.html">12. L5 Closed Body Heavy Duty</option>
-            <option value="slide9c.html" selected>13. L5 Passenger Premium</option>
-            <option value="slide10.html">14. Technical Excellence</option>
-            <option value="slide11.html">15. Future E-Bus</option>
-            <option value="slide12.html">16. Last-Mile Logistics</option>
-            <option value="slide13.html">17. SMB Empowerment</option>
-            <option value="slide14.html">18. Public Sector</option>
-            <option value="slide15.html">19. Aftermarket Excellence</option>
-            <option value="slide16.html">20. Chennai Case Study</option>
-            <option value="slide17.html">21. Panchayat Case Study</option>
-            <option value="slide18.html">22. Solar Smart Technology</option>
-            <option value="slide19.html">23. Manufacturing</option>
-            <option value="slide20.html">24. Customer Testimonials</option>
-            <option value="slide21.html">25. Awards & Recognition</option>
-            <option value="slide22.html">26. Strategic Partnerships</option>
-            <option value="slide23.html">27. Growth Vision</option>
-            <option value="slide24.html">28. Thank You</option>
-        </select>
-    </div>
-    
-    <!-- Navigation Buttons at Bottom -->
-    <div class="nav-buttons">
-        <button class="nav-btn prev" onclick="prevSlide()">‹</button>
-        <button class="nav-btn next" onclick="nextSlide()">›</button>
-    </div>
 
     <!-- Slide 13: L5 Passenger Premium -->
     <div class="slide sky-pattern">
@@ -749,7 +703,9 @@
             </div>
         </div>
         
-        <div class="logo-corner">QTCS</div>
+        <div class="logo-corner">
+            <img src="qtcslogo.png" alt="QTCS - Quick Turn Consultancy Solutions" style="height: clamp(40px, 4vw, 60px); width: auto; object-fit: contain; background: white; padding: 8px; border-radius: 8px;">
+        </div>
     </div>
     <script>
         const slides = [
@@ -783,8 +739,8 @@
             'slide24.html'
         ];
         
-        const currentSlide = 'slide9c.html';
-        const currentIndex = slides.indexOf(currentSlide);
+        
+        const currentIndex = 12;
         
         function jumpToSlide(slideFile) {
             if (slideFile && slideFile !== currentSlide) {
