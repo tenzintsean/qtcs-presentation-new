@@ -91,6 +91,57 @@ If you encounter issues:
 3. **Navigation issues:** Check that all slide files exist and keyboard navigation works manually
 4. **Slow captures:** Use headless mode for faster execution
 
+## Screenshot Gallery
+
+After capturing screenshots, view them in a beautiful gallery interface:
+
+### Open the Gallery
+```bash
+# Option 1: Direct file opening (Mac)
+npm run gallery
+
+# Option 2: Local web server (recommended)
+npm run serve
+# Then open: http://localhost:8000/screenshot-gallery.html
+
+# Option 3: Direct file opening
+open screenshot-gallery.html
+```
+
+### Gallery Features
+- ✅ **Visual thumbnails** of all screenshots
+- ✅ **Click to download** individual images
+- ✅ **Download all** screenshots at once
+- ✅ **Auto-detection** of available screenshots
+- ✅ **Responsive design** for mobile/desktop
+- ✅ **Status indicators** (available/missing)
+- ✅ **Slide information** with titles and descriptions
+
+### Gallery Interface
+The gallery shows:
+- **Slide number** and status indicator
+- **Thumbnail preview** of each screenshot
+- **Slide title** and description
+- **File information** (name, resolution)
+- **Download actions** for individual or bulk downloads
+
+## Complete Workflow
+
+1. **Generate screenshots:**
+   ```bash
+   npm run capture
+   ```
+
+2. **View in gallery:**
+   ```bash
+   npm run serve
+   # Open: http://localhost:8000/screenshot-gallery.html
+   ```
+
+3. **Download images:**
+   - Click any thumbnail to download individual screenshot
+   - Use "Download All" button for bulk download
+
 ## Technical Details
 
 - **Browser:** Chromium via Playwright
@@ -98,3 +149,4 @@ If you encounter issues:
 - **Wait strategy:** Network idle + timeout for animations
 - **Viewport:** 1920x1080
 - **File format:** PNG
+- **Gallery:** HTML with responsive CSS and JavaScript
