@@ -1,0 +1,17 @@
+{
+  "name": "qtcs-presentation-new",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "capture": "node capture-slides.js",
+    "capture-headless": "node capture-slides.js --headless"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "playwright": "^1.53.2"
+  }
+}
