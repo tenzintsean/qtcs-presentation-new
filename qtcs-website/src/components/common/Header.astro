@@ -24,7 +24,7 @@ const navLinks = [
           alt="QTCS Logo"
           class="h-10 w-auto md:h-12"
         />
-        <span class="text-xl md:text-2xl font-bold text-white">QTCS</span>
+        <span class="text-xl md:text-2xl font-bold text-text-primary">QTCS</span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -36,7 +36,7 @@ const navLinks = [
               'text-base font-medium transition-colors duration-200',
               currentPage === link.href
                 ? 'text-accent-orange'
-                : 'text-white hover:text-sky-light',
+                : 'text-text-secondary hover:text-text-primary',
             ]}
           >
             {link.label}
@@ -53,7 +53,7 @@ const navLinks = [
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-btn"
-        class="md:hidden p-2 text-white hover:text-sky-light"
+        class="md:hidden p-2 text-text-primary hover:text-text-secondary"
         aria-label="Toggle menu"
         aria-expanded="false"
       >
@@ -87,7 +87,7 @@ const navLinks = [
               'px-4 py-3 rounded-lg text-base font-medium transition-colors duration-200',
               currentPage === link.href
                 ? 'bg-glass-bg-strong text-accent-orange'
-                : 'text-white hover:bg-glass-bg',
+                : 'text-text-secondary hover:bg-glass-bg',
             ]}
           >
             {link.label}

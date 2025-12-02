@@ -76,7 +76,7 @@ const categories = ['All', 'L3', 'L5', 'E-Bus'];
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div class="text-center mb-12 md:mb-16">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-6">
           Our <span class="text-accent-orange">Vehicles</span>
         </h1>
         <p class="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto">
@@ -93,7 +93,7 @@ const categories = ['All', 'L3', 'L5', 'E-Bus'];
               'px-6 py-2 rounded-full font-medium transition-all duration-200',
               index === 0
                 ? 'bg-accent-orange text-white'
-                : 'glass text-white hover:bg-glass-bg-strong',
+                : 'glass text-text-primary hover:bg-glass-bg-strong',
             ]}
             data-category={category.toLowerCase()}
           >
@@ -127,7 +127,7 @@ const categories = ['All', 'L3', 'L5', 'E-Bus'];
                   {vehicle.category}
                 </span>
               </div>
-              <h3 class="text-xl font-bold text-white mb-2">{vehicle.name}</h3>
+              <h3 class="text-xl font-bold text-text-primary mb-2">{vehicle.name}</h3>
               <p class="text-text-muted text-sm mb-4">{vehicle.description}</p>
 
               <!-- Specs -->
@@ -151,7 +151,7 @@ const categories = ['All', 'L3', 'L5', 'E-Bus'];
               <!-- CTA -->
               <a
                 href={`/products/${vehicle.id}`}
-                class="block w-full py-3 text-center bg-glass-bg text-white font-medium rounded-lg hover:bg-accent-orange transition-colors duration-200"
+                class="block w-full py-3 text-center bg-glass-bg text-text-primary font-medium rounded-lg hover:bg-accent-orange hover:text-white transition-colors duration-200"
               >
                 View Details
               </a>

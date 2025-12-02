@@ -16,9 +16,15 @@
 
   /* Neutral Colors */
   --color-dark-overlay: rgba(0, 30, 60, 0.85);
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: rgba(255, 255, 255, 0.9);
-  --color-text-muted: rgba(255, 255, 255, 0.7);
+
+  /* Text Colors - WCAG AA Compliant (Trust Blue Palette) */
+  --color-text-primary: #0047AB;    /* Headings - trust-blue, ~8:1 contrast */
+  --color-text-secondary: #1a5490;  /* Body text - softer blue, ~6:1 contrast */
+  --color-text-muted: #3a6fa8;      /* Captions/muted - ~4.5:1 contrast */
+
+  /* Light text for dark backgrounds (footer, overlays) */
+  --color-text-light: #FFFFFF;
+  --color-text-light-muted: rgba(255, 255, 255, 0.7);
 
   /* Glassmorphism */
   --color-glass-bg: rgba(255, 255, 255, 0.1);
