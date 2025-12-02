@@ -1,8 +1,9 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/home/Hero.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
-<PageLayout title="QTCS - Driving the Future of India's Mobility" currentPage="/">
+<PageLayout title="QTCS - Driving the Future of India's Mobility" currentPage={base}>
   <Hero />
 </PageLayout>

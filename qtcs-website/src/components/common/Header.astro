@@ -4,12 +4,13 @@ interface Props {
 }
 
 const { currentPage = '' } = Astro.props;
+const base = import.meta.env.BASE_URL;
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/products', label: 'Vehicles' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+  { href: `${base}`, label: 'Home' },
+  { href: `${base}products`, label: 'Vehicles' },
+  { href: `${base}about`, label: 'About' },
+  { href: `${base}contact`, label: 'Contact' },
 ];
 ---
 
@@ -17,9 +18,9 @@ const navLinks = [
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 md:h-20">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3">
+      <a href={base} class="flex items-center gap-3">
         <img
-          src="/qtcslogo.png"
+          src={`${base}qtcslogo.png`}
           alt="QTCS Logo"
           class="h-10 w-auto md:h-12"
         />
@@ -42,7 +43,7 @@ const navLinks = [
           </a>
         ))}
         <a
-          href="/contact"
+          href={`${base}contact`}
           class="px-5 py-2 bg-accent-orange text-white font-semibold rounded-full hover:bg-accent-gold transition-colors duration-200"
         >
           Get Quote
@@ -93,7 +94,7 @@ const navLinks = [
           </a>
         ))}
         <a
-          href="/contact"
+          href={`${base}contact`}
           class="mt-2 px-4 py-3 bg-accent-orange text-white font-semibold rounded-lg text-center hover:bg-accent-gold transition-colors duration-200"
         >
           Get Quote

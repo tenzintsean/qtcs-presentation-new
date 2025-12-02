@@ -5,21 +5,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  // Use relative URLs for assets - works on any subdirectory
-  build: {
-    assetsPrefix: './'
-  },
+  // Set base path for GitHub Pages subdirectory deployment
+  base: '/qtcs-presentation-new/website/',
   vite: {
-    plugins: [tailwindcss()],
-    build: {
-      assetsDir: '_astro',
-      rollupOptions: {
-        output: {
-          assetFileNames: '_astro/[name][extname]',
-          chunkFileNames: '_astro/[name].js',
-          entryFileNames: '_astro/[name].js'
-        }
-      }
-    }
+    plugins: [tailwindcss()]
   }
 });

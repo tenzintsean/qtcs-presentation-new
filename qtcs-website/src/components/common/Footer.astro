@@ -1,21 +1,22 @@
 ---
 const currentYear = new Date().getFullYear();
+const base = import.meta.env.BASE_URL;
 
 const footerLinks = {
   products: [
-    { href: '/products/l3-vehicles', label: 'L3 Vehicles' },
-    { href: '/products/l5-vehicles', label: 'L5 Vehicles' },
-    { href: '/products/e-bus', label: 'E-Bus' },
+    { href: `${base}products/l3-vehicles`, label: 'L3 Vehicles' },
+    { href: `${base}products/l5-vehicles`, label: 'L5 Vehicles' },
+    { href: `${base}products/e-bus`, label: 'E-Bus' },
   ],
   company: [
-    { href: '/about', label: 'About Us' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/careers', label: 'Careers' },
+    { href: `${base}about`, label: 'About Us' },
+    { href: `${base}contact`, label: 'Contact' },
+    { href: `${base}careers`, label: 'Careers' },
   ],
   resources: [
-    { href: '/presentation', label: 'Presentation' },
-    { href: '/style-guide', label: 'Style Guide' },
-    { href: '/downloads', label: 'Downloads' },
+    { href: `${base}presentation`, label: 'Presentation' },
+    { href: `${base}style-guide`, label: 'Style Guide' },
+    { href: `${base}downloads`, label: 'Downloads' },
   ],
 };
 ---
@@ -25,8 +26,8 @@ const footerLinks = {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
       <!-- Brand -->
       <div class="col-span-1 md:col-span-2 lg:col-span-1">
-        <a href="/" class="flex items-center gap-3 mb-4">
-          <img src="/qtcslogo.png" alt="QTCS Logo" class="h-12 w-auto" />
+        <a href={base} class="flex items-center gap-3 mb-4">
+          <img src={`${base}qtcslogo.png`} alt="QTCS Logo" class="h-12 w-auto" />
           <span class="text-2xl font-bold text-white">QTCS</span>
         </a>
         <p class="text-text-muted text-sm leading-relaxed">
@@ -93,10 +94,10 @@ const footerLinks = {
           &copy; {currentYear} QTCS. All rights reserved.
         </p>
         <div class="flex gap-6">
-          <a href="/privacy" class="text-text-muted text-sm hover:text-white transition-colors">
+          <a href={`${base}privacy`} class="text-text-muted text-sm hover:text-white transition-colors">
             Privacy Policy
           </a>
-          <a href="/terms" class="text-text-muted text-sm hover:text-white transition-colors">
+          <a href={`${base}terms`} class="text-text-muted text-sm hover:text-white transition-colors">
             Terms of Service
           </a>
         </div>
