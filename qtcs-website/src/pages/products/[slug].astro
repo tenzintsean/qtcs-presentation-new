@@ -1,0 +1,443 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+const base = import.meta.env.BASE_URL;
+
+// Vehicle data from presentation slides
+const vehicles = {
+  'l3-closed-body': {
+    id: 'l3-closed-body',
+    name: 'L3 Closed Body Loader',
+    category: 'L3',
+    tagline: 'Secure transportation for sensitive goods',
+    description: 'Premium protection for premium deliveries. The L3 Closed Body Loader is designed for secure transportation of sensitive goods with complete weather protection and lockable storage.',
+    specs: {
+      weatherproof: '100%',
+      security: 'Lockable',
+      range: '90-100 km',
+      quality: 'Premium Build',
+    },
+    features: [
+      'Fully enclosed cargo area',
+      'Weather-proof construction',
+      'Lockable secure storage',
+      'Premium build quality',
+      'LED headlights & tail lights',
+      'Solar-smart technology',
+    ],
+    useCases: ['Pharmaceuticals', 'FMCG Products', 'Electronics', 'Secure Deliveries'],
+    images: [
+      '/vehicles/l3-closed-body/s6b-1.jpg',
+      '/vehicles/l3-closed-body/s6b-2.jpg',
+      '/vehicles/l3-closed-body/s6b-3.jpg',
+      '/vehicles/l3-closed-body/s6b-4.jpg',
+    ],
+  },
+  'l3-open-body': {
+    id: 'l3-open-body',
+    name: 'L3 Open Body Loader',
+    category: 'L3',
+    tagline: 'The workhorse of Indian logistics',
+    description: 'Versatile open cargo platform for diverse loads. The L3 Open Body offers maximum flexibility with easy loading from all sides, perfect for varied cargo sizes.',
+    specs: {
+      payload: '500 kg',
+      range: '80-100 km',
+      speed: '25 km/h',
+      savings: '₹18,000/year',
+    },
+    features: [
+      'Open flatbed design',
+      'Easy loading from all sides',
+      'Tie-down points for cargo',
+      'Heavy-duty suspension',
+      'Industrial-grade build',
+      'Low maintenance cost',
+    ],
+    useCases: ['General Cargo', 'Agricultural Goods', 'Construction Materials', 'Market Transport'],
+    images: [
+      '/vehicles/l3-open-body/L3-1.jpg',
+      '/vehicles/l3-open-body/L3-2.jpg',
+      '/vehicles/l3-open-body/L3-3.jpg',
+      '/vehicles/l3-open-body/L3-4.jpg',
+      '/vehicles/l3-open-body/L3-5.jpg',
+    ],
+  },
+  'l3-passenger': {
+    id: 'l3-passenger',
+    name: 'L3 Passenger Vehicle',
+    category: 'L3',
+    tagline: 'Redefining urban transportation economics',
+    description: 'E-Rickshaw excellence for urban mobility. Comfortable seating for 4+1 passengers with weather protection and smart design for maximum driver earnings.',
+    specs: {
+      seating: '4+1 Passengers',
+      dailyTrips: '15,000+',
+      dailyEarnings: '₹500',
+      roi: '2 Years',
+    },
+    features: [
+      'Spacious seating for 4+1',
+      'Weather protection canopy',
+      'Smooth suspension system',
+      '8-hour continuous operation',
+      'Fast charging capability',
+      'Smart connectivity ready',
+    ],
+    useCases: ['Urban Transport', 'Campus Mobility', 'Last-Mile Connect', 'Eco-Tourism'],
+    images: [
+      '/vehicles/l3-passenger/Untitled 6.jpeg',
+      '/vehicles/l3-passenger/Untitled 7.jpeg',
+      '/vehicles/l3-passenger/Untitled 8.jpeg',
+      '/vehicles/l3-passenger/Untitled 9.jpeg',
+    ],
+  },
+  'l3-garbage': {
+    id: 'l3-garbage',
+    name: 'L3 Garbage Body',
+    category: 'L3',
+    tagline: 'Efficient waste collection for cleaner communities',
+    description: 'Clean streets, healthy communities. Purpose-built for municipal waste collection with hydraulic tipping system and large hopper capacity.',
+    specs: {
+      hopperCapacity: '2.5 m³',
+      tipping: 'Hydraulic',
+      loading: 'Side Loading',
+      payload: '699 kg',
+    },
+    features: [
+      'Large hopper capacity',
+      'Hydraulic tipping system',
+      'Side loading design',
+      'Zero emissions',
+      'Silent operation',
+      'Solar-smart technology',
+    ],
+    useCases: ['Chennai Corporation', 'Tamil Nadu Panchayats', 'Municipal Bodies', 'Smart Cities'],
+    images: [
+      '/vehicles/l3-garbage/Untitled.jpeg',
+      '/vehicles/l3-garbage/Untitled 2.jpeg',
+      '/vehicles/l3-garbage/Untitled 3.jpeg',
+      '/vehicles/l3-garbage/Untitled 4.jpeg',
+      '/vehicles/l3-garbage/Untitled 5.jpeg',
+    ],
+  },
+  'l5-closed-body': {
+    id: 'l5-closed-body',
+    name: 'L5 Closed Body Heavy Duty',
+    category: 'L5',
+    tagline: 'Maximum capacity with complete protection',
+    description: 'Heavy-duty cargo with full weather protection. The L5 Closed Body is built for businesses requiring larger payload capacity with complete cargo security.',
+    specs: {
+      payload: '1000 kg',
+      range: '100-120 km',
+      speed: '35 km/h',
+      security: 'Lockable',
+    },
+    features: [
+      'Large enclosed cargo bay',
+      'Reinforced chassis',
+      'Power steering',
+      'Disc brakes all wheels',
+      'Advanced battery management',
+      'Cargo bay lighting',
+    ],
+    useCases: ['Wholesale Distribution', 'Retail Restocking', 'FMCG Delivery', 'Industrial Logistics'],
+    images: [
+      '/vehicles/l5-closed-body/Untitled 6.jpeg',
+      '/vehicles/l5-closed-body/Untitled 7.jpeg',
+      '/vehicles/l5-closed-body/Untitled 8.jpeg',
+      '/vehicles/l5-closed-body/Untitled 9.jpeg',
+    ],
+  },
+  'l5-open-body': {
+    id: 'l5-open-body',
+    name: 'L5 Open Body Heavy Duty',
+    category: 'L5',
+    tagline: 'Maximum payload for heavy-duty operations',
+    description: 'Maximum payload capacity for bulk transport. The L5 Open Body delivers the highest payload in our range, perfect for heavy-duty commercial operations.',
+    specs: {
+      payload: '1200 kg',
+      range: '100-120 km',
+      speed: '35 km/h',
+      bedSize: 'Extra Large',
+    },
+    features: [
+      'Extra-large cargo bed',
+      'Hydraulic tipping option',
+      'Heavy-duty axles',
+      'Industrial-grade tyres',
+      'Load sensors',
+      'Reinforced tailgate',
+    ],
+    useCases: ['Construction Materials', 'Sand & Gravel', 'Agricultural Bulk', 'Industrial Transport'],
+    images: [
+      '/vehicles/l5-open-body/Untitled 10.jpeg',
+      '/vehicles/l5-open-body/Untitled 11.jpeg',
+      '/vehicles/l5-open-body/Untitled 12.jpeg',
+      '/vehicles/l5-open-body/Untitled 13.jpeg',
+    ],
+  },
+  'l5-passenger-premium': {
+    id: 'l5-passenger-premium',
+    name: 'L5 Passenger Premium',
+    category: 'L5',
+    tagline: 'Premium comfort for passenger transportation',
+    description: 'Premium comfort ride with enhanced features. The L5 Passenger Premium offers the most comfortable ride with full cabin enclosure and premium amenities.',
+    specs: {
+      seating: '6+1 Passengers',
+      range: '100-120 km',
+      comfort: 'Premium',
+      cabin: 'Full Enclosure',
+    },
+    features: [
+      'Premium cushioned seating',
+      'Full cabin enclosure',
+      'Air ventilation system',
+      'Entertainment system ready',
+      'Ambient lighting',
+      'Extra legroom',
+    ],
+    useCases: ['VIP Transport', 'Hotel Shuttles', 'Golf Courses', 'Premium Eco-Tourism'],
+    images: [
+      '/vehicles/l5-passenger-premium/photo_2025-05-30_16-00-46.jpg',
+      '/vehicles/l5-passenger-premium/photo_2025-05-30_16-00-50.jpg',
+      '/vehicles/l5-passenger-premium/photo_2025-05-30_16-00-52.jpg',
+    ],
+  },
+  'e-bus': {
+    id: 'e-bus',
+    name: 'Future E-Bus',
+    category: 'E-Bus',
+    tagline: 'The Future of Mass Transit',
+    description: 'Next-generation electric bus for mass transit. Our upcoming E-Bus represents the future of sustainable public transportation with advanced features and high capacity.',
+    specs: {
+      capacity: '25+ Passengers',
+      range: '200 km',
+      charging: 'Fast Charge',
+      accessibility: 'Low Floor',
+    },
+    features: [
+      'Low-floor design for accessibility',
+      'Air conditioning',
+      'Real-time GPS tracking',
+      'Passenger information system',
+      'CCTV security',
+      'Wheelchair ramp',
+    ],
+    useCases: ['City Bus Routes', 'Airport Shuttles', 'Corporate Transport', 'School Buses'],
+    images: [
+      '/vehicles/future-e-bus/bus1.webp',
+      '/vehicles/future-e-bus/bus2.webp',
+      '/vehicles/future-e-bus/bus3.webp',
+      '/vehicles/future-e-bus/bus4.webp',
+    ],
+    comingSoon: true,
+  },
+};
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'l3-closed-body' } },
+    { params: { slug: 'l3-open-body' } },
+    { params: { slug: 'l3-passenger' } },
+    { params: { slug: 'l3-garbage' } },
+    { params: { slug: 'l5-closed-body' } },
+    { params: { slug: 'l5-open-body' } },
+    { params: { slug: 'l5-passenger-premium' } },
+    { params: { slug: 'e-bus' } },
+  ];
+}
+
+const { slug } = Astro.params;
+const vehicle = vehicles[slug];
+
+if (!vehicle) {
+  return Astro.redirect(`${base}products`);
+}
+
+// Get spec entries for display
+const specEntries = Object.entries(vehicle.specs);
+---
+
+<PageLayout title={`${vehicle.name} - QTCS Electric Vehicles`} currentPage={`${base}products`}>
+  <!-- Hero Section -->
+  <section class="py-12 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="mb-6">
+        <ol class="flex items-center gap-2 text-sm">
+          <li><a href={`${base}`} class="text-text-muted hover:text-text-primary">Home</a></li>
+          <li class="text-text-muted">/</li>
+          <li><a href={`${base}products`} class="text-text-muted hover:text-text-primary">Vehicles</a></li>
+          <li class="text-text-muted">/</li>
+          <li class="text-text-primary font-medium">{vehicle.name}</li>
+        </ol>
+      </nav>
+
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <!-- Vehicle Images Gallery -->
+        <div class="order-2 lg:order-1">
+          <!-- Main Image -->
+          <div class="glass-strong rounded-2xl overflow-hidden mb-4">
+            <img
+              id="main-image"
+              src={`${base}${vehicle.images[0].slice(1)}`}
+              alt={vehicle.name}
+              class="w-full aspect-[4/3] object-contain bg-white/5"
+            />
+          </div>
+
+          <!-- Thumbnail Gallery -->
+          <div class="grid grid-cols-4 gap-2">
+            {vehicle.images.map((img, index) => (
+              <button
+                class="glass rounded-lg overflow-hidden hover:ring-2 hover:ring-accent-orange transition-all thumbnail-btn"
+                data-src={`${base}${img.slice(1)}`}
+              >
+                <img
+                  src={`${base}${img.slice(1)}`}
+                  alt={`${vehicle.name} view ${index + 1}`}
+                  class="w-full aspect-square object-cover"
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Vehicle Info -->
+        <div class="order-1 lg:order-2">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="px-3 py-1 bg-accent-orange/20 text-accent-orange text-sm font-semibold rounded-full">
+              {vehicle.category}
+            </span>
+            {vehicle.comingSoon && (
+              <span class="px-3 py-1 bg-trust-blue/20 text-trust-blue text-sm font-semibold rounded-full">
+                Coming Soon
+              </span>
+            )}
+          </div>
+
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-2">
+            {vehicle.name}
+          </h1>
+
+          <p class="text-xl text-accent-orange font-medium mb-4">
+            {vehicle.tagline}
+          </p>
+
+          <p class="text-text-secondary text-lg leading-relaxed mb-8">
+            {vehicle.description}
+          </p>
+
+          <!-- Quick Specs Grid -->
+          <div class="grid grid-cols-2 gap-3 mb-8">
+            {specEntries.map(([key, value], index) => (
+              <div class="glass rounded-xl p-4">
+                <div class="text-text-muted text-sm capitalize mb-1">
+                  {key.replace(/([A-Z])/g, ' $1').trim()}
+                </div>
+                <span class="text-xl font-bold text-text-primary">{value}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a
+              href={`${base}contact`}
+              class="px-8 py-4 bg-accent-orange text-white font-semibold text-lg rounded-full text-center hover:bg-accent-gold transition-colors duration-200"
+            >
+              Get a Quote
+            </a>
+            <a
+              href={`${base}contact`}
+              class="px-8 py-4 glass text-text-dark font-semibold text-lg rounded-full text-center hover:bg-glass-bg-strong transition-colors duration-200"
+            >
+              Schedule Test Drive
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-12 md:py-16 bg-glass-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-text-primary text-center mb-8">
+        Key Features
+      </h2>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {vehicle.features.map((feature) => (
+          <div class="glass-strong rounded-xl p-5 flex items-center gap-4">
+            <div class="w-10 h-10 bg-highlight-green/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-highlight-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span class="text-text-primary font-medium">{feature}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section class="py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-text-primary text-center mb-4">
+        Ideal Applications
+      </h2>
+      <p class="text-text-secondary text-center mb-8 max-w-2xl mx-auto">
+        The {vehicle.name} is perfect for these use cases
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-3">
+        {vehicle.useCases.map((useCase) => (
+          <span class="px-5 py-3 glass-strong rounded-full text-text-primary font-medium text-lg">
+            {useCase}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-dark-overlay">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        Interested in the {vehicle.name}?
+      </h2>
+      <p class="text-lg text-text-light-muted mb-8">
+        Contact our team to learn more about pricing, financing options, and availability.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href={`${base}contact`}
+          class="px-8 py-4 bg-accent-orange text-white font-semibold text-lg rounded-full hover:bg-accent-gold transition-colors duration-200"
+        >
+          Request Quote
+        </a>
+        <a
+          href={`${base}products`}
+          class="px-8 py-4 glass text-white font-semibold text-lg rounded-full hover:bg-glass-bg-strong transition-colors duration-200"
+        >
+          View All Vehicles
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  // Image gallery functionality
+  const thumbnails = document.querySelectorAll('.thumbnail-btn');
+  const mainImage = document.getElementById('main-image') as HTMLImageElement;
+
+  thumbnails.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const src = btn.getAttribute('data-src');
+      if (src && mainImage) {
+        mainImage.src = src;
+      }
+    });
+  });
+</script>
