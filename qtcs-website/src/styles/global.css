@@ -21,6 +21,7 @@
   --color-text-primary: #0047AB;    /* Headings - trust-blue, ~8:1 contrast */
   --color-text-secondary: #1a5490;  /* Body text - softer blue, ~6:1 contrast */
   --color-text-muted: #3a6fa8;      /* Captions/muted - ~4.5:1 contrast */
+  --color-text-dark: #002855;       /* Very dark blue for glass buttons */
 
   /* Light text for dark backgrounds (footer, overlays) */
   --color-text-light: #FFFFFF;
