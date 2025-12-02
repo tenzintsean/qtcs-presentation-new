@@ -160,6 +160,134 @@
       color: var(--accent-orange);
     }
 
+    .comparison-section {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .comparison-section h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .comparison-section .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .comparison-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    .comparison-card:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .comparison-card.new-site {
+      border: 2px solid rgba(34, 197, 94, 0.5);
+    }
+
+    .comparison-card.old-site {
+      border: 2px solid rgba(239, 68, 68, 0.5);
+    }
+
+    .comparison-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .comparison-card .site-url {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .score-item {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .score-item .label {
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .score-item .value {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .score-item .value.good {
+      color: #22c55e;
+    }
+
+    .score-item .value.warning {
+      color: #f59e0b;
+    }
+
+    .score-item .value.poor {
+      color: #ef4444;
+    }
+
+    .comparison-card .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge.secure {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .badge.insecure {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+
+    .click-hint {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 600px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+
     footer {
       margin-top: 3rem;
       text-align: center;
@@ -200,11 +328,64 @@
         <p>Brand colors, typography & components</p>
       </a>
 
-      <a href="reports/lighthouse-report.html" class="card">
-        <div class="card-icon">📊</div>
-        <h3>Lighthouse Report</h3>
-        <p>Google's web quality audit</p>
-      </a>
+    </div>
+
+    <!-- Quality Comparison Section -->
+    <div class="comparison-section">
+      <h2>📊 Quality Comparison</h2>
+      <p class="section-subtitle">Google Lighthouse audit scores - Click to view full reports</p>
+
+      <div class="comparison-grid">
+        <a href="reports/lighthouse-report.html" class="comparison-card new-site">
+          <span class="badge secure">HTTPS Secure</span>
+          <h3>New Website</h3>
+          <div class="site-url">Our redesigned site</div>
+          <div class="score-grid">
+            <div class="score-item">
+              <span class="label">Performance</span>
+              <span class="value good">99</span>
+            </div>
+            <div class="score-item">
+              <span class="label">Accessibility</span>
+              <span class="value good">93</span>
+            </div>
+            <div class="score-item">
+              <span class="label">Best Practices</span>
+              <span class="value good">100</span>
+            </div>
+            <div class="score-item">
+              <span class="label">SEO</span>
+              <span class="value good">100</span>
+            </div>
+          </div>
+          <div class="click-hint">Click for full report →</div>
+        </a>
+
+        <a href="reports/qtcs-org-lighthouse.html" class="comparison-card old-site">
+          <span class="badge insecure">HTTP Insecure</span>
+          <h3>Current Website</h3>
+          <div class="site-url">qtcs.org</div>
+          <div class="score-grid">
+            <div class="score-item">
+              <span class="label">Performance</span>
+              <span class="value warning">62</span>
+            </div>
+            <div class="score-item">
+              <span class="label">Accessibility</span>
+              <span class="value warning">75</span>
+            </div>
+            <div class="score-item">
+              <span class="label">Best Practices</span>
+              <span class="value warning">67</span>
+            </div>
+            <div class="score-item">
+              <span class="label">SEO</span>
+              <span class="value good">100</span>
+            </div>
+          </div>
+          <div class="click-hint">Click for full report →</div>
+        </a>
+      </div>
     </div>
 
     <div class="download-section">
