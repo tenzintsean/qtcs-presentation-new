@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS: Growth Vision</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Sky blue theme variables are imported from theme-skyblue.css */
+        
+        /* Body styles handled by theme-skyblue.css */
+        
+        /* Mobile-first approach - Base styles for mobile */
+        .slide {
+            display: block;
+            width: 100vw;
+            height: auto;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 80px 20px 120px;
+        }
+        
+        /* Enhanced Sky pattern background animations - STANDARDIZED VERSION */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 80%, rgba(135, 206, 235, 0.1) 4px, transparent 4px);
+            background-size: 120px 120px, 80px 80px, 150px 150px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+        
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 90% 20%, rgba(176, 224, 230, 0.08) 3px, transparent 3px);
+            background-size: 100px 100px, 140px 140px;
+            animation: cloudMove2 50s linear infinite reverse;
+            z-index: 0;
+        }
+        
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, 10px) rotate(90deg); }
+            50% { transform: translate(30px, 25px) rotate(180deg); }
+            75% { transform: translate(45px, 35px) rotate(270deg); }
+            100% { transform: translate(60px, 50px) rotate(360deg); }
+        }
+        
+        @keyframes cloudMove2 {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 15px) scale(1.1); }
+            66% { transform: translate(-40px, 30px) scale(0.9); }
+            100% { transform: translate(-60px, 45px) scale(1); }
+        }
+        
+        /* Content wrapper - Mobile first */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        /* Slide number - Mobile first */
+        .slide-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 6px 10px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            z-index: 20;
+        }
+        
+        /* Title styling - Mobile first */
+        h1 {
+            color: var(--text-primary);
+            font-size: var(--title-md);
+            font-weight: 700;
+            margin-bottom: clamp(2px, 0.3vh, 6px);
+            line-height: 1;
+            text-align: center;
+            background: linear-gradient(135deg, var(--title-blue) 0%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            width: 100%;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+        
+        /* Grid layout - Mobile first (stacked) */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 100%;
+            transform: scale(clamp(0.7, calc(100vh / 840px), 1.0));
+            transform-origin: top center;
+        }
+        
+        /* Section titles - Mobile first */
+        h2 {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        /* Benefit cards - Mobile first */
+        .benefit-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            border-left: 4px solid;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 140, 0, 0.4);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .benefit-card.gold {
+            border-left-color: var(--accent-primary);
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.15) 0%, var(--glass-bg) 100%);
+        }
+        
+        .benefit-card.green {
+            border-left-color: var(--green-primary);
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.15) 0%, var(--glass-bg) 100%);
+        }
+        
+        .benefit-card.blue {
+            border-left-color: var(--title-blue);
+            background: linear-gradient(135deg, rgba(0, 71, 171, 0.15) 0%, var(--glass-bg) 100%);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .card-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+        
+        .highlight-box p {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .highlight-box.gold p {
+            color: var(--accent-primary);
+        }
+        
+        .highlight-box.green p {
+            color: var(--green-primary);
+        }
+        
+        .highlight-box.blue p {
+            color: var(--title-blue);
+        }
+        
+        /* Savings card - Mobile first */
+        .savings-card {
+            background: linear-gradient(135deg, rgba(253, 184, 19, 0.2) 0%, rgba(253, 184, 19, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(253, 184, 19, 0.3);
+            color: var(--text-primary);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(253, 184, 19, 0.3);
+        }
+        
+        .savings-title {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .savings-amount {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .savings-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        
+        .savings-note {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .savings-note p {
+            font-size: 14px;
+            margin: 0;
+            color: var(--text-secondary);
+        }
+        
+        /* Strategic section - Mobile first */
+        .strategic-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .strategic-title {
+            text-align: center;
+            margin-bottom: 18px;
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .strategic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .strategic-item {
+            text-align: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            transition: var(--transition-normal);
+        }
+        
+        .strategic-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .strategic-item.blue {
+            border-color: rgba(0, 71, 171, 0.3);
+        }
+        
+        .strategic-item.green {
+            border-color: rgba(34, 139, 34, 0.3);
+        }
+        
+        .strategic-item.gold {
+            border-color: rgba(253, 184, 19, 0.3);
+        }
+        
+        .strategic-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+        
+        .strategic-text {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0;
+            color: var(--text-primary);
+        }
+        
+        .strategic-text.blue {
+            color: var(--title-blue);
+        }
+        
+        .strategic-text.green {
+            color: var(--green-primary);
+        }
+        
+        .strategic-text.gold {
+            color: var(--accent-primary);
+        }
+        
+        /* Enhanced Solar-themed decorative elements - STANDARDIZED VERSION */
+        .solar-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            opacity: 0.06;
+            animation: solarPulse 8s ease-in-out infinite;
+        }
+        
+        .solar-rays::before,
+        .solar-rays::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--accent-primary) 3deg,
+                transparent 6deg,
+                transparent 90deg,
+                var(--sky-primary) 93deg,
+                transparent 96deg,
+                transparent 180deg,
+                var(--accent-primary) 183deg,
+                transparent 186deg,
+                transparent 270deg,
+                var(--sky-primary) 273deg,
+                transparent 276deg,
+                transparent 354deg,
+                var(--accent-primary) 357deg,
+                transparent 360deg
+            );
+            animation: rotateSlow 45s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+        
+        .solar-rays::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-duration: 65s;
+            animation-direction: reverse;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--sky-light) 2deg,
+                transparent 4deg,
+                transparent 178deg,
+                var(--sky-light) 180deg,
+                transparent 182deg,
+                transparent 358deg,
+                var(--sky-light) 360deg
+            );
+        }
+        
+        @keyframes rotateSlow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes solarPulse {
+            0%, 100% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        /* Desktop enhancement - Keep desktop layout exactly as it was */
+        @media (min-width: 768px) {
+            body {
+                overflow: hidden;
+            }
+            
+            .slide {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                height: 100vh;
+                max-width: 1920px;
+                max-height: 1080px;
+                overflow: hidden;
+                padding: clamp(100px, 10vh, 120px) clamp(20px, 2.5vw, 50px) clamp(80px, 8vh, 100px);
+            }
+            
+            .content-wrapper {
+                height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0.3vh !important;
+                max-width: 1200px;
+                flex: 0.95;
+            }
+            
+            .slide-number {
+                top: clamp(15px, 1.5vw, 30px);
+                left: clamp(15px, 1.5vw, 30px);
+                font-size: clamp(12px, 0.8vw, 16px);
+                padding: 8px 12px;
+                border-radius: 20px;
+            }
+            
+            /* Header section - fixed space */
+            h1, .subtitle {
+                flex: 0 0 auto;
+                max-height: 12vh;
+            }
+            
+            h1 {
+                font-size: var(--title-md);
+                margin-bottom: clamp(2px, 0.3vh, 6px);
+            }
+            
+            .subtitle {
+                font-size: min(2vh, 18px) !important;
+                margin-bottom: 1vh !important;
+            }
+            
+            /* Grid layout - Desktop */
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+                gap: clamp(15px, 2.5vw, 25px);
+                flex: 1 1 auto;
+                min-height: 0;
+                overflow: visible;
+                transform: scale(clamp(0.7, calc(100vh / 840px), 1.0));
+                transform-origin: top center;
+            }
+            
+            h2 {
+                font-size: clamp(18px, 2.2vw, 24px);
+                margin-bottom: clamp(8px, 1.5vh, 15px);
+            }
+            
+            .benefit-card {
+                border-radius: clamp(12px, 1.2vw, 16px);
+                padding: clamp(12px, 2vh, 18px);
+                margin-bottom: clamp(10px, 1.5vh, 15px);
+            }
+            
+            .card-title {
+                font-size: clamp(16px, 1.8vw, 20px);
+                margin-bottom: clamp(6px, 1vh, 10px);
+            }
+            
+            .card-description {
+                font-size: clamp(13px, 1.5vw, 16px);
+                margin-bottom: clamp(6px, 1vh, 10px);
+            }
+            
+            .highlight-box {
+                padding: clamp(10px, 1.3vh, 12px);
+                border-radius: clamp(6px, 0.8vw, 8px);
+                margin-top: clamp(8px, 1.2vh, 10px);
+            }
+            
+            .highlight-box p {
+                font-size: clamp(14px, 1.5vw, 16px);
+            }
+            
+            .savings-card {
+                padding: clamp(16px, 2.5vh, 22px);
+                border-radius: clamp(12px, 1.2vw, 16px);
+                margin-bottom: clamp(12px, 2vh, 18px);
+            }
+            
+            .savings-title {
+                font-size: clamp(18px, 2.2vw, 22px);
+                margin-bottom: clamp(8px, 1.2vh, 12px);
+            }
+            
+            .savings-amount {
+                font-size: clamp(38px, 4.5vw, 50px);
+                margin-bottom: clamp(6px, 1vh, 8px);
+            }
+            
+            .savings-subtitle {
+                font-size: clamp(16px, 1.8vw, 20px);
+                margin-bottom: clamp(10px, 1.5vh, 14px);
+            }
+            
+            .savings-note {
+                padding: clamp(10px, 1.3vh, 12px);
+                border-radius: clamp(6px, 0.8vw, 8px);
+                margin-top: clamp(10px, 1.5vh, 14px);
+            }
+            
+            .savings-note p {
+                font-size: clamp(14px, 1.6vw, 16px);
+            }
+            
+            .strategic-section {
+                padding: clamp(8px, 1vh, 12px);
+                border-radius: clamp(8px, 0.8vw, 12px);
+            }
+            
+            .strategic-title {
+                margin-bottom: clamp(6px, 0.8vh, 10px);
+                font-size: clamp(16px, 1.8vw, 18px);
+            }
+            
+            .strategic-grid {
+                gap: clamp(6px, 0.8vh, 10px);
+            }
+            
+            .strategic-item {
+                padding: clamp(6px, 1vh, 10px);
+                border-radius: clamp(4px, 0.6vw, 6px);
+            }
+            
+            .strategic-icon {
+                font-size: clamp(26px, 3.2vw, 36px);
+                margin-bottom: clamp(6px, 0.8vh, 8px);
+            }
+            
+            .strategic-text {
+                font-size: clamp(14px, 1.5vw, 16px);
+            }
+        }
+        
+        /* Height constrained screens - Desktop only */
+        @media (max-height: 950px) and (min-width: 768px) {
+            .slide { padding: clamp(90px, 9vh, 110px) clamp(15px, 2vw, 40px) clamp(70px, 7vh, 90px); }
+            .content-wrapper { height: 88vh !important; }
+            h1 { font-size: var(--title-md); }
+            .subtitle { font-size: min(1.8vh, 16px) !important; }
+        }
+        
+        @media (max-height: 850px) and (min-width: 768px) {
+            .slide { padding: clamp(80px, 8vh, 100px) clamp(15px, 2vw, 35px) clamp(65px, 6.5vh, 80px); }
+            .content-wrapper { height: 91vh !important; }
+            h1 { font-size: var(--title-md); }
+            .subtitle { font-size: min(1.6vh, 14px) !important; }
+            .benefit-card { padding: clamp(12px, 2vh, 18px); }
+            .savings-card { padding: clamp(15px, 2.5vh, 20px); }
+        }
+        
+        @media (max-height: 750px) and (min-width: 768px) {
+            .slide { padding: 70px 15px 60px; }
+            .content-wrapper { height: 94vh !important; gap: clamp(5px, 0.8vh, 8px); }
+            h1 { font-size: var(--title-md); }
+            .subtitle { font-size: min(1.4vh, 12px) !important; }
+            .benefit-card { padding: clamp(10px, 1.5vh, 15px); }
+            .card-title { font-size: clamp(14px, 1.8vw, 18px); }
+        }
+        
+        /* Mobile responsive adjustments */
+        @media (max-width: 480px) {
+            .strategic-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Navigation and logo styles handled by centralized theme-skyblue.css */
+        
+        /* Slide-specific progress bar width override */
+        .progress-fill {
+            width: calc(27 / 28 * 100%);
+        }
+    </style>
+</head>
+<body class="sky-theme">
+
+    <div class="slide sky-pattern">
+        <div class="solar-rays"></div>
+        <div class="slide-number">27</div>
+        
+        <div class="content-wrapper">
+            <h1>Your Investment in the Future</h1>
+            <div class="subtitle">Partner with QTCS for sustainable growth and superior returns</div>
+            
+            <div class="grid-2">
+                <div>
+                    <h2>Economic Benefits</h2>
+                    
+                    <div class="benefit-card gold">
+                        <h4 class="card-title">40-60% Lower Operating Costs</h4>
+                        <p class="card-description">Save ₹3-5 per kilometer compared to diesel/petrol vehicles. Additional ₹30,000 annual savings with solar integration.</p>
+                        <div class="highlight-box gold">
+                            <p>💰 ₹1.5L annual savings per vehicle</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-card green">
+                        <h4 class="card-title">60% Reduced Maintenance</h4>
+                        <p class="card-description">Fewer moving parts mean lower service costs and higher vehicle uptime for your business.</p>
+                        <div class="highlight-box green">
+                            <p>🔧 Only 2 services per year required</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-card blue">
+                        <h4 class="card-title">Government Incentives</h4>
+                        <p class="card-description">Maximize benefits from PM E-DRIVE scheme and state subsidies. We help optimize your savings.</p>
+                        <div class="highlight-box blue">
+                            <p>🏛️ Up to ₹50,000 subsidy per vehicle</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="savings-card">
+                        <h3 class="savings-title">5-Year Total Savings</h3>
+                        <div class="savings-amount">₹7.5L</div>
+                        <p class="savings-subtitle">Per Vehicle vs Conventional</p>
+                        <div class="savings-note">
+                            <p>Including fuel, maintenance & incentives</p>
+                        </div>
+                    </div>
+                    
+                    <div class="strategic-section">
+                        <h3 class="strategic-title">Strategic Benefits</h3>
+                        <div class="strategic-grid">
+                            <div class="strategic-item blue">
+                                <div class="strategic-icon">🚀</div>
+                                <p class="strategic-text blue">Future-proof your fleet</p>
+                            </div>
+                            <div class="strategic-item green">
+                                <div class="strategic-icon">⭐</div>
+                                <p class="strategic-text green">Enhance brand image</p>
+                            </div>
+                            <div class="strategic-item gold">
+                                <div class="strategic-icon">🎯</div>
+                                <p class="strategic-text gold">Meet sustainability goals</p>
+                            </div>
+                            <div class="strategic-item blue">
+                                <div class="strategic-icon">🌆</div>
+                                <p class="strategic-text blue">Access to green zones</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="logo-corner">
+            <img src="qtcslogo.png" alt="QTCS - Quick Turn Consultancy Solutions" style="height: clamp(40px, 4vw, 60px); width: auto; object-fit: contain; background: white; padding: 8px; border-radius: 8px;">
+        </div>
+    </div>
+    
+    <script>
+        const slides = [
+            'index.html',
+            'slide2.html',
+            'slide3.html',
+            'slide4.html',
+            'slide5.html',
+            'slide6.html',
+            'slide6b.html',
+            'slide7.html',
+            'slide8.html',
+            'slide8b.html',
+            'slide9.html',
+            'slide9b.html',
+            'slide9c.html',
+            'slide10.html',
+            'slide11.html',
+            'slide12.html',
+            'slide13.html',
+            'slide14.html',
+            'slide15.html',
+            'slide16.html',
+            'slide17.html',
+            'slide18.html',
+            'slide19.html',
+            'slide20.html',
+            'slide21.html',
+            'slide22.html',
+            'slide23.html',
+            'slide24.html'
+        ];
+        
+        
+        const currentIndex = 26;
+        
+        function jumpToSlide(slideFile) {
+            if (slideFile && slideFile !== currentSlide) {
+                window.location.href = slideFile;
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                window.location.href = slides[currentIndex - 1];
+            }
+        }
+        
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                window.location.href = slides[currentIndex + 1];
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+        
+        // Set the correct option in dropdown
+        document.querySelector('.slide-select').value = currentSlide;
+    </script>
+</body>
+</html>

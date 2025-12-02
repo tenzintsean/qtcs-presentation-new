@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS Presentation Screenshots Gallery</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Override theme CSS to enable scrolling */
+        body.sky-theme {
+            font-family: var(--font-family) !important;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%) !important;
+            color: var(--text-primary) !important;
+            line-height: 1.6 !important;
+            min-height: 100vh !important;
+            padding: 20px !important;
+            overflow: visible !important; /* Override theme's overflow: hidden */
+            overflow-x: hidden !important; /* Prevent horizontal scrolling */
+            overflow-y: auto !important;   /* Enable vertical scrolling */
+            margin: 0 !important;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden; /* Allow vertical scrolling, prevent horizontal */
+            overflow-y: auto;   /* Enable vertical scrolling */
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .main-title {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 50%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+        }
+
+        .subtitle {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .stat {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .actions {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .action-btn {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-full);
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .action-btn:hover {
+            background: var(--glass-bg-light);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        .action-btn.primary:hover {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-light) 100%);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .screenshot-card {
+            background: var(--glass-card);
+            backdrop-filter: blur(var(--glass-blur-light));
+            -webkit-backdrop-filter: blur(var(--glass-blur-light));
+            border: 1px solid var(--glass-card-border);
+            border-radius: var(--radius-lg);
+            padding: 15px;
+            transition: all var(--transition-slow);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--accent-primary);
+            box-shadow: 
+                0 16px 40px rgba(255, 140, 0, 0.2),
+                inset 0 0 0 1px rgba(255, 140, 0, 0.1);
+            background: var(--glass-card-hover);
+        }
+
+        .screenshot-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 140, 0, 0.1) 100%);
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
+        .screenshot-card:hover::before {
+            opacity: 1;
+        }
+
+        .thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-normal);
+        }
+
+        .screenshot-card:hover .thumbnail {
+            transform: scale(1.05);
+        }
+
+        .placeholder {
+            color: var(--text-muted);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .slide-number {
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .download-icon {
+            color: var(--accent-primary);
+            font-size: 18px;
+            opacity: 0.7;
+            transition: all var(--transition-normal);
+        }
+
+        .screenshot-card:hover .download-icon {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .slide-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .slide-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .file-info {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green-primary);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .status-indicator.missing {
+            background: #ff4444;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .stats {
+                gap: 15px;
+            }
+
+            .action-btn {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-light) 100%);
+        }
+
+        /* Firefox scrollbar */
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-primary) rgba(255, 255, 255, 0.1);
+        }
+
+        /* Ensure container doesn't restrict height */
+        .container {
+            min-height: auto;
+            height: auto;
+        }
+
+        /* Add bottom padding to ensure last items are visible */
+        .gallery {
+            padding-bottom: 60px;
+        }
+
+        /* Ensure HTML and body allow full scrolling */
+        html {
+            height: auto !important;
+            min-height: 100vh !important;
+            overflow-y: auto !important;
+        }
+
+        /* Additional container adjustments */
+        .container {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body class="sky-theme">
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">🎬 QTCS Presentation Screenshots</h1>
+            <p class="subtitle">High-resolution captures of all presentation slides</p>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number" id="totalSlides">28</div>
+                    <div class="stat-label">Total Slides</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="availableCount">0</div>
+                    <div class="stat-label">Available</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">1920×1080</div>
+                    <div class="stat-label">Resolution</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="action-btn primary" onclick="downloadAll()">📥 Download All</button>
+        </div>
+
+        <div class="gallery" id="gallery">
+            <!-- Screenshot cards will be dynamically generated here -->
+        </div>
+    </div>
+
+    <script>
+        // Slide information with titles and descriptions
+        const slideInfo = [
+            { file: 'index', title: 'Welcome to QTCS', description: 'Driving the Future of India\'s Mobility' },
+            { file: 'slide2', title: 'Market Opportunity', description: 'India\'s ₹50,000+ Crore EV Revolution' },
+            { file: 'slide3', title: 'Purpose & Direction', description: 'Our Foundation of Excellence' },
+            { file: 'slide4', title: 'Heritage', description: 'From 1984 to 2025: Four Decades of Trust' },
+            { file: 'slide5', title: 'Excellence Pillars', description: 'Why QTCS Vehicles Outperform' },
+            { file: 'slide6', title: 'L3 Open Body', description: 'The Workhorse of Indian Commerce' },
+            { file: 'slide6b', title: 'L3 Closed Body', description: 'Security Meets Efficiency' },
+            { file: 'slide7', title: 'L5 Tipper', description: 'Heavy-Duty Performance Solutions' },
+            { file: 'slide8', title: 'L3 Garbage Body', description: 'Municipal Excellence' },
+            { file: 'slide8b', title: 'L3 Fogging', description: 'Public Health Protection' },
+            { file: 'slide9', title: 'Product Range', description: 'Comprehensive Vehicle Portfolio' },
+            { file: 'slide9b', title: 'L5 Premium', description: 'Luxury Electric Solutions' },
+            { file: 'slide9c', title: 'L5 Variants', description: 'Multiple Configuration Options' },
+            { file: 'slide10', title: 'Technical Excellence', description: 'Engineering for India' },
+            { file: 'slide11', title: 'Future E-Bus', description: 'Leading Public Transportation Revolution' },
+            { file: 'slide12', title: 'Last-Mile Logistics', description: 'E-Commerce Backbone' },
+            { file: 'slide13', title: 'SMB Empowerment', description: 'Democratizing Business Transportation' },
+            { file: 'slide14', title: 'Public Sector Excellence', description: 'Trusted by Government' },
+            { file: 'slide15', title: 'Aftermarket Excellence', description: 'Lifetime Partnership' },
+            { file: 'slide16', title: 'Service Network', description: 'Coverage Across South India' },
+            { file: 'slide17', title: 'Awards & Recognition', description: 'Validated Excellence' },
+            { file: 'slide18', title: 'Strategic Partnerships', description: 'The QTCS Advantage' },
+            { file: 'slide19', title: 'Growth Vision', description: 'Financial Transformation' },
+            { file: 'slide20', title: 'Customer Success', description: 'Real-World Results' },
+            { file: 'slide21', title: 'Innovation Pipeline', description: 'Future Technologies' },
+            { file: 'slide22', title: 'Sustainability Impact', description: 'Environmental Leadership' },
+            { file: 'slide23', title: 'Call to Action', description: 'Ready to Transform Your Fleet?' },
+            { file: 'slide24', title: 'Thank You', description: 'Partner with QTCS Today' }
+        ];
+
+        function generateGallery() {
+            const gallery = document.getElementById('gallery');
+            let availableCount = 0;
+            
+            gallery.innerHTML = '';
+            
+            slideInfo.forEach((slide, index) => {
+                const slideNumber = index + 1;
+                const paddedNumber = slideNumber.toString().padStart(2, '0');
+                const filename = `slide-${paddedNumber}-${slide.file}.png`;
+                const screenshotPath = `screenshots/${filename}`;
+                
+                const card = document.createElement('div');
+                card.className = 'screenshot-card';
+                card.onclick = () => downloadImage(screenshotPath, filename);
+                
+                // Check if image exists (this will be handled by the onerror event)
+                const img = new Image();
+                let imageExists = false;
+                
+                card.innerHTML = `
+                    <div class="status-indicator" id="status-${index}"></div>
+                    <div class="card-header">
+                        <div class="slide-number">Slide ${slideNumber}</div>
+                        <div class="download-icon">⬇️</div>
+                    </div>
+                    <div class="thumbnail-container">
+                        <img class="thumbnail loading" 
+                             id="img-${index}"
+                             src="${screenshotPath}" 
+                             alt="Slide ${slideNumber} - ${slide.title}"
+                             onerror="handleImageError(${index})"
+                             onload="handleImageLoad(${index})">
+                        <div class="placeholder" id="placeholder-${index}" style="display: none;">
+                            📷 Screenshot not generated yet
+                        </div>
+                    </div>
+                    <div class="slide-title">${slide.title}</div>
+                    <div class="slide-description">${slide.description}</div>
+                    <div class="file-info">
+                        <div>📁 ${filename}</div>
+                        <div>📐 1920×1080 PNG</div>
+                    </div>
+                `;
+                
+                gallery.appendChild(card);
+            });
+        }
+
+        function handleImageLoad(index) {
+            const img = document.getElementById(`img-${index}`);
+            const status = document.getElementById(`status-${index}`);
+            const placeholder = document.getElementById(`placeholder-${index}`);
+            
+            img.classList.remove('loading');
+            status.classList.remove('missing');
+            placeholder.style.display = 'none';
+            
+            updateAvailableCount();
+        }
+
+        function handleImageError(index) {
+            const img = document.getElementById(`img-${index}`);
+            const status = document.getElementById(`status-${index}`);
+            const placeholder = document.getElementById(`placeholder-${index}`);
+            
+            img.style.display = 'none';
+            status.classList.add('missing');
+            placeholder.style.display = 'block';
+            
+            updateAvailableCount();
+        }
+
+        function updateAvailableCount() {
+            const loadedImages = document.querySelectorAll('.thumbnail:not([style*="display: none"])').length;
+            document.getElementById('availableCount').textContent = loadedImages;
+        }
+
+        function downloadImage(imagePath, filename) {
+            // Create a temporary link element
+            const link = document.createElement('a');
+            link.href = imagePath;
+            link.download = filename;
+            link.target = '_blank';
+            
+            // Check if image exists before trying to download
+            const img = new Image();
+            img.onload = function() {
+                // Image exists, proceed with download
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
+            img.onerror = function() {
+                // Image doesn't exist, show alert
+                alert(`Screenshot not found: ${filename}\\n\\nPlease generate screenshots first using:\\nnpm run capture`);
+            };
+            img.src = imagePath;
+        }
+
+        function downloadAll() {
+            const availableImages = document.querySelectorAll('.thumbnail:not([style*="display: none"])');
+            
+            if (availableImages.length === 0) {
+                alert('No screenshots available to download.\\n\\nPlease generate screenshots first using:\\nnpm run capture');
+                return;
+            }
+            
+            if (confirm(`Download all ${availableImages.length} available screenshots?`)) {
+                availableImages.forEach((img, index) => {
+                    setTimeout(() => {
+                        const filename = img.alt.replace('Slide ', 'slide-').replace(/[^a-zA-Z0-9-_.]/g, '_') + '.png';
+                        downloadImage(img.src, filename);
+                    }, index * 500); // Stagger downloads by 500ms
+                });
+            }
+        }
+
+
+        // Initialize gallery when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            generateGallery();
+        });
+    </script>
+</body>
+</html>
