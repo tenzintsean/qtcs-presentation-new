@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/* QTCS Sky Blue Theme - Extracted from theme-skyblue.css */
+@theme {
+  /* Primary Sky Blue */
+  --color-sky-primary: #87CEEB;
+  --color-sky-light: #B0E0E6;
+  --color-sky-dark: #6BB6D6;
+  --color-sky-darker: #5AA8C8;
+
+  /* Accent Colors */
+  --color-accent-orange: #FF8C00;
+  --color-accent-gold: #FFA500;
+  --color-trust-blue: #0047AB;
+  --color-highlight-green: #228B22;
+
+  /* Neutral Colors */
+  --color-dark-overlay: rgba(0, 30, 60, 0.85);
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: rgba(255, 255, 255, 0.9);
+  --color-text-muted: rgba(255, 255, 255, 0.7);
+
+  /* Glassmorphism */
+  --color-glass-bg: rgba(255, 255, 255, 0.1);
+  --color-glass-bg-strong: rgba(255, 255, 255, 0.15);
+  --color-glass-border: rgba(255, 255, 255, 0.2);
+
+  /* Font Family */
+  --font-family-sans: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Responsive breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism utility classes */
+.glass {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--color-glass-border);
+}
+
+.glass-strong {
+  background: var(--color-glass-bg-strong);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--color-glass-border);
+}
+
+/* Sky blue gradient backgrounds */
+.bg-sky-gradient {
+  background: linear-gradient(135deg, var(--color-sky-light) 0%, var(--color-sky-primary) 50%, var(--color-sky-dark) 100%);
+}
+
+.bg-sky-gradient-dark {
+  background: linear-gradient(180deg, var(--color-dark-overlay) 0%, rgba(0, 30, 60, 0.95) 100%);
+}
+
+/* Cloud animation (from original theme) */
+@keyframes cloudMove {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(20px) translateY(-10px); }
+}
+
+@keyframes cloudMove2 {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-15px) translateY(5px); }
+}
+
+.animate-cloud {
+  animation: cloudMove 20s ease-in-out infinite;
+}
+
+.animate-cloud-reverse {
+  animation: cloudMove2 25s ease-in-out infinite;
+}

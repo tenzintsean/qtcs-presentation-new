@@ -34,7 +34,16 @@ Create a mobile-friendly corporate website for QTCS (Electric Vehicle company) w
 | Website Preview | Live Astro site | `/website/` |
 | Style Guide | Interactive web page | `/style-guide/` |
 | Download Package | Static HTML ZIP | `/downloads/qtcs-website.zip` |
+| Lighthouse Report | HTML Report | `/reports/lighthouse-report.html` |
 | Presentation | Existing slides | `/` (root - unchanged) |
+
+### Lighthouse Scores (Google's Web Quality Tests)
+| Category | Score |
+|----------|-------|
+| Performance | 99/100 |
+| Accessibility | 93/100 |
+| Best Practices | 100/100 |
+| SEO | 100/100 |
 
 ---
 
@@ -244,19 +253,26 @@ qtcs-website/
 2. Initialize Astro project with Tailwind
 3. Configure Tailwind with sky-blue color palette
 4. Copy theme CSS and vehicle images
+5. **PLAYWRIGHT TEST**: Verify base setup renders correctly
 
 ### Phase 2: Website Build
 1. Create base layouts (mobile-first)
+   - **PLAYWRIGHT TEST**: Layout renders on mobile/desktop viewports
 2. Build common components (Header, Footer, MobileNav)
+   - **PLAYWRIGHT TEST**: Navigation works, mobile menu toggles
 3. Create Home page with hero and features
+   - **PLAYWRIGHT TEST**: Home page visual verification
 4. Build Products listing and detail pages
+   - **PLAYWRIGHT TEST**: Product pages load with correct data
 5. Add About and Contact pages
+   - **PLAYWRIGHT TEST**: All pages accessible and styled
 
 ### Phase 3: Style Guide
 1. Create style guide HTML pages
 2. Extract all design tokens from theme
 3. Build interactive color/typography showcases
 4. Add component examples with code snippets
+5. **PLAYWRIGHT TEST**: Style guide pages load, colors display correctly
 
 ### Phase 4: Deployment
 1. Build Astro site to static HTML
@@ -264,7 +280,7 @@ qtcs-website/
 3. Set up `docs/` folder for GitHub Pages
 4. Create landing page hub
 5. Configure GitHub Pages deployment
-6. Test all URLs and downloads
+6. **PLAYWRIGHT TEST**: All GitHub Pages URLs work, downloads functional
 
 ---
 

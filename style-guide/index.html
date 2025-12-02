@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QTCS Style Guide - Brand Guidelines</title>
+  <link rel="icon" type="image/png" href="../qtcslogo.png">
+  <style>
+    :root {
+      /* Primary Sky Blue */
+      --sky-blue-primary: #87CEEB;
+      --sky-blue-light: #B0E0E6;
+      --sky-blue-dark: #6BB6D6;
+      --sky-blue-darker: #5AA8C8;
+
+      /* Accent Colors */
+      --accent-orange: #FF8C00;
+      --accent-gold: #FFA500;
+      --trust-blue: #0047AB;
+      --highlight-green: #228B22;
+
+      /* Neutral Colors */
+      --dark-overlay: rgba(0, 30, 60, 0.85);
+      --text-primary: #FFFFFF;
+      --text-secondary: rgba(255, 255, 255, 0.9);
+      --text-muted: rgba(255, 255, 255, 0.7);
+
+      /* Glassmorphism */
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-bg-strong: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.2);
+
+      /* Font */
+      --font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: linear-gradient(135deg, var(--sky-blue-light) 0%, var(--sky-blue-primary) 50%, var(--sky-blue-dark) 100%);
+      min-height: 100vh;
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    /* Header */
+    header {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .logo span {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent-orange);
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 4rem 0;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span {
+      color: var(--accent-orange);
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Sections */
+    section {
+      background: var(--glass-bg-strong);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    section h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--accent-orange);
+      display: inline-block;
+    }
+
+    /* Color Grid */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .color-card {
+      background: var(--glass-bg);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .color-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .color-swatch {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .color-info {
+      padding: 1rem;
+    }
+
+    .color-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .color-value {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .copied {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--accent-orange);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      z-index: 1000;
+      animation: fadeOut 1.5s forwards;
+    }
+
+    @keyframes fadeOut {
+      0%, 70% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* Typography */
+    .typography-sample {
+      margin-bottom: 2rem;
+    }
+
+    .typography-sample h3 {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .text-display {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .text-h1 { font-size: 2.5rem; font-weight: 700; }
+    .text-h2 { font-size: 2rem; font-weight: 600; }
+    .text-h3 { font-size: 1.5rem; font-weight: 600; }
+    .text-body { font-size: 1rem; line-height: 1.6; color: var(--text-secondary); }
+    .text-small { font-size: 0.875rem; color: var(--text-muted); }
+
+    /* Components */
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--accent-orange);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-gold);
+    }
+
+    .btn-secondary {
+      background: var(--glass-bg);
+      color: white;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: var(--glass-bg-strong);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      max-width: 300px;
+    }
+
+    .card h4 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Glassmorphism Demo */
+    .glass-demo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .glass-card {
+      padding: 1.5rem;
+      border-radius: 1rem;
+      text-align: center;
+    }
+
+    .glass-light {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+    }
+
+    .glass-strong {
+      background: var(--glass-bg-strong);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+    }
+
+    .glass-dark {
+      background: var(--dark-overlay);
+    }
+
+    /* Spacing */
+    .spacing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+
+    .spacing-item {
+      text-align: center;
+    }
+
+    .spacing-visual {
+      background: var(--accent-orange);
+      margin: 0 auto 0.5rem;
+      border-radius: 4px;
+    }
+
+    .spacing-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .spacing-value {
+      font-family: monospace;
+      font-size: 0.875rem;
+    }
+
+    /* Code Block */
+    .code-block {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      overflow-x: auto;
+      font-family: 'SF Mono', Consolas, monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .code-block .comment { color: var(--text-muted); }
+    .code-block .property { color: var(--sky-blue-light); }
+    .code-block .value { color: var(--accent-gold); }
+
+    /* Footer */
+    footer {
+      background: var(--dark-overlay);
+      padding: 2rem 0;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      nav { display: none; }
+      .color-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="../qtcslogo.png" alt="QTCS Logo">
+        <span>QTCS Style Guide</span>
+      </div>
+      <nav>
+        <a href="#colors">Colors</a>
+        <a href="#typography">Typography</a>
+        <a href="#components">Components</a>
+        <a href="#spacing">Spacing</a>
+        <a href="#quality">Quality</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="hero">
+      <h1>QTCS <span>Style Guide</span></h1>
+      <p>Brand guidelines and design system for QTCS - Quick Turn Consultancy Solutions</p>
+    </div>
+
+    <!-- Colors Section -->
+    <section id="colors">
+      <h2>Color Palette</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Click any color to copy its hex value to clipboard.</p>
+
+      <h3 style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem; text-transform: uppercase;">Primary Sky Blue</h3>
+      <div class="color-grid" style="margin-bottom: 2rem;">
+        <div class="color-card" onclick="copyColor('#B0E0E6', 'Sky Light')">
+          <div class="color-swatch" style="background: #B0E0E6;"></div>
+          <div class="color-info">
+            <div class="color-name">Sky Light</div>
+            <div class="color-value">#B0E0E6</div>
+          </div>
+        </div>
+        <div class="color-card" onclick="copyColor('#87CEEB', 'Sky Primary')">
+          <div class="color-swatch" style="background: #87CEEB;"></div>
+          <div class="color-info">
+            <div class="color-name">Sky Primary</div>
+            <div class="color-value">#87CEEB</div>
+          </div>
+        </div>
+        <div class="color-card" onclick="copyColor('#6BB6D6', 'Sky Dark')">
+          <div class="color-swatch" style="background: #6BB6D6;"></div>
+          <div class="color-info">
+            <div class="color-name">Sky Dark</div>
+            <div class="color-value">#6BB6D6</div>
+          </div>
+        </div>
+        <div class="color-card" onclick="copyColor('#5AA8C8', 'Sky Darker')">
+          <div class="color-swatch" style="background: #5AA8C8;"></div>
+          <div class="color-info">
+            <div class="color-name">Sky Darker</div>
+            <div class="color-value">#5AA8C8</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem; text-transform: uppercase;">Accent Colors</h3>
+      <div class="color-grid">
+        <div class="color-card" onclick="copyColor('#FF8C00', 'Accent Orange')">
+          <div class="color-swatch" style="background: #FF8C00;"></div>
+          <div class="color-info">
+            <div class="color-name">Accent Orange</div>
+            <div class="color-value">#FF8C00</div>
+          </div>
+        </div>
+        <div class="color-card" onclick="copyColor('#FFA500', 'Accent Gold')">
+          <div class="color-swatch" style="background: #FFA500;"></div>
+          <div class="color-info">
+            <div class="color-name">Accent Gold</div>
+            <div class="color-value">#FFA500</div>
+          </div>
+        </div>
+        <div class="color-card" onclick="copyColor('#0047AB', 'Trust Blue')">
+          <div class="color-swatch" style="background: #0047AB;"></div>
+          <div class="color-info">
+            <div class="color-name">Trust Blue</div>
+            <div class="color-value">#0047AB</div>
+          </div>
+        </div>
+        <div class="color-card" onclick="copyColor('#228B22', 'Highlight Green')">
+          <div class="color-swatch" style="background: #228B22;"></div>
+          <div class="color-info">
+            <div class="color-name">Highlight Green</div>
+            <div class="color-value">#228B22</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography Section -->
+    <section id="typography">
+      <h2>Typography</h2>
+      <div class="typography-sample">
+        <h3>Font Family</h3>
+        <p class="text-body" style="font-family: monospace; margin-bottom: 2rem;">'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif</p>
+      </div>
+
+      <div class="typography-sample">
+        <h3>Display</h3>
+        <p class="text-display">Driving the Future</p>
+      </div>
+
+      <div class="typography-sample">
+        <h3>Heading 1</h3>
+        <p class="text-h1">India's EV Revolution</p>
+      </div>
+
+      <div class="typography-sample">
+        <h3>Heading 2</h3>
+        <p class="text-h2">Sustainable Mobility Solutions</p>
+      </div>
+
+      <div class="typography-sample">
+        <h3>Heading 3</h3>
+        <p class="text-h3">Electric Vehicle Innovation</p>
+      </div>
+
+      <div class="typography-sample">
+        <h3>Body Text</h3>
+        <p class="text-body">QTCS delivers sustainable electric vehicle solutions that transform transportation while protecting our environment for future generations. Our vehicles are designed for India's diverse needs.</p>
+      </div>
+
+      <div class="typography-sample">
+        <h3>Small / Muted</h3>
+        <p class="text-small">Supporting text and metadata information</p>
+      </div>
+    </section>
+
+    <!-- Components Section -->
+    <section id="components">
+      <h2>Components</h2>
+
+      <h3 style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem; text-transform: uppercase;">Buttons</h3>
+      <div class="component-row">
+        <button class="btn btn-primary">Primary Button</button>
+        <button class="btn btn-secondary">Secondary Button</button>
+      </div>
+
+      <h3 style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem; text-transform: uppercase;">Cards</h3>
+      <div class="component-row">
+        <div class="card">
+          <h4>Feature Card</h4>
+          <p>A glassmorphism card component for displaying features, products, or information.</p>
+        </div>
+      </div>
+
+      <h3 style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem; text-transform: uppercase;">Glassmorphism Effects</h3>
+      <div class="glass-demo">
+        <div class="glass-card glass-light">
+          <strong>Glass Light</strong>
+          <p class="text-small" style="margin-top: 0.5rem;">10% opacity, blur 10px</p>
+        </div>
+        <div class="glass-card glass-strong">
+          <strong>Glass Strong</strong>
+          <p class="text-small" style="margin-top: 0.5rem;">15% opacity, blur 15px</p>
+        </div>
+        <div class="glass-card glass-dark">
+          <strong>Dark Overlay</strong>
+          <p class="text-small" style="margin-top: 0.5rem;">85% dark overlay</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spacing Section -->
+    <section id="spacing">
+      <h2>Spacing Scale</h2>
+      <div class="spacing-grid">
+        <div class="spacing-item">
+          <div class="spacing-visual" style="width: 4px; height: 32px;"></div>
+          <div class="spacing-value">4px</div>
+          <div class="spacing-label">xs</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-visual" style="width: 8px; height: 32px;"></div>
+          <div class="spacing-value">8px</div>
+          <div class="spacing-label">sm</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-visual" style="width: 16px; height: 32px;"></div>
+          <div class="spacing-value">16px</div>
+          <div class="spacing-label">md</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-visual" style="width: 24px; height: 32px;"></div>
+          <div class="spacing-value">24px</div>
+          <div class="spacing-label">lg</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-visual" style="width: 32px; height: 32px;"></div>
+          <div class="spacing-value">32px</div>
+          <div class="spacing-label">xl</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-visual" style="width: 48px; height: 32px;"></div>
+          <div class="spacing-value">48px</div>
+          <div class="spacing-label">2xl</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quality Report Section -->
+    <section id="quality">
+      <h2>Website Quality Report</h2>
+      <div style="background: var(--glass-bg); border-radius: 1rem; padding: 1.5rem; margin-bottom: 2rem;">
+        <h3 style="color: var(--accent-orange); margin-bottom: 1rem;">What is Google Lighthouse?</h3>
+        <p class="text-body" style="margin-bottom: 1rem;">
+          <a href="https://developer.chrome.com/docs/lighthouse/overview" target="_blank" rel="noopener" style="color: var(--accent-orange);">Google Lighthouse</a> is an industry-standard automated tool developed by Google to audit web pages for quality.
+          It tests websites across four critical categories that directly impact your business success online.
+        </p>
+        <p class="text-small" style="color: var(--text-muted);">
+          Scores above 90 are considered "green" and excellent. Your QTCS website has achieved top scores in all categories.
+          <a href="https://developer.chrome.com/docs/lighthouse/overview" target="_blank" rel="noopener" style="color: var(--sky-blue-light);">Learn more about Lighthouse</a>
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div class="glass-card glass-strong" style="padding: 1.5rem; text-align: center;">
+          <div style="font-size: 3rem; font-weight: 700; color: #22c55e; margin-bottom: 0.5rem;">99</div>
+          <div style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Performance</div>
+          <p class="text-small">Fast page loads = better user experience & higher conversions</p>
+        </div>
+        <div class="glass-card glass-strong" style="padding: 1.5rem; text-align: center;">
+          <div style="font-size: 3rem; font-weight: 700; color: #22c55e; margin-bottom: 0.5rem;">93</div>
+          <div style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Accessibility</div>
+          <p class="text-small">Usable by everyone including people with disabilities</p>
+        </div>
+        <div class="glass-card glass-strong" style="padding: 1.5rem; text-align: center;">
+          <div style="font-size: 3rem; font-weight: 700; color: #22c55e; margin-bottom: 0.5rem;">100</div>
+          <div style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Best Practices</div>
+          <p class="text-small">Follows modern web security & development standards</p>
+        </div>
+        <div class="glass-card glass-strong" style="padding: 1.5rem; text-align: center;">
+          <div style="font-size: 3rem; font-weight: 700; color: #22c55e; margin-bottom: 0.5rem;">100</div>
+          <div style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">SEO</div>
+          <p class="text-small">Optimized for Google search visibility & rankings</p>
+        </div>
+      </div>
+
+      <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 1rem; padding: 1.5rem;">
+        <h4 style="color: #22c55e; margin-bottom: 1rem;">Why These Scores Matter for Your Business</h4>
+        <ul style="color: var(--text-secondary); line-height: 1.8; padding-left: 1.5rem;">
+          <li><strong>Better Google Rankings:</strong> Google uses page speed and mobile-friendliness as ranking factors</li>
+          <li><strong>Higher Conversion Rates:</strong> Every 1-second delay in page load reduces conversions by 7%</li>
+          <li><strong>Reduced Bounce Rate:</strong> 53% of mobile users leave sites that take over 3 seconds to load</li>
+          <li><strong>Legal Compliance:</strong> Accessibility scores help ensure compliance with disability regulations</li>
+          <li><strong>Trust & Security:</strong> Best practices indicate a secure, trustworthy website</li>
+        </ul>
+      </div>
+
+      <p style="text-align: center; margin-top: 1.5rem;">
+        <a href="../docs/reports/lighthouse-report.html" style="color: var(--accent-orange); text-decoration: underline;">View Full Lighthouse Report</a>
+      </p>
+    </section>
+
+    <!-- CSS Variables -->
+    <section>
+      <h2>CSS Variables</h2>
+      <div class="code-block">
+        <span class="comment">/* Copy these CSS variables to use the QTCS theme */</span><br><br>
+        <span class="property">--sky-blue-primary:</span> <span class="value">#87CEEB;</span><br>
+        <span class="property">--sky-blue-light:</span> <span class="value">#B0E0E6;</span><br>
+        <span class="property">--sky-blue-dark:</span> <span class="value">#6BB6D6;</span><br>
+        <span class="property">--accent-orange:</span> <span class="value">#FF8C00;</span><br>
+        <span class="property">--accent-gold:</span> <span class="value">#FFA500;</span><br>
+        <span class="property">--trust-blue:</span> <span class="value">#0047AB;</span><br>
+        <span class="property">--highlight-green:</span> <span class="value">#228B22;</span><br>
+        <span class="property">--glass-bg:</span> <span class="value">rgba(255, 255, 255, 0.1);</span><br>
+        <span class="property">--glass-border:</span> <span class="value">rgba(255, 255, 255, 0.2);</span><br>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 QTCS - Quick Turn Consultancy Solutions. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function copyColor(color, name) {
+      navigator.clipboard.writeText(color).then(() => {
+        const notification = document.createElement('div');
+        notification.className = 'copied';
+        notification.textContent = `Copied ${name}: ${color}`;
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 1500);
+      });
+    }
+  </script>
+</body>
+</html>

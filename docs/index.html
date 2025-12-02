@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QTCS - Project Deliverables</title>
+  <link rel="icon" type="image/png" href="../qtcslogo.png">
+  <style>
+    :root {
+      --sky-blue-primary: #87CEEB;
+      --sky-blue-light: #B0E0E6;
+      --sky-blue-dark: #6BB6D6;
+      --accent-orange: #FF8C00;
+      --accent-gold: #FFA500;
+      --text-primary: #FFFFFF;
+      --text-secondary: rgba(255, 255, 255, 0.9);
+      --text-muted: rgba(255, 255, 255, 0.7);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, var(--sky-blue-light) 0%, var(--sky-blue-primary) 50%, var(--sky-blue-dark) 100%);
+      min-height: 100vh;
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .logo img {
+      height: 60px;
+    }
+
+    .logo h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .download-section {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .download-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .download-section p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .download-btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: var(--accent-orange);
+      color: white;
+      text-decoration: none;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .download-btn:hover {
+      background: var(--accent-gold);
+    }
+
+    .scores {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .score-badge {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .score-badge strong {
+      color: var(--accent-orange);
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 600px) {
+      .logo h1 { font-size: 1.75rem; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="../qtcslogo.png" alt="QTCS Logo">
+      <h1>QTCS</h1>
+    </div>
+    <p class="subtitle">Project Deliverables Hub</p>
+
+    <div class="card-grid">
+      <a href="../index.html" class="card">
+        <div class="card-icon">🎬</div>
+        <h3>Presentation</h3>
+        <p>View the complete slide deck</p>
+      </a>
+
+      <a href="website/" class="card">
+        <div class="card-icon">🌐</div>
+        <h3>Website Preview</h3>
+        <p>Preview the new QTCS website</p>
+      </a>
+
+      <a href="style-guide/" class="card">
+        <div class="card-icon">🎨</div>
+        <h3>Style Guide</h3>
+        <p>Brand colors, typography & components</p>
+      </a>
+
+      <a href="reports/lighthouse-report.html" class="card">
+        <div class="card-icon">📊</div>
+        <h3>Lighthouse Report</h3>
+        <p>Google's web quality audit</p>
+      </a>
+    </div>
+
+    <div class="download-section">
+      <h2>Download Website Package</h2>
+      <p>Get the complete website ready for deployment to your hosting server.</p>
+      <a href="downloads/qtcs-website.zip" class="download-btn">
+        Download ZIP Package
+      </a>
+      <div class="scores">
+        <span class="score-badge">Performance: <strong>99</strong></span>
+        <span class="score-badge">Accessibility: <strong>93</strong></span>
+        <span class="score-badge">Best Practices: <strong>100</strong></span>
+        <span class="score-badge">SEO: <strong>100</strong></span>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 QTCS - Quick Turn Consultancy Solutions</p>
+    </footer>
+  </div>
+</body>
+</html>
