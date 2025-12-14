@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Comparison - QTCS Website</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(60px, 6vh, 80px) clamp(20px, 3vw, 60px);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px);
+            background-size: 120px 120px, 80px 80px;
+            z-index: 0;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .slide-title {
+            font-size: clamp(28px, 3.5vw, 48px);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: clamp(8px, 1vh, 15px);
+        }
+
+        .slide-subtitle {
+            font-size: clamp(14px, 1.6vw, 20px);
+            color: var(--text-secondary);
+            margin-bottom: clamp(20px, 3vh, 35px);
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(20px, 3vw, 40px);
+            margin-bottom: clamp(20px, 3vh, 35px);
+        }
+
+        .comparison-card {
+            background: var(--glass-header);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-radius: 20px;
+            padding: clamp(20px, 2.5vw, 35px);
+            text-align: center;
+            position: relative;
+        }
+
+        .comparison-card.new {
+            border: 2px solid rgba(34, 197, 94, 0.5);
+        }
+
+        .comparison-card.old {
+            border: 2px solid rgba(239, 68, 68, 0.5);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: clamp(11px, 1.1vw, 14px);
+            font-weight: 600;
+        }
+
+        .card-badge.secure {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .card-badge.insecure {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .card-title {
+            font-size: clamp(18px, 2vw, 26px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 15px 0 20px;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .score-item {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            padding: clamp(12px, 1.5vw, 18px);
+        }
+
+        .score-label {
+            font-size: clamp(11px, 1.1vw, 14px);
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .score-value {
+            font-size: clamp(28px, 3vw, 40px);
+            font-weight: 700;
+        }
+
+        .score-value.good { color: #22c55e; }
+        .score-value.warning { color: #f59e0b; }
+        .score-value.poor { color: #ef4444; }
+
+        .improvement-banner {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: clamp(15px, 2vw, 25px);
+            display: flex;
+            justify-content: center;
+            gap: clamp(30px, 5vw, 60px);
+            flex-wrap: wrap;
+        }
+
+        .improvement-stat {
+            text-align: center;
+        }
+
+        .improvement-value {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 700;
+            color: #22c55e;
+        }
+
+        .improvement-label {
+            font-size: clamp(12px, 1.2vw, 15px);
+            color: var(--text-secondary);
+        }
+
+        .slide-number {
+            position: absolute;
+            top: clamp(15px, 1.5vw, 30px);
+            left: clamp(15px, 1.5vw, 30px);
+            font-size: clamp(12px, 0.8vw, 16px);
+            color: var(--text-muted);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 20;
+        }
+
+        .key-badge {
+            position: absolute;
+            top: clamp(15px, 1.5vw, 30px);
+            right: clamp(15px, 1.5vw, 30px);
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: clamp(11px, 1vw, 14px);
+            font-weight: 600;
+            z-index: 20;
+        }
+
+        .logo-corner {
+            position: absolute;
+            bottom: clamp(20px, 2vw, 40px);
+            right: clamp(20px, 2vw, 40px);
+            z-index: 10;
+        }
+
+        .logo-corner img {
+            height: clamp(40px, 4vw, 60px);
+            width: auto;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            width: 60%;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="sky-theme">
+    <div class="slide sky-pattern">
+        <div class="slide-number">6 / 10</div>
+        <div class="key-badge">⭐ KEY SLIDE</div>
+
+        <div class="content-wrapper">
+            <h1 class="slide-title">Quality Metrics: New vs Current</h1>
+            <p class="slide-subtitle">Google Lighthouse audit scores - objective, measurable proof</p>
+
+            <div class="comparison-container">
+                <div class="comparison-card new">
+                    <span class="card-badge secure">✓ HTTPS Secure</span>
+                    <h3 class="card-title">New Website</h3>
+                    <div class="score-grid">
+                        <div class="score-item">
+                            <div class="score-label">Performance</div>
+                            <div class="score-value good">99</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Accessibility</div>
+                            <div class="score-value good">93</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Best Practices</div>
+                            <div class="score-value good">100</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">SEO</div>
+                            <div class="score-value good">100</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-card old">
+                    <span class="card-badge insecure">✗ HTTP Insecure</span>
+                    <h3 class="card-title">Current qtcs.org</h3>
+                    <div class="score-grid">
+                        <div class="score-item">
+                            <div class="score-label">Performance</div>
+                            <div class="score-value warning">62</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Accessibility</div>
+                            <div class="score-value warning">75</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Best Practices</div>
+                            <div class="score-value warning">67</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">SEO</div>
+                            <div class="score-value good">100</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="improvement-banner">
+                <div class="improvement-stat">
+                    <div class="improvement-value">+37</div>
+                    <div class="improvement-label">Performance</div>
+                </div>
+                <div class="improvement-stat">
+                    <div class="improvement-value">+18</div>
+                    <div class="improvement-label">Accessibility</div>
+                </div>
+                <div class="improvement-stat">
+                    <div class="improvement-value">+33</div>
+                    <div class="improvement-label">Best Practices</div>
+                </div>
+                <div class="improvement-stat">
+                    <div class="improvement-value">HTTPS</div>
+                    <div class="improvement-label">Security Upgrade</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="logo-corner">
+            <img src="qtcslogo.png" alt="QTCS">
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        const slides = [
+            'index.html', 'slide2.html', 'slide3.html', 'slide4.html', 'slide5.html',
+            'slide6.html', 'slide7.html', 'slide8.html', 'slide9.html', 'slide10.html'
+        ];
+        const currentIndex = 5;
+
+        function nextSlide() { if (currentIndex < slides.length - 1) window.location.href = slides[currentIndex + 1]; }
+        function prevSlide() { if (currentIndex > 0) window.location.href = slides[currentIndex - 1]; }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+        });
+
+        let touchStartX = 0, touchEndX = 0;
+        document.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+        });
+    </script>
+</body>
+</html>

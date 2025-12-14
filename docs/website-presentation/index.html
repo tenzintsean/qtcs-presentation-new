@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTCS Website Delivered - Management Presentation</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(60px, 6vh, 80px) clamp(20px, 3vw, 60px);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 80%, rgba(135, 206, 235, 0.1) 4px, transparent 4px);
+            background-size: 120px 120px, 80px 80px, 150px 150px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(60px, 50px) rotate(360deg); }
+        }
+
+        .glass-container {
+            background: var(--glass-header);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: clamp(40px, 5vw, 80px);
+            box-shadow: var(--shadow-lg), var(--shadow-inset);
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .main-title {
+            font-size: clamp(36px, 5vw, 72px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 50%, var(--title-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: clamp(8px, 1vw, 15px);
+        }
+
+        .subtitle {
+            font-size: clamp(18px, 2.5vw, 32px);
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: clamp(25px, 3vw, 40px);
+            letter-spacing: 0.05em;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(15px, 2vw, 25px);
+            width: 100%;
+            margin-top: clamp(20px, 2.5vw, 35px);
+        }
+
+        .stat-card {
+            background: var(--glass-card);
+            backdrop-filter: blur(var(--glass-blur-light));
+            -webkit-backdrop-filter: blur(var(--glass-blur-light));
+            border: 1px solid var(--glass-card-border);
+            border-radius: var(--radius-xl);
+            padding: clamp(20px, 2.5vw, 35px);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-slow);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 140, 0, 0.4);
+            box-shadow: 0 16px 40px rgba(255, 140, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: clamp(36px, 4vw, 56px);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: clamp(14px, 1.5vw, 18px);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .logo-section {
+            margin-bottom: clamp(20px, 3vw, 40px);
+        }
+
+        .logo-section img {
+            height: clamp(60px, 8vw, 100px);
+            width: auto;
+            background: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .slide-number {
+            position: absolute;
+            top: clamp(15px, 1.5vw, 30px);
+            left: clamp(15px, 1.5vw, 30px);
+            font-size: clamp(12px, 0.8vw, 16px);
+            color: var(--text-muted);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 20;
+        }
+
+        .logo-corner {
+            position: absolute;
+            bottom: clamp(20px, 2vw, 40px);
+            right: clamp(20px, 2vw, 40px);
+            z-index: 10;
+        }
+
+        .logo-corner img {
+            height: clamp(40px, 4vw, 60px);
+            width: auto;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            width: 10%;
+            transition: width 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glass-container > * {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .glass-container > *:nth-child(1) { animation-delay: 0.2s; }
+        .glass-container > *:nth-child(2) { animation-delay: 0.4s; }
+        .glass-container > *:nth-child(3) { animation-delay: 0.6s; }
+        .glass-container > *:nth-child(4) { animation-delay: 0.8s; }
+
+        @media (max-width: 768px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="sky-theme">
+    <div class="slide sky-pattern">
+        <div class="slide-number">1 / 10</div>
+
+        <div class="glass-container">
+            <div class="logo-section">
+                <img src="qtcslogo.png" alt="QTCS Logo">
+            </div>
+            <h1 class="main-title">Website Delivered</h1>
+            <p class="subtitle">Production-Ready Digital Presence for QTCS</p>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Pages Built</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">99</div>
+                    <div class="stat-label">Performance Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Complete</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="logo-corner">
+            <img src="qtcslogo.png" alt="QTCS">
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        const slides = [
+            'index.html', 'slide2.html', 'slide3.html', 'slide4.html', 'slide5.html',
+            'slide6.html', 'slide7.html', 'slide8.html', 'slide9.html', 'slide10.html'
+        ];
+
+        const currentIndex = 0;
+
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                window.location.href = slides[currentIndex + 1];
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                window.location.href = slides[currentIndex - 1];
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+        });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - QTCS Website</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(80px, 8vh, 100px) clamp(20px, 3vw, 60px);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px);
+            background-size: 120px 120px, 80px 80px;
+            z-index: 0;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1100px;
+            text-align: center;
+        }
+
+        .slide-title {
+            font-size: clamp(32px, 4vw, 56px);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: clamp(30px, 4vh, 50px);
+        }
+
+        .design-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(20px, 2.5vw, 30px);
+        }
+
+        .design-card {
+            background: var(--glass-header);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: clamp(25px, 3vw, 40px);
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .design-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: clamp(16px, 1.8vw, 22px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title span {
+            font-size: 24px;
+        }
+
+        /* Color Palette */
+        .color-swatches {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .color-swatch.sky-light { background: #B0E0E6; }
+        .color-swatch.sky-primary { background: #87CEEB; }
+        .color-swatch.sky-dark { background: #6BB6D6; }
+        .color-swatch.orange { background: #FF8C00; }
+        .color-swatch.trust-blue { background: #0047AB; }
+
+        .color-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .color-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Typography */
+        .font-sample {
+            margin-bottom: 10px;
+        }
+
+        .font-name {
+            font-size: clamp(20px, 2.5vw, 28px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .font-desc {
+            font-size: clamp(13px, 1.3vw, 16px);
+            color: var(--text-secondary);
+        }
+
+        /* UI Style */
+        .glass-demo {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .glass-demo-text {
+            font-size: clamp(13px, 1.3vw, 16px);
+            color: var(--text-secondary);
+        }
+
+        /* Accessibility */
+        .a11y-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .a11y-badge {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: clamp(12px, 1.2vw, 14px);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .a11y-badge .check {
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: clamp(15px, 1.5vw, 30px);
+            left: clamp(15px, 1.5vw, 30px);
+            font-size: clamp(12px, 0.8vw, 16px);
+            color: var(--text-muted);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 20;
+        }
+
+        .logo-corner {
+            position: absolute;
+            bottom: clamp(20px, 2vw, 40px);
+            right: clamp(20px, 2vw, 40px);
+            z-index: 10;
+        }
+
+        .logo-corner img {
+            height: clamp(40px, 4vw, 60px);
+            width: auto;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            width: 40%;
+        }
+
+        @media (max-width: 768px) {
+            .design-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="sky-theme">
+    <div class="slide sky-pattern">
+        <div class="slide-number">4 / 10</div>
+
+        <div class="content-wrapper">
+            <h1 class="slide-title">Visual Design & Brand Identity</h1>
+
+            <div class="design-grid">
+                <div class="design-card">
+                    <h3 class="card-title"><span>🎨</span> Color Palette</h3>
+                    <div class="color-swatches">
+                        <div class="color-group">
+                            <div class="color-swatch sky-light"></div>
+                            <div class="color-label">Sky Light</div>
+                        </div>
+                        <div class="color-group">
+                            <div class="color-swatch sky-primary"></div>
+                            <div class="color-label">Sky Blue</div>
+                        </div>
+                        <div class="color-group">
+                            <div class="color-swatch sky-dark"></div>
+                            <div class="color-label">Sky Dark</div>
+                        </div>
+                        <div class="color-group">
+                            <div class="color-swatch orange"></div>
+                            <div class="color-label">Accent</div>
+                        </div>
+                        <div class="color-group">
+                            <div class="color-swatch trust-blue"></div>
+                            <div class="color-label">Trust Blue</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="design-card">
+                    <h3 class="card-title"><span>✒️</span> Typography</h3>
+                    <div class="font-sample">
+                        <p class="font-name">SF Pro Display</p>
+                        <p class="font-desc">Apple's system font for premium, professional appearance across all devices</p>
+                    </div>
+                </div>
+
+                <div class="design-card">
+                    <h3 class="card-title"><span>✨</span> UI Style</h3>
+                    <div class="glass-demo">
+                        <span>🔮</span>
+                        <span class="glass-demo-text">Glassmorphism with blur effects</span>
+                    </div>
+                    <p class="font-desc">Modern, translucent UI elements with depth and visual hierarchy</p>
+                </div>
+
+                <div class="design-card">
+                    <h3 class="card-title"><span>♿</span> Accessibility</h3>
+                    <div class="a11y-badges">
+                        <div class="a11y-badge">
+                            <span class="check">✓</span> WCAG AA Compliant
+                        </div>
+                        <div class="a11y-badge">
+                            <span class="check">✓</span> 4.5:1+ Contrast
+                        </div>
+                        <div class="a11y-badge">
+                            <span class="check">✓</span> Screen Reader Ready
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="logo-corner">
+            <img src="qtcslogo.png" alt="QTCS">
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        const slides = [
+            'index.html', 'slide2.html', 'slide3.html', 'slide4.html', 'slide5.html',
+            'slide6.html', 'slide7.html', 'slide8.html', 'slide9.html', 'slide10.html'
+        ];
+        const currentIndex = 3;
+
+        function nextSlide() { if (currentIndex < slides.length - 1) window.location.href = slides[currentIndex + 1]; }
+        function prevSlide() { if (currentIndex > 0) window.location.href = slides[currentIndex - 1]; }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+        });
+
+        let touchStartX = 0, touchEndX = 0;
+        document.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshots Gallery - QTCS Website</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(60px, 6vh, 80px) clamp(20px, 3vw, 60px);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px);
+            background-size: 120px 120px, 80px 80px;
+            z-index: 0;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1100px;
+            text-align: center;
+        }
+
+        .slide-title {
+            font-size: clamp(32px, 4vw, 56px);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: clamp(20px, 2.5vh, 35px);
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(15px, 2vw, 25px);
+        }
+
+        .screenshot-card {
+            background: var(--glass-header);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: clamp(15px, 2vw, 25px);
+            transition: all 0.3s ease;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 140, 0, 0.4);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .screenshot-preview {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4ebf2 100%);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(36px, 4vw, 48px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshot-preview::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0, 71, 171, 0.1) 100%);
+        }
+
+        .screenshot-label {
+            font-size: clamp(14px, 1.5vw, 18px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .screenshot-desc {
+            font-size: clamp(11px, 1.1vw, 14px);
+            color: var(--text-secondary);
+        }
+
+        .live-demo-note {
+            margin-top: clamp(20px, 2.5vh, 35px);
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            border-radius: 12px;
+            padding: clamp(12px, 1.5vw, 20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .live-demo-note span {
+            font-size: 24px;
+        }
+
+        .live-demo-note p {
+            font-size: clamp(14px, 1.4vw, 18px);
+            color: var(--text-secondary);
+        }
+
+        .live-demo-note strong {
+            color: var(--accent-primary);
+        }
+
+        .slide-number {
+            position: absolute;
+            top: clamp(15px, 1.5vw, 30px);
+            left: clamp(15px, 1.5vw, 30px);
+            font-size: clamp(12px, 0.8vw, 16px);
+            color: var(--text-muted);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 20;
+        }
+
+        .logo-corner {
+            position: absolute;
+            bottom: clamp(20px, 2vw, 40px);
+            right: clamp(20px, 2vw, 40px);
+            z-index: 10;
+        }
+
+        .logo-corner img {
+            height: clamp(40px, 4vw, 60px);
+            width: auto;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            width: 80%;
+        }
+
+        @media (max-width: 768px) {
+            .screenshots-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body class="sky-theme">
+    <div class="slide sky-pattern">
+        <div class="slide-number">8 / 10</div>
+
+        <div class="content-wrapper">
+            <h1 class="slide-title">Website Screenshots</h1>
+
+            <div class="screenshots-grid">
+                <div class="screenshot-card">
+                    <div class="screenshot-preview">🏠</div>
+                    <div class="screenshot-label">Homepage</div>
+                    <div class="screenshot-desc">Hero, stats, featured vehicles</div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-preview">🚗</div>
+                    <div class="screenshot-label">Products Listing</div>
+                    <div class="screenshot-desc">Filterable vehicle grid</div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-preview">📋</div>
+                    <div class="screenshot-label">Product Detail</div>
+                    <div class="screenshot-desc">Specs, gallery, inquiry form</div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-preview">👥</div>
+                    <div class="screenshot-label">About Page</div>
+                    <div class="screenshot-desc">Leadership, mission, values</div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-preview">📧</div>
+                    <div class="screenshot-label">Contact Page</div>
+                    <div class="screenshot-desc">Inquiry form, company info</div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-preview">📱</div>
+                    <div class="screenshot-label">Mobile View</div>
+                    <div class="screenshot-desc">Fully responsive design</div>
+                </div>
+            </div>
+
+            <div class="live-demo-note">
+                <span>💡</span>
+                <p><strong>Live Demo Available:</strong> Visit the preview to see all pages in action</p>
+            </div>
+        </div>
+
+        <div class="logo-corner">
+            <img src="qtcslogo.png" alt="QTCS">
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        const slides = [
+            'index.html', 'slide2.html', 'slide3.html', 'slide4.html', 'slide5.html',
+            'slide6.html', 'slide7.html', 'slide8.html', 'slide9.html', 'slide10.html'
+        ];
+        const currentIndex = 7;
+
+        function nextSlide() { if (currentIndex < slides.length - 1) window.location.href = slides[currentIndex + 1]; }
+        function prevSlide() { if (currentIndex > 0) window.location.href = slides[currentIndex - 1]; }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+        });
+
+        let touchStartX = 0, touchEndX = 0;
+        document.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+        });
+    </script>
+</body>
+</html>

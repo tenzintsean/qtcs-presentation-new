@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What We Built - QTCS Website</title>
+    <link rel="stylesheet" href="theme-skyblue.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky-primary) 50%, var(--sky-dark) 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(80px, 8vh, 100px) clamp(20px, 3vw, 60px);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25) 3px, transparent 3px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.18) 2px, transparent 2px);
+            background-size: 120px 120px, 80px 80px;
+            animation: cloudMove 35s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes cloudMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 50px); }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1100px;
+            text-align: center;
+        }
+
+        .slide-title {
+            font-size: clamp(32px, 4vw, 56px);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--title-blue-dark) 0%, var(--title-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: clamp(30px, 4vh, 50px);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(20px, 2.5vw, 35px);
+            margin-bottom: clamp(30px, 4vh, 50px);
+        }
+
+        .feature-card {
+            background: var(--glass-header);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: clamp(25px, 3vw, 40px);
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 140, 0, 0.4);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon.blue { background: rgba(0, 71, 171, 0.15); }
+        .feature-icon.orange { background: rgba(255, 140, 0, 0.15); }
+        .feature-icon.green { background: rgba(34, 197, 94, 0.15); }
+        .feature-icon.purple { background: rgba(139, 92, 246, 0.15); }
+
+        .feature-title {
+            font-size: clamp(18px, 2vw, 24px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            font-size: clamp(14px, 1.4vw, 18px);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            border-radius: 16px;
+            padding: clamp(20px, 2.5vw, 30px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(30px, 4vw, 60px);
+        }
+
+        .highlight-stat {
+            text-align: center;
+        }
+
+        .highlight-number {
+            font-size: clamp(36px, 4vw, 56px);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .highlight-label {
+            font-size: clamp(14px, 1.4vw, 18px);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: clamp(15px, 1.5vw, 30px);
+            left: clamp(15px, 1.5vw, 30px);
+            font-size: clamp(12px, 0.8vw, 16px);
+            color: var(--text-muted);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 20;
+        }
+
+        .logo-corner {
+            position: absolute;
+            bottom: clamp(20px, 2vw, 40px);
+            right: clamp(20px, 2vw, 40px);
+            z-index: 10;
+        }
+
+        .logo-corner img {
+            height: clamp(40px, 4vw, 60px);
+            width: auto;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent-primary) 100%);
+            width: 20%;
+        }
+
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .highlight-box { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body class="sky-theme">
+    <div class="slide sky-pattern">
+        <div class="slide-number">2 / 10</div>
+
+        <div class="content-wrapper">
+            <h1 class="slide-title">What We Built</h1>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon blue">🏠</div>
+                    <h3 class="feature-title">5 Main Pages</h3>
+                    <p class="feature-desc">Home, Products, About, Contact, and a comprehensive Products listing page</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon orange">🚗</div>
+                    <h3 class="feature-title">8 Product Pages</h3>
+                    <p class="feature-desc">Detailed pages for each vehicle model with specs, galleries, and inquiry forms</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon green">📱</div>
+                    <h3 class="feature-title">Mobile-First Design</h3>
+                    <p class="feature-desc">Fully responsive across all devices - phones, tablets, and desktops</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon purple">🚀</div>
+                    <h3 class="feature-title">Production-Ready</h3>
+                    <p class="feature-desc">Complete, tested, and ready for immediate deployment to live server</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <div class="highlight-stat">
+                    <div class="highlight-number">12</div>
+                    <div class="highlight-label">Total HTML Pages</div>
+                </div>
+                <div class="highlight-stat">
+                    <div class="highlight-number">8</div>
+                    <div class="highlight-label">Vehicle Models</div>
+                </div>
+                <div class="highlight-stat">
+                    <div class="highlight-number">100%</div>
+                    <div class="highlight-label">Responsive</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="logo-corner">
+            <img src="qtcslogo.png" alt="QTCS">
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        const slides = [
+            'index.html', 'slide2.html', 'slide3.html', 'slide4.html', 'slide5.html',
+            'slide6.html', 'slide7.html', 'slide8.html', 'slide9.html', 'slide10.html'
+        ];
+        const currentIndex = 1;
+
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) window.location.href = slides[currentIndex + 1];
+        }
+        function prevSlide() {
+            if (currentIndex > 0) window.location.href = slides[currentIndex - 1];
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+        });
+
+        let touchStartX = 0, touchEndX = 0;
+        document.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+        });
+    </script>
+</body>
+</html>
